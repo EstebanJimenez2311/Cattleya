@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CATTLEYA — Datos que no callan</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="data/charts.js"></script>
+  <script src="components/index.js"></script>
+  <style>
+    .hero__badge    { opacity:0; animation: slideUp 0.6s ease 0.2s forwards; }
+    .hero__title    { opacity:0; animation: slideUp 0.7s ease 0.4s forwards; }
+    .hero__subtitle { opacity:0; animation: slideUp 0.7s ease 0.6s forwards; }
+    .hero__cta      { opacity:0; animation: slideUp 0.7s ease 0.8s forwards; }
+    .hero__stats    { opacity:0; animation: slideUp 0.8s ease 1.0s forwards; }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .navbar__links { display: none; }
+      .preview-grid  { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <cat-navbar active="inicio"></cat-navbar>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <img src="assets/logo-claro.png" alt="" class="hero__orquidea-bg">
+    <div class="hero__content">
+      <div class="hero__text">
+        <span class="hero__badge">📊 Análisis de Datos · Colombia</span>
+        <h1 class="hero__title">
+          Datos que<br><em>no callan.</em><br>Flores que<br>no se doblan.
+        </h1>
+        <p class="hero__subtitle">
+          La orquídea Cattleya florece incluso en condiciones adversas.
+          Como ella, cada dato aquí habla de resiliencia, de verdad y de
+          la urgencia de actuar frente a la violencia contra la mujer en Colombia.
+        </p>
+        <div class="hero__cta">
+          <a href="analisis.html" class="btn-primary">Explorar el análisis →</a>
+          <a href="cattleya.html" class="btn-outline">¿Qué es Cattleya?</a>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="hero__stats">
+        <cat-stat-card animate target="182000" suffix="" label="casos de violencia intrafamiliar registrados en Colombia (2023)"></cat-stat-card>
+        <cat-stat-card animate target="78" suffix="%" label="de las víctimas son mujeres"></cat-stat-card>
+        <cat-stat-card number="1 de cada 3" label="mujeres ha sufrido violencia de pareja en su vida"></cat-stat-card>
+        <cat-stat-card animate target="60" suffix="%" label="de los casos no son denunciados" color="var(--naranja)"></cat-stat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEW ANÁLISIS -->
+  <section class="section">
+    <div class="preview-grid">
+      <div>
+        <cat-section-header
+          label="Análisis exploratorio"
+          title="Los datos hablan,&lt;br&gt;&lt;em&gt;nosotros escuchamos&lt;/em&gt;"
+          subtitle="Aplicamos EDA, estadística descriptiva e inferencial, y machine learning sobre bases de datos gubernamentales de Colombia para encontrar patrones y tendencias en los reportes de violencia contra la mujer.">
+        </cat-section-header>
+        <a href="analisis.html" class="btn-primary" style="margin-top:32px;display:inline-flex;">Ver el análisis completo →</a>
+      </div>
+      <cat-chart
+        chart-id="chart-home"
+        title="Distribución por tipo de violencia">
+      </cat-chart>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="section" style="padding-top:0;">
+    <cat-cta-banner
+      title="¿Necesitas ayuda ahora?"
+      text="Si tú o alguien que conoces está en riesgo, no estás sola. Hay personas dispuestas a escucharte y a ayudarte."
+      btn-text="Ver líneas de ayuda →"
+      btn-href="lucha.html">
+    </cat-cta-banner>
+  </div>
+
+  <!-- FOOTER -->
+  <cat-footer></cat-footer>
+
+</body>
+</html>

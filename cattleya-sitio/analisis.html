@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis — CATTLEYA</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="data/charts.js"></script>
+  <script src="components/index.js"></script>
+</head>
+<body>
+
+  <cat-navbar active="analisis"></cat-navbar>
+
+  <cat-page-hero
+    letter="A"
+    position="Segunda"
+    title="Análisis Exploratorio de Datos"
+    subtitle="Estadística descriptiva, distribuciones y patrones encontrados en los datos gubernamentales sobre violencia contra la mujer en Colombia.">
+  </cat-page-hero>
+
+  <!-- RESUMEN ESTADÍSTICO -->
+  <div class="section--bg" style="margin-top:0;">
+    <div class="section__inner">
+      <cat-section-header
+        label="Estadística Descriptiva"
+        subtitle="Reemplaza estos valores con los reales del análisis en Python.">
+      </cat-section-header>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px;">
+        <cat-stat-card variant="dark" number="XX,XXX" label="Total de registros analizados"></cat-stat-card>
+        <cat-stat-card variant="dark" number="XX"     label="Variables en el dataset"></cat-stat-card>
+        <cat-stat-card variant="dark" number="X.X%"   label="Valores nulos / faltantes"></cat-stat-card>
+        <cat-stat-card variant="dark" number="20XX–20XX" label="Rango temporal del dataset"></cat-stat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRÁFICOS EDA -->
+  <div class="section">
+    <cat-section-header
+      label="EDA — Análisis Exploratorio"
+      title="¿Qué dicen los datos?"
+      subtitle="Cada gráfico responde una pregunta clave del análisis.">
+    </cat-section-header>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;">
+      <cat-chart
+        chart-id="chart-evolucion"
+        title="📅 Evolución anual de casos reportados"
+        description="¿Aumentaron o disminuyeron los casos a lo largo del tiempo?">
+      </cat-chart>
+      <cat-chart
+        chart-id="chart-departamentos"
+        title="🗺️ Distribución por departamento (Top 10)"
+        description="¿Cuáles son las regiones más afectadas?">
+      </cat-chart>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+      <cat-chart
+        chart-id="chart-edad"
+        title="👩 Distribución por grupo de edad"
+        description="¿Qué grupos etarios son más vulnerables?">
+      </cat-chart>
+      <cat-chart
+        chart-id="chart-tipo"
+        title="⚠️ Tipo de violencia más frecuente"
+        description="¿Qué tipos de violencia predominan en los reportes?">
+      </cat-chart>
+    </div>
+
+    <div style="margin-top:24px;">
+      <cat-chart
+        chart-id="chart-meses"
+        title="📈 Estacionalidad — casos por mes (promedio histórico)"
+        description="¿Hay meses con mayor incidencia?"
+        height="260">
+      </cat-chart>
+    </div>
+  </div>
+
+  <!-- HALLAZGOS -->
+  <div class="section--bg">
+    <div class="section__inner">
+      <cat-section-header
+        label="Hallazgos"
+        title="Conclusiones del EDA">
+      </cat-section-header>
+      <div class="cards-grid" style="margin-top:32px;">
+        <cat-card icon="📌" title="Hallazgo 1 — [Título]"
+          text="Describe aquí el hallazgo más relevante del análisis descriptivo. Reemplaza con los resultados reales del notebook.">
+        </cat-card>
+        <cat-card icon="📌" title="Hallazgo 2 — [Título]"
+          text="Segundo hallazgo importante. Por ejemplo: concentración geográfica, grupo etario más afectado, o tipo de violencia predominante.">
+        </cat-card>
+        <cat-card icon="📌" title="Hallazgo 3 — [Título]"
+          text="Tercer hallazgo. Considera tendencias temporales, variaciones regionales o correlaciones iniciales encontradas.">
+        </cat-card>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;">
+    <a href="contexto.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">← Contexto</a>
+    <a href="tendencias.html" class="btn-primary">Tendencias →</a>
+  </div>
+
+  <cat-footer></cat-footer>
+
+</body>
+</html>
