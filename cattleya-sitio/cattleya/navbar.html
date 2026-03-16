@@ -1,0 +1,68 @@
+<!-- 
+  CATTLEYA — Navbar compartida
+  Incluir en cada página dentro de <body> al inicio
+-->
+<nav class="navbar" id="navbar">
+  <div class="navbar__brand">
+    <img src="assets/logo-claro.png" alt="Cattleya Logo" class="navbar__logo" id="navbar-logo">
+    <span class="navbar__name">CATT<span>L</span>EYA</span>
+  </div>
+  <ul class="navbar__links">
+    <li>
+      <a href="contexto.html">
+        <span class="nav-letter">C</span> Contexto
+      </a>
+    </li>
+    <li>
+      <a href="analisis.html">
+        <span class="nav-letter">A</span> Análisis
+      </a>
+    </li>
+    <li>
+      <a href="tendencias.html">
+        <span class="nav-letter">T</span> Tendencias
+      </a>
+    </li>
+    <li>
+      <a href="testimonios.html">
+        <span class="nav-letter">T</span> Testimonios
+      </a>
+    </li>
+    <li>
+      <a href="lucha.html">
+        <span class="nav-letter">L</span> Lucha
+      </a>
+    </li>
+    <li>
+      <a href="equipo.html">
+        <span class="nav-letter">E</span> Equipo
+      </a>
+    </li>
+    <li>
+      <a href="yo-decido.html">
+        <span class="nav-letter">Y</span> Yo Decido
+      </a>
+    </li>
+    <li>
+      <a href="alertas.html">
+        <span class="nav-letter">A</span> Alertas
+      </a>
+    </li>
+    <li>
+      <a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  // Cambiar logo según scroll (dark/light context)
+  const navbarEl = document.getElementById('navbar');
+  const logoEl = document.getElementById('navbar-logo');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      logoEl.src = 'assets/logo-magenta.png';
+    } else {
+      logoEl.src = 'assets/logo-claro.png';
+    }
+  });
+</script>

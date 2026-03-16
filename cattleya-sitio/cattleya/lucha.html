@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucha — CATTLEYA</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .lineas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .linea-card {
+      border-radius: 20px;
+      padding: 32px;
+      color: var(--blanco);
+      position: relative;
+      overflow: hidden;
+    }
+    .linea-card--magenta { background: linear-gradient(135deg, var(--magenta), var(--purpura)); }
+    .linea-card--naranja { background: linear-gradient(135deg, var(--naranja), #d4700a); }
+    .linea-card--dark    { background: linear-gradient(135deg, var(--carbon), #111); }
+    .linea-card__numero {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .linea-card__nombre {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .linea-card__desc {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+    .linea-card__badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .pasos-list { list-style: none; margin-top: 40px; }
+    .pasos-list li {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--crema);
+    }
+    .pasos-list li:last-child { border-bottom: none; }
+    .paso-num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: var(--magenta);
+      color: var(--blanco);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+    .paso-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--purpura);
+      margin-bottom: 6px;
+    }
+    .paso-content p {
+      font-size: 0.9rem;
+      color: var(--carbon);
+      opacity: 0.75;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+    <a class="navbar__brand" href="index.html">
+      <img src="assets/logo-claro.png" alt="Cattleya" class="navbar__logo">
+      <span class="navbar__name">CATTLEYA</span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li>
+        <a href="#">Análisis <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="analisis.html">📊 Estadística Descriptiva</a>
+          <a href="tendencias.html">📈 Tendencias y Machine Learning</a>
+          <a href="analisis.html#powerbi">🖥️ Power BI</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Información y educación <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="contexto.html">📚 Contexto y Marco Legal</a>
+          <a href="testimonios.html">📰 Noticias y Testimonios</a>
+          <a href="lucha.html">🆘 Línea de Ayuda</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">¿Qué es Cattleya? <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
+          <a href="equipo.html#vision">🎯 Visión y Misión</a>
+          <a href="equipo.html">👥 El Equipo</a>
+          <hr>
+          <a href="yo-decido.html">📁 Entregables</a>
+        </div>
+      </li>
+      <li><a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero__letter-badge">
+      <strong>L</strong> · Quinta letra de CATTLEYA
+    </div>
+    <h1>Lucha</h1>
+    <p>Recursos, líneas de ayuda y pasos concretos para actuar. La información puede salvar vidas.</p>
+  </div>
+
+  <!-- LÍNEAS DE EMERGENCIA -->
+  <div class="section">
+    <span class="section-label">Líneas de emergencia</span>
+    <h2 class="section-title">Si estás en riesgo,<br><em>llama ahora</em></h2>
+    <p class="section-subtitle">En Colombia estas líneas son gratuitas y disponibles las 24 horas.</p>
+
+    <div class="lineas-grid">
+      <div class="linea-card linea-card--magenta">
+        <div class="linea-card__badge">Nacional</div>
+        <div class="linea-card__numero">155</div>
+        <div class="linea-card__nombre">Línea Mujer</div>
+        <div class="linea-card__desc">Línea gratuita de atención a mujeres víctimas de violencia. Disponible 24/7 en todo el país.</div>
+      </div>
+      <div class="linea-card linea-card--naranja">
+        <div class="linea-card__badge">Emergencias</div>
+        <div class="linea-card__numero">123</div>
+        <div class="linea-card__nombre">Emergencias Nacionales</div>
+        <div class="linea-card__desc">Para situaciones de peligro inmediato. Policía, bomberos y ambulancia.</div>
+      </div>
+      <div class="linea-card linea-card--dark">
+        <div class="linea-card__badge">ICBF</div>
+        <div class="linea-card__numero">141</div>
+        <div class="linea-card__nombre">Línea de Protección</div>
+        <div class="linea-card__desc">Instituto Colombiano de Bienestar Familiar. Atención a niños, niñas y familias en situación de vulnerabilidad.</div>
+      </div>
+      <div class="linea-card linea-card--magenta">
+        <div class="linea-card__badge">Denuncia</div>
+        <div class="linea-card__numero">018000112998</div>
+        <div class="linea-card__nombre">Fiscalía General</div>
+        <div class="linea-card__desc">Denuncia anónima y gratuita de delitos sexuales y violencia intrafamiliar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASOS A SEGUIR -->
+  <div class="section--bg">
+    <div class="section__inner">
+      <span class="section-label">¿Qué hacer?</span>
+      <h2 class="section-title">Pasos si eres víctima<br>o conoces a alguien</h2>
+      <ul class="pasos-list">
+        <li>
+          <div class="paso-num">1</div>
+          <div class="paso-content">
+            <h4>Busca un lugar seguro</h4>
+            <p>Si estás en peligro inmediato, sal del lugar y ve a casa de un familiar, vecino de confianza o establecimiento público. Tu seguridad es la prioridad.</p>
+          </div>
+        </li>
+        <li>
+          <div class="paso-num">2</div>
+          <div class="paso-content">
+            <h4>Llama a la línea 155</h4>
+            <p>La línea Mujer del gobierno colombiano te orienta, escucha y conecta con las autoridades y servicios de apoyo más cercanos a ti.</p>
+          </div>
+        </li>
+        <li>
+          <div class="paso-num">3</div>
+          <div class="paso-content">
+            <h4>Denuncia ante la Fiscalía o la Policía</h4>
+            <p>Puedes hacerlo en persona, por teléfono o de manera anónima. Guarda evidencias: fotos, mensajes, testigos. Tienes derecho a presentar denuncia sin costo.</p>
+          </div>
+        </li>
+        <li>
+          <div class="paso-num">4</div>
+          <div class="paso-content">
+            <h4>Solicita medidas de protección</h4>
+            <p>La Comisaría de Familia puede emitir medidas de protección que prohíben al agresor acercarse. Es un trámite gratuito y relativamente rápido.</p>
+          </div>
+        </li>
+        <li>
+          <div class="paso-num">5</div>
+          <div class="paso-content">
+            <h4>Busca apoyo psicológico</h4>
+            <p>El trauma de la violencia es real. Las entidades gubernamentales y ONG en Colombia ofrecen atención psicológica gratuita para víctimas.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section">
+    <div class="cta-banner">
+      <h2>No estás sola.</h2>
+      <p>Millones de mujeres han pasado por esto y han encontrado apoyo. Dar el primer paso es el más difícil, pero no tienes que darlo sola.</p>
+      <a href="tel:155" class="btn-outline" style="border-color: rgba(255,255,255,0.6);">📞 Llamar al 155 ahora</a>
+    </div>
+  </div>
+
+  <div style="max-width:1200px; margin: 0 auto; padding: 0 40px 40px; display: flex; justify-content: space-between;">
+    <a href="testimonios.html" class="btn-outline" style="border-color: var(--magenta); color: var(--magenta);">← Testimonios</a>
+    <a href="equipo.html" class="btn-primary">Equipo →</a>
+  </div>
+
+  <footer>
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand-name">CATTLEYA</div>
+        <p class="footer__tagline">Datos que no callan.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Ayuda inmediata</h4>
+        <ul>
+          <li><a href="tel:155">Línea Mujer: 155</a></li>
+          <li><a href="tel:123">Emergencias: 123</a></li>
+          <li><a href="tel:141">ICBF: 141</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="analisis.html">Análisis</a></li>
+          <li><a href="equipo.html">Equipo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Cattleya · Proyecto de Grado</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

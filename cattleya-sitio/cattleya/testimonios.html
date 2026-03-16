@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonios — CATTLEYA</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .navbar__hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
+    .navbar__hamburger span { display:block; width:24px; height:2px; background:var(--magenta); border-radius:2px; transition:transform 0.3s,opacity 0.3s; }
+    .navbar__hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .navbar__hamburger.open span:nth-child(2) { opacity:0; }
+    .navbar__hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .navbar__mobile-menu { display:none; position:fixed; top:var(--navbar-h); left:0; right:0; background:var(--blanco); border-bottom:2px solid var(--crema); padding:16px 24px 24px; z-index:999; box-shadow:0 8px 32px rgba(157,45,106,0.12); flex-direction:column; gap:4px; }
+    .navbar__mobile-menu.open { display:flex; }
+    .navbar__mobile-menu a { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px; font-size:0.95rem; font-weight:500; color:var(--carbon); transition:background 0.2s; text-decoration:none; }
+    .navbar__mobile-menu a:hover { background:var(--crema); }
+    .navbar__mobile-menu a.mobile-panico { background:var(--naranja); color:var(--blanco); margin-top:8px; font-weight:600; justify-content:center; }
+    @media (max-width:900px) { .navbar__links { display:none; } .navbar__hamburger { display:flex; } }
+
+    /* CARRUSEL */
+    .carrusel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-top: 40px;
+    }
+    .carrusel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .carrusel-slide {
+      min-width: 100%;
+      padding: 0 4px;
+    }
+    .noticia-card {
+      background: var(--blanco);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      border: 1px solid rgba(157,45,106,0.1);
+      box-shadow: 0 8px 32px rgba(157,45,106,0.08);
+    }
+    .noticia-card__img {
+      background: linear-gradient(135deg, var(--magenta), var(--purpura));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 320px;
+    }
+    .noticia-card__img svg { width: 100px; opacity: 0.6; }
+    .noticia-card__body {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .noticia-card__tag {
+      display: inline-block;
+      background: var(--crema);
+      color: var(--magenta);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .noticia-card__title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--purpura);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .noticia-card__excerpt {
+      font-size: 0.92rem;
+      color: var(--carbon);
+      opacity: 0.75;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .noticia-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--carbon);
+      opacity: 0.55;
+    }
+    .noticia-card__meta a {
+      color: var(--magenta);
+      font-weight: 600;
+      font-size: 0.85rem;
+      opacity: 1;
+      transition: opacity 0.2s;
+    }
+    .noticia-card__meta a:hover { opacity: 0.7; }
+
+    /* CONTROLES CARRUSEL */
+    .carrusel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .carrusel-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--magenta);
+      background: var(--blanco);
+      color: var(--magenta);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .carrusel-btn:hover { background: var(--magenta); color: var(--blanco); }
+    .carrusel-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .carrusel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--crema);
+      border: 2px solid var(--magenta);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .carrusel-dot.active { background: var(--magenta); }
+
+    /* TIMELINE -->
+    .timeline { position: relative; margin-top: 48px; padding-left: 32px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--magenta), var(--crema));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--magenta);
+      border: 3px solid var(--blanco);
+      box-shadow: 0 0 0 2px var(--magenta);
+    }
+    .timeline-date {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--naranja);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--purpura);
+      margin-bottom: 6px;
+    }
+    .timeline-text {
+      font-size: 0.88rem;
+      color: var(--carbon);
+      opacity: 0.75;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .noticia-card { grid-template-columns: 1fr; }
+      .noticia-card__img { min-height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+    <a class="navbar__brand" href="index.html">
+      <img src="assets/logo-claro.png" alt="Cattleya" class="navbar__logo">
+      <span class="navbar__name">CATTLEYA</span>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li>
+        <a href="#">Análisis <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="analisis.html">📊 Estadística Descriptiva</a>
+          <a href="tendencias.html">📈 Tendencias y Machine Learning</a>
+          <a href="analisis.html#powerbi">🖥️ Power BI</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Información y educación <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="contexto.html">📚 Contexto y Marco Legal</a>
+          <a href="testimonios.html">📰 Noticias y Testimonios</a>
+          <a href="lucha.html">🆘 Línea de Ayuda</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">¿Qué es Cattleya? <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
+          <a href="equipo.html#vision">🎯 Visión y Misión</a>
+          <a href="equipo.html">👥 El Equipo</a>
+          <hr>
+          <a href="yo-decido.html">📁 Entregables</a>
+        </div>
+      </li>
+      <li><a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a></li>
+    </ul>
+  </nav>
+
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="contexto.html"><span class="nav-letter">C</span> Contexto</a>
+    <a href="analisis.html"><span class="nav-letter">A</span> Análisis</a>
+    <a href="tendencias.html"><span class="nav-letter">T</span> Tendencias</a>
+    <a href="testimonios.html"><span class="nav-letter">T</span> Testimonios</a>
+    <a href="lucha.html"><span class="nav-letter">L</span> Lucha</a>
+    <a href="equipo.html"><span class="nav-letter">E</span> Equipo</a>
+    <a href="yo-decido.html"><span class="nav-letter">Y</span> Yo Decido</a>
+    <a href="alertas.html"><span class="nav-letter">A</span> Alertas</a>
+    <a href="lucha.html" class="mobile-panico">🆘 Necesito Ayuda</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero__letter-badge"><strong>T</strong> · Cuarta letra de CATTLEYA</div>
+    <h1>Testimonios</h1>
+    <p>Noticias y casos documentados que dan rostro humano a los números. Cada estadística representa una vida real.</p>
+  </div>
+
+  <!-- CARRUSEL DE NOTICIAS -->
+  <div class="section">
+    <span class="section-label">Noticias documentadas</span>
+    <h2 class="section-title">Los números<br><em>tienen nombre y rostro</em></h2>
+    <p class="section-subtitle">Casos documentados por medios verificados. Actualiza el contenido con las noticias reales que elija el equipo.</p>
+
+    <div class="carrusel-wrapper">
+      <div class="carrusel-track" id="carrusel-track">
+
+        <!-- SLIDE 1 -->
+        <div class="carrusel-slide">
+          <div class="noticia-card">
+            <div class="noticia-card__img">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <ellipse cx="50" cy="30" rx="12" ry="22" fill="white"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(-30 50 50)"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(30 50 50)"/>
+                <ellipse cx="50" cy="72" rx="14" ry="18" fill="white"/>
+                <circle cx="50" cy="50" r="7" fill="white" opacity="0.7"/>
+              </svg>
+            </div>
+            <div class="noticia-card__body">
+              <div>
+                <span class="noticia-card__tag">📰 Noticia</span>
+                <div class="noticia-card__title">Titular de noticia 1 — Reemplazar con caso real documentado</div>
+                <div class="noticia-card__excerpt">
+                  Agrega aquí el resumen de la noticia. Describe el caso brevemente, sin revictimizar ni exponer datos de identidad sin consentimiento. Conecta cuando sea posible con los hallazgos del análisis estadístico del proyecto.
+                </div>
+              </div>
+              <div class="noticia-card__meta">
+                <span>Fuente: [Medio] · [Fecha]</span>
+                <a href="#" target="_blank">Leer nota completa →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="carrusel-slide">
+          <div class="noticia-card">
+            <div class="noticia-card__img" style="background:linear-gradient(135deg,var(--naranja),#d4700a);">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <ellipse cx="50" cy="30" rx="12" ry="22" fill="white"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(-30 50 50)"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(30 50 50)"/>
+                <ellipse cx="50" cy="72" rx="14" ry="18" fill="white"/>
+                <circle cx="50" cy="50" r="7" fill="white" opacity="0.7"/>
+              </svg>
+            </div>
+            <div class="noticia-card__body">
+              <div>
+                <span class="noticia-card__tag">📰 Noticia</span>
+                <div class="noticia-card__title">Titular de noticia 2 — Reemplazar con caso real documentado</div>
+                <div class="noticia-card__excerpt">
+                  Agrega aquí el resumen de la segunda noticia. El carrusel permite navegar entre casos sin que la página se sienta abrumadora para el visitante.
+                </div>
+              </div>
+              <div class="noticia-card__meta">
+                <span>Fuente: [Medio] · [Fecha]</span>
+                <a href="#" target="_blank">Leer nota completa →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="carrusel-slide">
+          <div class="noticia-card">
+            <div class="noticia-card__img" style="background:linear-gradient(135deg,var(--carbon),#3a1a2e);">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <ellipse cx="50" cy="30" rx="12" ry="22" fill="white"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(-30 50 50)"/>
+                <ellipse cx="50" cy="50" rx="22" ry="10" fill="white" transform="rotate(30 50 50)"/>
+                <ellipse cx="50" cy="72" rx="14" ry="18" fill="white"/>
+                <circle cx="50" cy="50" r="7" fill="white" opacity="0.7"/>
+              </svg>
+            </div>
+            <div class="noticia-card__body">
+              <div>
+                <span class="noticia-card__tag">📰 Noticia</span>
+                <div class="noticia-card__title">Titular de noticia 3 — Reemplazar con caso real documentado</div>
+                <div class="noticia-card__excerpt">
+                  Tercer caso. Puedes agregar más slides duplicando el bloque .carrusel-slide y actualizando el contenido y los puntos de control.
+                </div>
+              </div>
+              <div class="noticia-card__meta">
+                <span>Fuente: [Medio] · [Fecha]</span>
+                <a href="#" target="_blank">Leer nota completa →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /wrapper -->
+
+    <!-- CONTROLES -->
+    <div class="carrusel-controls">
+      <button class="carrusel-btn" id="prev-btn">&#8592;</button>
+      <div class="carrusel-dots" id="carrusel-dots">
+        <div class="carrusel-dot active" data-idx="0"></div>
+        <div class="carrusel-dot" data-idx="1"></div>
+        <div class="carrusel-dot" data-idx="2"></div>
+      </div>
+      <button class="carrusel-btn" id="next-btn">&#8594;</button>
+    </div>
+
+    <div style="background:var(--crema);border-radius:16px;padding:24px 28px;margin-top:40px;border-left:4px solid var(--naranja);">
+      <p style="font-size:0.88rem;color:var(--carbon);opacity:0.75;line-height:1.7;">
+        <strong style="color:var(--magenta);">Nota del equipo:</strong> Las noticias provienen de medios verificados. Su inclusión busca contextualizar los datos estadísticos con realidades concretas, sin revictimizar ni exponer identidades sin consentimiento previo.
+      </p>
+    </div>
+  </div>
+
+  <!-- TIMELINE LEGISLATIVO -->
+  <div class="section--bg">
+    <div class="section__inner">
+      <span class="section-label">Línea de tiempo</span>
+      <h2 class="section-title">Hitos en la lucha<br><em>por los derechos de las mujeres</em></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1994</div>
+          <div class="timeline-title">Convención Belém do Pará</div>
+          <div class="timeline-text">Colombia ratifica la Convención Interamericana para Prevenir, Sancionar y Erradicar la Violencia contra la Mujer. Primer instrumento internacional vinculante en la materia.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2008</div>
+          <div class="timeline-title">Ley 1257 — Marco legal nacional</div>
+          <div class="timeline-text">Colombia promulga normas de sensibilización, prevención y sanción de formas de violencia y discriminación contra las mujeres. Define tipos de violencia reconocidos por el Estado.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">23 mayo 2012</div>
+          <div class="timeline-title">El caso de Rosa Elvira Cely</div>
+          <div class="timeline-text">Rosa Elvira Cely es agredida en el Parque Nacional de Bogotá. Muere días después. Su caso conmociona al país y cataliza el movimiento legislativo por el reconocimiento del feminicidio.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2014</div>
+          <div class="timeline-title">Ley 1719 — Violencia sexual en el conflicto</div>
+          <div class="timeline-text">Se adoptan medidas para garantizar el acceso a la justicia de las víctimas de violencia sexual, especialmente aquellas relacionadas con el conflicto armado interno.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">6 julio 2015</div>
+          <div class="timeline-title">Ley 1761 — Ley Rosa Elvira Cely</div>
+          <div class="timeline-text">El feminicidio es tipificado como delito autónomo en Colombia (Art. 104A del Código Penal). Penas de 250 a 500 meses de prisión. Un hito histórico para los derechos de las mujeres colombianas.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Hoy</div>
+          <div class="timeline-title">El camino continúa</div>
+          <div class="timeline-text">Las leyes existen. Los datos de este proyecto muestran que la implementación, la denuncia y la protección real aún son desafíos pendientes. Los números no mienten.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;">
+    <a href="tendencias.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">← Tendencias</a>
+    <a href="lucha.html" class="btn-primary">Lucha →</a>
+  </div>
+
+  <footer>
+    <div class="footer__inner">
+      <div><div class="footer__brand-name">CATTLEYA</div><p class="footer__tagline">Datos que no callan.</p></div>
+      <div class="footer__col"><h4>Secciones</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="analisis.html">Análisis</a></li><li><a href="lucha.html">Lucha</a></li></ul></div>
+      <div class="footer__col"><h4>Proyecto</h4><ul><li><a href="equipo.html">Equipo</a></li><li><a href="yo-decido.html">Entregables</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 Cattleya · Proyecto de Grado</span></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // NAVBAR
+    const logo = document.getElementById("navbar-logo");
+    const nav  = document.getElementById("navbar");
+    window.addEventListener("scroll", () => { const s = window.scrollY>80; logo.src=s?"assets/logo-magenta.png":"assets/logo-claro.png"; nav.classList.toggle("scrolled",s); });
+    const ham = document.getElementById("hamburger");
+    const mob = document.getElementById("mobile-menu");
+    ham.addEventListener("click", () => { ham.classList.toggle("open"); mob.classList.toggle("open"); });
+    mob.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { ham.classList.remove("open"); mob.classList.remove("open"); }));
+
+    // CARRUSEL
+    const track  = document.getElementById("carrusel-track");
+    const dots   = document.querySelectorAll(".carrusel-dot");
+    const slides = document.querySelectorAll(".carrusel-slide");
+    let current  = 0;
+
+    function goTo(idx) {
+      current = (idx + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + (current * 100) + "%)";
+      dots.forEach((d,i) => d.classList.toggle("active", i === current));
+    }
+
+    document.getElementById("prev-btn").addEventListener("click", () => goTo(current - 1));
+    document.getElementById("next-btn").addEventListener("click", () => goTo(current + 1));
+    dots.forEach(d => d.addEventListener("click", () => goTo(+d.dataset.idx)));
+
+    // Auto-play
+    let autoPlay = setInterval(() => goTo(current + 1), 6000);
+    track.parentElement.addEventListener("mouseenter", () => clearInterval(autoPlay));
+    track.parentElement.addEventListener("mouseleave", () => { autoPlay = setInterval(() => goTo(current+1), 6000); });
+
+    // TIMELINE ANIMATION
+    const tlItems = document.querySelectorAll(".timeline-item");
+    const tlObs = new IntersectionObserver(entries => {
+      entries.forEach((en,i) => {
+        if (en.isIntersecting) {
+          setTimeout(() => en.target.classList.add("visible"), en.target.dataset.tdelay || 0);
+          tlObs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    tlItems.forEach((el, i) => { el.dataset.tdelay = i * 120; tlObs.observe(el); });
+  </script>
+</body>
+</html>
