@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CATTLEYA — Datos que no callan</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    .hero__badge    { opacity:0; animation: slideUp 0.6s ease 0.2s forwards; }
+    .hero__title    { opacity:0; animation: slideUp 0.7s ease 0.4s forwards; }
+    .hero__subtitle { opacity:0; animation: slideUp 0.7s ease 0.6s forwards; }
+    .hero__cta      { opacity:0; animation: slideUp 0.7s ease 0.8s forwards; }
+    .hero__stats    { opacity:0; animation: slideUp 0.8s ease 1.0s forwards; }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .navbar__links { display: none; }
+      .preview-grid  { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <a class="navbar__brand" href="index.html">
+      <img src="assets/logo-claro.png" alt="Cattleya" class="navbar__logo">
+      <span class="navbar__name">CATTLEYA</span>
+    </a>
+    <ul class="navbar__links">
+
+      <li><a href="index.html" class="active">Inicio</a></li>
+
+      <li>
+        <a href="#">Análisis <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="analisis.html">📊 Estadística Descriptiva</a>
+          <a href="tendencias.html">📈 Tendencias y Machine Learning</a>
+          <a href="analisis.html#powerbi">🖥️ Power BI</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">Información y educación <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="contexto.html">📚 Contexto y Marco Legal</a>
+          <a href="testimonios.html">📰 Noticias y Testimonios</a>
+          <a href="lucha.html">🆘 Línea de Ayuda</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">¿Qué es Cattleya? <span class="dropdown-arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
+          <a href="equipo.html#vision">🎯 Visión y Misión</a>
+          <a href="equipo.html">👥 El Equipo</a>
+          <hr>
+          <a href="yo-decido.html">📁 Entregables</a>
+        </div>
+      </li>
+
+      <li><a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="hero">
+    <img src="assets/logo-claro.png" alt="" class="hero__orquidea-bg">
+    <div class="hero__content">
+      <div class="hero__text">
+        <span class="hero__badge">📊 Análisis de Datos · Colombia</span>
+        <h1 class="hero__title">
+          Datos que<br><em>no callan.</em><br>Flores que<br>no se doblan.
+        </h1>
+        <p class="hero__subtitle">
+          La orquídea Cattleya florece incluso en condiciones adversas.
+          Como ella, cada dato aquí habla de resiliencia, de verdad y de
+          la urgencia de actuar frente a la violencia contra la mujer en Colombia.
+        </p>
+        <div class="hero__cta">
+          <a href="analisis.html" class="btn-primary">Explorar el análisis →</a>
+          <a href="cattleya.html" class="btn-outline">¿Qué es Cattleya?</a>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="hero__stats">
+        <div class="stat-card">
+          <div class="stat-card__number"><span class="counter" data-target="182000" data-suffix=""></span></div>
+          <div class="stat-card__label">casos de violencia intrafamiliar registrados en Colombia (2023)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number"><span class="counter" data-target="78" data-suffix="%"></span></div>
+          <div class="stat-card__label">de las víctimas son mujeres</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number" style="font-size:1.6rem;">1 de cada 3</div>
+          <div class="stat-card__label">mujeres ha sufrido violencia de pareja en su vida</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number" style="color:var(--naranja);"><span class="counter" data-target="60" data-suffix="%"></span></div>
+          <div class="stat-card__label">de los casos no son denunciados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PREVIEW ANÁLISIS ── -->
+  <section class="section">
+    <div class="preview-grid">
+      <div>
+        <span class="section-label">Análisis exploratorio</span>
+        <h2 class="section-title">Los datos hablan,<br><em>nosotros escuchamos</em></h2>
+        <p style="font-size:1rem;line-height:1.7;color:var(--carbon);opacity:0.75;margin-bottom:32px;">
+          Aplicamos EDA, estadística descriptiva e inferencial, y machine learning sobre bases
+          de datos gubernamentales de Colombia para encontrar patrones y tendencias en los
+          reportes de violencia contra la mujer.
+        </p>
+        <a href="analisis.html" class="btn-primary">Ver el análisis completo →</a>
+      </div>
+      <div class="chart-container">
+        <h3>Distribución por tipo de violencia</h3>
+        <div class="chart-canvas-wrap"><canvas id="chartHome"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div class="section" style="padding-top:0;">
+    <div class="cta-banner">
+      <h2>¿Necesitas ayuda ahora?</h2>
+      <p>Si tú o alguien que conoces está en riesgo, no estás sola. Hay personas dispuestas a escucharte y a ayudarte.</p>
+      <a href="lucha.html" class="btn-outline" style="display:inline-flex;border-color:rgba(255,255,255,0.6);">Ver líneas de ayuda →</a>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand-name">CATTLEYA</div>
+        <p class="footer__tagline">Datos que no callan. Un proyecto de análisis de datos sobre violencia contra la mujer en Colombia.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Análisis</h4>
+        <ul>
+          <li><a href="analisis.html">Estadística Descriptiva</a></li>
+          <li><a href="tendencias.html">Tendencias y ML</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Más</h4>
+        <ul>
+          <li><a href="contexto.html">Contexto</a></li>
+          <li><a href="equipo.html">Equipo</a></li>
+          <li><a href="yo-decido.html">Entregables</a></li>
+          <li><a href="lucha.html">Línea de Ayuda</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Cattleya · Proyecto de Grado · Técnico en Programación para Analítica de Datos</span>
+      <span>Hecho con 💜 para que los datos no callen</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // CONTADORES ANIMADOS
+    function animCounter(el) {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || "";
+      const fmt = n => target >= 1000 ? Math.floor(n).toLocaleString("es-CO") : Math.floor(n);
+      let t0 = null;
+      const step = ts => {
+        if (!t0) t0 = ts;
+        const p = Math.min((ts - t0) / 2200, 1);
+        const e = 1 - Math.pow(1 - p, 4);
+        el.textContent = fmt(e * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { animCounter(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll(".counter").forEach(el => io.observe(el));
+
+    // CHART HOME
+    new Chart(document.getElementById("chartHome").getContext("2d"), {
+      type: "doughnut",
+      data: {
+        labels: ["Física","Psicológica","Sexual","Económica","Negligencia"],
+        datasets: [{
+          data: [38,29,18,11,4],
+          backgroundColor: ["#9D2D6A","#822157","#F28C28","#FDEEE9","#d4700a"],
+          borderWidth: 0, hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position:"right", labels:{ font:{ family:"DM Sans", size:13 }, color:"#333333", padding:16 } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
