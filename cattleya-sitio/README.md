@@ -1,6 +1,6 @@
 # 🌸 CATTLEYA — Datos que no callan
 
-> Proyecto de Técnico en Programación para Analítica de Datos  
+> Proyecto de grado · Técnico en Programación para Analítica de Datos  
 > Análisis de datos gubernamentales sobre violencia contra la mujer en Colombia
 
 [![Estado](https://img.shields.io/badge/estado-en%20desarrollo-yellow)](https://github.com)

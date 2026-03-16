@@ -1,94 +1,162 @@
 /**
  * <cat-navbar active="inicio|analisis|educacion|cattleya">
  *
+ * Navbar tipo pill flotante. Diseño extraído del equipo de diseño.
+ * Incluye dropdowns en desktop y menú hamburger en mobile.
+ *
  * Uso:
  *   <cat-navbar active="analisis"></cat-navbar>
+ *
+ * Valores para active:
+ *   inicio | analisis | educacion | cattleya
  */
 class CatNavbar extends HTMLElement {
   static get observedAttributes() { return ['active']; }
 
-  connectedCallback() { this._render(); }
-  attributeChangedCallback() { this._render(); }
+  connectedCallback()            { this._render(); this._bindEvents(); }
+  attributeChangedCallback()     { this._render(); this._bindEvents(); }
+  disconnectedCallback()         { this._cleanup(); }
 
   get active() { return this.getAttribute('active') || 'inicio'; }
 
-  _isActive(key) {
-    return this.active === key ? 'class="active"' : '';
+  // Marca el link activo dentro de cada <li> con dropdown button
+  _activeClass(key) {
+    return this.active === key ? ' active' : '';
   }
 
   _render() {
     this.innerHTML = `
-      <style>
-        cat-navbar { display: block; }
-      </style>
-      <nav class="navbar" id="navbar">
-        <a class="navbar__brand" href="index.html">
-          <img src="assets/logo-claro.png" alt="Cattleya" class="navbar__logo" id="navbar-logo">
-          <span class="navbar__name">CATTLEYA</span>
-        </a>
-        <ul class="navbar__links">
+      <div class="nav-wrapper">
 
-          <li>
-            <a href="index.html" ${this._isActive('inicio')}>Inicio</a>
-          </li>
+        <!-- ── PILL NAVBAR ── -->
+        <nav class="cat-pill-navbar">
 
-          <li>
-            <a href="#" ${this._isActive('analisis')}>
-              Análisis <span class="dropdown-arrow">▾</span>
+          <!-- Logo -->
+          <a href="index.html" class="cat-logo">
+            <svg class="cat-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="18" cy="18" rx="10" ry="14" fill="#F6871D" opacity="0.9"/>
+              <ellipse cx="8"  cy="15" rx="7"  ry="4"  fill="#fff" opacity="0.65" transform="rotate(-20 8 15)"/>
+              <ellipse cx="28" cy="15" rx="7"  ry="4"  fill="#fff" opacity="0.65" transform="rotate(20 28 15)"/>
+              <ellipse cx="18" cy="25" rx="5"  ry="7"  fill="#fff" opacity="0.45"/>
+              <circle  cx="18" cy="18" r="3.5"          fill="#8B2467"/>
+            </svg>
+            <span class="cat-logo-text">Cattleya</span>
+          </a>
+
+          <!-- Links desktop -->
+          <div class="cat-nav-links" id="cat-desktop-links">
+
+            <a href="index.html" class="cat-nav-link${this._activeClass('inicio')}">
+              Inicio
             </a>
-            <div class="dropdown">
-              <a href="analisis.html">📊 Estadística Descriptiva</a>
-              <a href="tendencias.html">📈 Tendencias y Machine Learning</a>
-              <a href="analisis.html#powerbi">🖥️ Power BI</a>
-            </div>
-          </li>
 
-          <li>
-            <a href="#" ${this._isActive('educacion')}>
-              Información y educación <span class="dropdown-arrow">▾</span>
+            <a href="analisis.html" class="cat-nav-link${this._activeClass('analisis')}">
+              Power BI
             </a>
-            <div class="dropdown">
-              <a href="contexto.html">📚 Contexto y Marco Legal</a>
-              <a href="testimonios.html">📰 Noticias y Testimonios</a>
-              <a href="lucha.html">🆘 Línea de Ayuda</a>
-            </div>
-          </li>
 
-          <li>
-            <a href="#" ${this._isActive('cattleya')}>
-              ¿Qué es Cattleya? <span class="dropdown-arrow">▾</span>
+            <!-- Dropdown: Información y educación -->
+            <div class="cat-dropdown" id="cat-dd1">
+              <button class="cat-nav-btn${this._activeClass('educacion')}"
+                      onclick="this.closest('.cat-dropdown').querySelector('.cat-drop-menu').classList.toggle('open'); this.classList.toggle('active')">
+                Información y educación <span class="cat-caret">▾</span>
+              </button>
+              <div class="cat-drop-menu" id="cat-dd1-menu">
+                <a href="contexto.html">📚 Metodología y Marco Legal</a>
+                <a href="testimonios.html">📰 Noticias y blogs</a>
+                <a href="lucha.html">🆘 Línea de ayuda</a>
+              </div>
+            </div>
+
+            <a href="tendencias.html" class="cat-nav-link">
+              Prototipo
             </a>
-            <div class="dropdown">
-              <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
-              <a href="equipo.html#vision">🎯 Visión y Misión</a>
-              <a href="equipo.html">👥 El Equipo</a>
-              <hr>
-              <a href="yo-decido.html">📁 Entregables</a>
-            </div>
-          </li>
 
-          <li>
-            <a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a>
-          </li>
-        </ul>
-      </nav>
+            <!-- Dropdown: ¿Qué es Cattleya? -->
+            <div class="cat-dropdown" id="cat-dd2">
+              <button class="cat-nav-btn${this._activeClass('cattleya')}"
+                      onclick="this.closest('.cat-dropdown').querySelector('.cat-drop-menu').classList.toggle('open'); this.classList.toggle('active')">
+                ¿Qué es Cattleya? <span class="cat-caret">▾</span>
+              </button>
+              <div class="cat-drop-menu" id="cat-dd2-menu">
+                <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
+                <a href="equipo.html#vision">🎯 Visión / Misión</a>
+                <a href="equipo.html">👥 Equipo</a>
+                <hr class="cat-drop-hr">
+                <a href="yo-decido.html">📁 Entregables</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hamburger mobile -->
+          <button class="cat-hamburger" id="cat-hamburger" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </nav>
+
+        <!-- ── MENÚ MOBILE ── -->
+        <div class="cat-mobile-menu" id="cat-mobile-menu">
+          <a href="index.html" class="cat-mob-item">Inicio</a>
+          <a href="analisis.html" class="cat-mob-item">Power BI</a>
+
+          <button class="cat-mob-item" onclick="
+            const s = this.nextElementSibling;
+            s.classList.toggle('open');
+            this.classList.toggle('active');">
+            Información y educación <span class="cat-mob-caret">▾</span>
+          </button>
+          <div class="cat-mob-sub">
+            <a href="contexto.html">📚 Metodología y Marco Legal</a>
+            <a href="testimonios.html">📰 Noticias y blogs</a>
+            <a href="lucha.html">🆘 Línea de ayuda</a>
+          </div>
+
+          <a href="tendencias.html" class="cat-mob-item">Prototipo</a>
+
+          <button class="cat-mob-item" onclick="
+            const s = this.nextElementSibling;
+            s.classList.toggle('open');
+            this.classList.toggle('active');">
+            ¿Qué es Cattleya? <span class="cat-mob-caret">▾</span>
+          </button>
+          <div class="cat-mob-sub">
+            <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
+            <a href="equipo.html#vision">🎯 Visión / Misión</a>
+            <a href="equipo.html">👥 Equipo</a>
+            <a href="yo-decido.html">📁 Entregables</a>
+          </div>
+        </div>
+
+      </div>
     `;
-
-    // Swap logo claro→magenta al hacer scroll
-    const logo = this.querySelector('#navbar-logo');
-    const onScroll = () => {
-      logo.src = window.scrollY > 80
-        ? 'assets/logo-magenta.png'
-        : 'assets/logo-claro.png';
-    };
-    // Remover listener previo si el componente se re-renderiza
-    window.removeEventListener('scroll', this._onScroll);
-    this._onScroll = onScroll;
-    window.addEventListener('scroll', this._onScroll);
   }
 
-  disconnectedCallback() {
-    window.removeEventListener('scroll', this._onScroll);
+  _bindEvents() {
+    // Hamburger toggle
+    const ham  = this.querySelector('#cat-hamburger');
+    const menu = this.querySelector('#cat-mobile-menu');
+    if (!ham || !menu) return;
+
+    this._hamHandler = () => {
+      ham.classList.toggle('open');
+      menu.classList.toggle('open');
+    };
+    ham.addEventListener('click', this._hamHandler);
+
+    // Cerrar dropdowns desktop al hacer clic fuera
+    this._outsideHandler = (e) => {
+      if (!this.contains(e.target)) {
+        this.querySelectorAll('.cat-drop-menu.open').forEach(m => m.classList.remove('open'));
+        this.querySelectorAll('.cat-nav-btn.active').forEach(b => b.classList.remove('active'));
+      }
+    };
+    document.addEventListener('click', this._outsideHandler);
+  }
+
+  _cleanup() {
+    document.removeEventListener('click', this._outsideHandler);
   }
 }
 
