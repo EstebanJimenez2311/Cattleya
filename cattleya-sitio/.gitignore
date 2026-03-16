@@ -1,0 +1,37 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Datos sensibles (nunca subir datasets con info personal)
+data/raw/
+data/sensible/
+*.csv.bak
+
+# Node (si se agrega build tooling después)
+node_modules/
+npm-debug.log
+
+# Archivos temporales
+*.tmp
+*.log
+*.zip
