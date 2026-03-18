@@ -1,0 +1,249 @@
+/* ============================================
+   CATTLEYA — Navbar
+   Pill flotante. No modificar estructura base.
+   ============================================ */
+
+/* Wrapper posicionador — centra la pill y la fija arriba */
+.nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 48px);
+  max-width: 900px;
+}
+
+/* La pill principal */
+.cat-pill-navbar {
+  background: rgba(139, 36, 103, 0.92);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 999px;
+  box-shadow: 0 8px 32px rgba(111,30,78,0.35), 0 2px 8px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.18);
+  height: 56px;
+  padding: 0 10px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+
+.cat-pill-navbar:hover {
+  box-shadow: 0 12px 40px rgba(111,30,78,0.45), 0 4px 12px rgba(0,0,0,0.18);
+}
+
+/* ── LOGO ── */
+.cat-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.cat-logo-icon  { width: 32px; height: 32px; }
+
+.cat-logo-text {
+  color: var(--blanco);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* ── LINKS DESKTOP ── */
+.cat-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cat-nav-link,
+.cat-nav-btn {
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: none;
+  background: none;
+  font-family: var(--font);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.cat-nav-link:hover,
+.cat-nav-btn:hover,
+.cat-nav-link.active,
+.cat-nav-btn.active {
+  color: var(--naranja);
+  background: rgba(255,255,255,0.10);
+}
+
+/* ── DROPDOWN DESKTOP ── */
+.cat-caret {
+  font-size: 9px;
+  opacity: 0.7;
+  transition: transform 0.25s;
+}
+
+.cat-nav-btn.active .cat-caret { transform: rotate(180deg); }
+
+.cat-dropdown { position: relative; }
+
+.cat-drop-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--purpura);
+  border-radius: 16px;
+  min-width: 210px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.12);
+  z-index: 200;
+  animation: catDropIn 0.2s ease;
+}
+
+.cat-drop-menu.open { display: block; }
+
+@keyframes catDropIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.cat-drop-menu a {
+  display: block;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 11px 18px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.cat-drop-menu a + a,
+.cat-drop-hr + a { border-top: 1px solid rgba(255,255,255,0.07); }
+
+.cat-drop-menu a:hover {
+  color: var(--naranja);
+  background: rgba(255,255,255,0.07);
+}
+
+.cat-drop-hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin: 4px 0;
+}
+
+/* ── HAMBURGER — solo mobile ── */
+.cat-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.cat-hamburger span {
+  display: block;
+  width: 19px;
+  height: 2px;
+  background: var(--blanco);
+  border-radius: 2px;
+  transition: all 0.28s;
+}
+
+.cat-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.cat-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.cat-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MENÚ MOBILE ── */
+.cat-mobile-menu {
+  background: var(--purpura);
+  border-radius: 20px;
+  margin-top: 8px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.28s ease,
+              transform 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cat-mobile-menu.open {
+  max-height: 600px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cat-mob-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  background: none;
+  border-left: none; border-right: none; border-bottom: none;
+  font-family: var(--font);
+  cursor: pointer;
+  width: 100%;
+  transition: color 0.2s;
+}
+
+.cat-mob-item:first-child { border-top: none; }
+.cat-mob-item:hover,
+.cat-mob-item.active { color: var(--naranja); }
+
+.cat-mob-caret {
+  font-size: 10px;
+  transition: transform 0.25s;
+}
+
+.cat-mob-item.active .cat-mob-caret { transform: rotate(180deg); }
+
+.cat-mob-sub {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1);
+  background: rgba(0,0,0,0.15);
+}
+
+.cat-mob-sub.open { max-height: 280px; }
+
+.cat-mob-sub a {
+  display: block;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: 13.5px;
+  padding: 12px 20px 12px 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s;
+}
+
+.cat-mob-sub a:hover { color: var(--naranja); }
+
+/* ── RESPONSIVE: ocultar desktop, mostrar hamburger ── */
+@media (max-width: 780px) {
+  .cat-nav-links  { display: none; }
+  .cat-hamburger  { display: flex; }
+}

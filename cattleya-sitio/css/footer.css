@@ -1,0 +1,67 @@
+/* ============================================
+   CATTLEYA — Footer
+   ============================================ */
+
+footer {
+  background: var(--carbon);
+  color: rgba(255,255,255,0.7);
+  padding: 48px 40px 24px;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 24px;
+}
+
+.footer__brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--blanco);
+  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+}
+
+.footer__tagline {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footer__col h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--naranja);
+  margin-bottom: 16px;
+}
+
+.footer__col ul { list-style: none; }
+
+.footer__col ul li {
+  margin-bottom: 10px;
+}
+
+.footer__col ul li a {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+}
+
+.footer__col ul li a:hover { color: var(--blanco); }
+
+.footer__bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
