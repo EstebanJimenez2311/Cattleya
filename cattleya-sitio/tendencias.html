@@ -3,24 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tendencias — CATTLEYA</title>
+  <title>Tendencias - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-    /* HAMBURGER */
-    .navbar__hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
-    .navbar__hamburger span { display:block; width:24px; height:2px; background:var(--magenta); border-radius:2px; transition:transform 0.3s,opacity 0.3s; }
-    .navbar__hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .navbar__hamburger.open span:nth-child(2) { opacity:0; }
-    .navbar__hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-    .navbar__mobile-menu { display:none; position:fixed; top:var(--navbar-h); left:0; right:0; background:var(--blanco); border-bottom:2px solid var(--crema); padding:16px 24px 24px; z-index:999; box-shadow:0 8px 32px rgba(157,45,106,0.12); flex-direction:column; gap:4px; }
-    .navbar__mobile-menu.open { display:flex; }
-    .navbar__mobile-menu a { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px; font-size:0.95rem; font-weight:500; color:var(--carbon); transition:background 0.2s; text-decoration:none; }
-    .navbar__mobile-menu a:hover { background:var(--crema); }
-    .navbar__mobile-menu a.mobile-panico { background:var(--naranja); color:var(--blanco); margin-top:8px; font-weight:600; justify-content:center; }
-    @media (max-width:900px) { .navbar__links { display:none; } .navbar__hamburger { display:flex; } }
-
-    /* TABS INFERENCIAL / ML */
     .tabs-nav {
       display: flex;
       gap: 8px;
@@ -46,8 +32,6 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: tabFade 0.4s ease; }
     @keyframes tabFade { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-
-    /* CONCEPTO CARD */
     .concepto-card {
       background: linear-gradient(135deg, var(--crema), #f5e0d8);
       border-radius: 20px;
@@ -67,7 +51,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      color: var(--blanco);
       flex-shrink: 0;
     }
     .concepto-titulo {
@@ -83,8 +68,6 @@
       line-height: 1.7;
       opacity: 0.8;
     }
-
-    /* PRUEBA CARD */
     .prueba-wrapper {
       background: var(--blanco);
       border: 2px solid var(--crema);
@@ -116,7 +99,6 @@
       letter-spacing: 0.06em;
     }
     .prueba-badge--pendiente { background: #fff3cd; color: #856404; }
-    .prueba-badge--completada { background: #d1e7dd; color: #0f5132; }
     .prueba-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -151,8 +133,6 @@
       border-top: 1px solid var(--crema);
       padding-top: 16px;
     }
-
-    /* ML MÉTRICAS */
     .metricas-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -189,8 +169,6 @@
       color: var(--carbon);
       opacity: 0.6;
     }
-
-    /* MATRIZ CONFUSIÓN */
     .matriz-grid {
       display: grid;
       grid-template-columns: auto 1fr 1fr;
@@ -214,12 +192,8 @@
       color: var(--carbon);
       opacity: 0.6;
     }
-    .matriz-tp { background: #d1e7dd; color: #0f5132; }
-    .matriz-tn { background: #d1e7dd; color: #0f5132; }
-    .matriz-fp { background: #f8d7da; color: #842029; }
-    .matriz-fn { background: #f8d7da; color: #842029; }
-
-    /* IMPORTANCIA VARIABLES */
+    .matriz-tp, .matriz-tn { background: #d1e7dd; color: #0f5132; }
+    .matriz-fp, .matriz-fn { background: #f8d7da; color: #842029; }
     .var-importance { margin-top: 24px; }
     .var-row {
       display: flex;
@@ -231,7 +205,6 @@
     .var-bar-wrap { flex: 1; background: var(--crema); border-radius: 100px; height: 10px; overflow: hidden; }
     .var-bar-fill { height: 100%; background: var(--magenta); border-radius: 100px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
     .var-pct { font-size: 0.82rem; font-weight: 600; color: var(--magenta); min-width: 40px; text-align: right; }
-
     @media (max-width: 768px) {
       .prueba-grid { grid-template-columns: 1fr 1fr; }
       .metricas-grid { grid-template-columns: 1fr 1fr; }
@@ -242,207 +215,167 @@
 </head>
 <body>
 
-    <cat-navbar active="analisis"></cat-navbar>
+  <cat-navbar active="analisis"></cat-navbar>
 
-    <div class="page-hero">
-    <div class="page-hero__letter-badge"><strong>T</strong> · Tercera letra de CATTLEYA</div>
-    <h1>Tendencias</h1>
-    <p>Estadística inferencial y machine learning aplicados a los datos. De los patrones a las conclusiones con respaldo matemático.</p>
-  </div>
+  <cat-page-hero
+    letter="T"
+    position="Tercera"
+    title="Tendencias"
+    subtitle="Estadistica inferencial y machine learning aplicados a los datos. De los patrones a las conclusiones con respaldo matematico.">
+  </cat-page-hero>
 
-  <!-- TABS -->
   <div class="section">
     <div class="tabs-nav">
-      <button class="tab-btn active" data-tab="inferencial">📐 Estadística Inferencial</button>
-      <button class="tab-btn" data-tab="ml">🤖 Machine Learning</button>
+      <button class="tab-btn active" data-tab="inferencial">Estadistica Inferencial</button>
+      <button class="tab-btn" data-tab="ml">Machine Learning</button>
     </div>
 
-    <!-- ══════════════════════════════════════
-         TAB: ESTADÍSTICA INFERENCIAL
-    ══════════════════════════════════════ -->
     <div class="tab-panel active" id="tab-inferencial">
-
-      <!-- Qué es -->
       <div class="concepto-card">
-        <div class="concepto-icon">📐</div>
+        <div class="concepto-icon">I</div>
         <div>
-          <div class="concepto-titulo">¿Qué es la estadística inferencial?</div>
+          <div class="concepto-titulo">Que es la estadistica inferencial?</div>
           <div class="concepto-texto">
-            A diferencia de la estadística descriptiva (que describe lo que ya ocurrió), la estadística inferencial nos permite <strong>sacar conclusiones sobre una población completa a partir de una muestra</strong>, y cuantificar qué tan confiables son esas conclusiones. En este proyecto la usamos para responder preguntas como: ¿existe una relación estadísticamente significativa entre la región geográfica y el tipo de violencia reportado? ¿Hay diferencias reales entre años, o son solo variaciones del azar?
+            A diferencia de la estadistica descriptiva, la estadistica inferencial nos permite sacar conclusiones sobre una poblacion completa a partir de una muestra y cuantificar que tan confiables son esas conclusiones.
           </div>
         </div>
       </div>
 
-      <!-- PRUEBA 1 — Chi-cuadrado (placeholder flexible) -->
       <div class="prueba-wrapper">
         <div class="prueba-header">
-          <div class="prueba-nombre">Prueba 1 — [Nombre de la prueba]</div>
-          <span class="prueba-badge prueba-badge--pendiente">⏳ Pendiente de datos reales</span>
+          <div class="prueba-nombre">Prueba 1 - [Nombre de la prueba]</div>
+          <span class="prueba-badge prueba-badge--pendiente">Pendiente de datos reales</span>
         </div>
         <p style="font-size:0.88rem;color:var(--carbon);opacity:0.7;margin-bottom:20px;line-height:1.7;">
-          <strong>Hipótesis nula (H₀):</strong> [Escribir aquí la hipótesis nula del equipo] <br>
-          <strong>Hipótesis alternativa (H₁):</strong> [Escribir aquí la hipótesis alternativa]
+          <strong>Hipotesis nula (H0):</strong> [Escribir aqui la hipotesis nula del equipo] <br>
+          <strong>Hipotesis alternativa (H1):</strong> [Escribir aqui la hipotesis alternativa]
         </p>
         <div class="prueba-grid">
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">Estadístico</div>
-            <div class="prueba-dato__valor">—</div>
-          </div>
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">P-valor</div>
-            <div class="prueba-dato__valor">—</div>
-          </div>
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">Nivel α</div>
-            <div class="prueba-dato__valor">0.05</div>
-          </div>
+          <div class="prueba-dato"><div class="prueba-dato__label">Estadistico</div><div class="prueba-dato__valor">-</div></div>
+          <div class="prueba-dato"><div class="prueba-dato__label">P-valor</div><div class="prueba-dato__valor">-</div></div>
+          <div class="prueba-dato"><div class="prueba-dato__label">Nivel a</div><div class="prueba-dato__valor">0.05</div></div>
         </div>
         <div class="prueba-conclusion">
-          <strong>Conclusión:</strong> Reemplaza este texto con la interpretación real de la prueba. Ejemplo: "Con un p-valor de 0.003 (menor a α = 0.05), rechazamos la hipótesis nula. Existe evidencia estadística suficiente para afirmar que..."
+          <strong>Conclusion:</strong> Reemplaza este texto con la interpretacion real de la prueba.
         </div>
         <div class="chart-container" style="margin-top:24px; margin-bottom:0;">
-          <h3>Visualización de la prueba</h3>
+          <h3>Visualizacion de la prueba</h3>
           <div class="chart-canvas-wrap" style="height:260px;"><canvas id="chart-prueba1"></canvas></div>
         </div>
       </div>
 
-      <!-- PRUEBA 2 — Correlación -->
       <div class="prueba-wrapper">
         <div class="prueba-header">
-          <div class="prueba-nombre">Prueba 2 — [Nombre de la prueba]</div>
-          <span class="prueba-badge prueba-badge--pendiente">⏳ Pendiente de datos reales</span>
+          <div class="prueba-nombre">Prueba 2 - [Nombre de la prueba]</div>
+          <span class="prueba-badge prueba-badge--pendiente">Pendiente de datos reales</span>
         </div>
         <p style="font-size:0.88rem;color:var(--carbon);opacity:0.7;margin-bottom:20px;line-height:1.7;">
-          <strong>Hipótesis nula (H₀):</strong> [Escribir aquí] <br>
-          <strong>Hipótesis alternativa (H₁):</strong> [Escribir aquí]
+          <strong>Hipotesis nula (H0):</strong> [Escribir aqui] <br>
+          <strong>Hipotesis alternativa (H1):</strong> [Escribir aqui]
         </p>
         <div class="prueba-grid">
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">Estadístico</div>
-            <div class="prueba-dato__valor">—</div>
-          </div>
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">P-valor</div>
-            <div class="prueba-dato__valor">—</div>
-          </div>
-          <div class="prueba-dato">
-            <div class="prueba-dato__label">Nivel α</div>
-            <div class="prueba-dato__valor">0.05</div>
-          </div>
+          <div class="prueba-dato"><div class="prueba-dato__label">Estadistico</div><div class="prueba-dato__valor">-</div></div>
+          <div class="prueba-dato"><div class="prueba-dato__label">P-valor</div><div class="prueba-dato__valor">-</div></div>
+          <div class="prueba-dato"><div class="prueba-dato__label">Nivel a</div><div class="prueba-dato__valor">0.05</div></div>
         </div>
         <div class="prueba-conclusion">
-          <strong>Conclusión:</strong> Reemplaza con la interpretación del equipo una vez corran las pruebas en Python.
+          <strong>Conclusion:</strong> Reemplaza con la interpretacion del equipo una vez corran las pruebas en Python.
         </div>
         <div class="chart-container" style="margin-top:24px; margin-bottom:0;">
-          <h3>Matriz de correlación (placeholder)</h3>
+          <h3>Matriz de correlacion (placeholder)</h3>
           <div class="chart-canvas-wrap" style="height:260px;"><canvas id="chart-correlacion"></canvas></div>
         </div>
       </div>
+    </div>
 
-    </div><!-- /tab inferencial -->
-
-
-    <!-- ══════════════════════════════════════
-         TAB: MACHINE LEARNING
-    ══════════════════════════════════════ -->
     <div class="tab-panel" id="tab-ml">
-
-      <!-- Qué es -->
       <div class="concepto-card">
-        <div class="concepto-icon">🤖</div>
+        <div class="concepto-icon">ML</div>
         <div>
-          <div class="concepto-titulo">¿Qué es el Machine Learning y por qué lo aplicamos aquí?</div>
+          <div class="concepto-titulo">Que es el Machine Learning y por que lo aplicamos aqui?</div>
           <div class="concepto-texto">
-            El machine learning (aprendizaje automático) permite que los computadores <strong>aprendan patrones a partir de datos históricos</strong> para hacer predicciones o clasificaciones sobre casos nuevos. En este proyecto lo usamos para identificar qué factores (región, edad, tipo de relación, etc.) tienen mayor peso en predecir el tipo o la severidad de los casos reportados. Esto convierte el análisis de datos en una herramienta de <strong>anticipación y política pública</strong>.
+            El machine learning permite que los computadores aprendan patrones a partir de datos historicos para hacer predicciones o clasificaciones sobre casos nuevos.
           </div>
         </div>
       </div>
 
-      <!-- MODELO SELECTOR -->
       <div style="background:var(--crema);border-radius:16px;padding:24px 28px;margin-bottom:32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
         <span style="font-size:0.82rem;font-weight:600;color:var(--magenta);letter-spacing:0.08em;text-transform:uppercase;">Modelo utilizado:</span>
         <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--purpura);" id="modelo-nombre">[Completar con el modelo elegido]</span>
         <span style="font-size:0.82rem;color:var(--carbon);opacity:0.6;">Reemplaza el texto entre corchetes con el nombre real del modelo.</span>
       </div>
 
-      <!-- MÉTRICAS -->
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--purpura);margin-bottom:20px;">Métricas de evaluación</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--purpura);margin-bottom:20px;">Metricas de evaluacion</h3>
       <div class="metricas-grid">
         <div class="metrica-card">
           <div class="metrica-card__label">Accuracy</div>
-          <div class="metrica-card__valor" id="met-accuracy">—%</div>
+          <div class="metrica-card__valor" id="met-accuracy">-%</div>
           <div class="metrica-card__desc">Porcentaje de predicciones correctas</div>
         </div>
         <div class="metrica-card">
-          <div class="metrica-card__label">Precisión</div>
-          <div class="metrica-card__valor" id="met-precision">—%</div>
-          <div class="metrica-card__desc">De los positivos predichos, cuántos son reales</div>
+          <div class="metrica-card__label">Precision</div>
+          <div class="metrica-card__valor" id="met-precision">-%</div>
+          <div class="metrica-card__desc">De los positivos predichos, cuantos son reales</div>
         </div>
         <div class="metrica-card">
           <div class="metrica-card__label">Recall</div>
-          <div class="metrica-card__valor" id="met-recall">—%</div>
-          <div class="metrica-card__desc">De los positivos reales, cuántos encontró</div>
+          <div class="metrica-card__valor" id="met-recall">-%</div>
+          <div class="metrica-card__desc">De los positivos reales, cuantos encontro</div>
         </div>
         <div class="metrica-card">
           <div class="metrica-card__label">F1-Score</div>
-          <div class="metrica-card__valor" id="met-f1">—%</div>
-          <div class="metrica-card__desc">Balance entre precisión y recall</div>
+          <div class="metrica-card__valor" id="met-f1">-%</div>
+          <div class="metrica-card__desc">Balance entre precision y recall</div>
         </div>
       </div>
 
-      <!-- INSTRUCCIÓN EQUIPO -->
       <div style="background:#fff3cd;border-radius:12px;padding:16px 20px;margin-bottom:32px;border-left:4px solid #856404;font-size:0.85rem;color:#856404;">
-        💡 <strong>Para el equipo:</strong> Cuando tengan las métricas del modelo, reemplacen los "—%" en el JS al final de esta página buscando <code>met-accuracy</code>, <code>met-precision</code>, <code>met-recall</code>, <code>met-f1</code>.
+        <strong>Para el equipo:</strong> Cuando tengan las metricas del modelo, reemplacen los valores placeholder en el bloque JS al final de esta pagina.
       </div>
 
-      <!-- DOS COLUMNAS: MATRIZ + IMPORTANCIA -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
-
-        <!-- MATRIZ DE CONFUSIÓN -->
         <div class="chart-container" style="margin-bottom:0;">
-          <h3>Matriz de Confusión</h3>
+          <h3>Matriz de Confusion</h3>
           <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">Reemplaza los valores con los resultados reales del modelo.</p>
           <div class="matriz-grid">
             <div class="matriz-label"></div>
             <div class="matriz-label">Pred. Positivo</div>
             <div class="matriz-label">Pred. Negativo</div>
-            <div class="matriz-label" style="writing-mode:horizontal-tb;">Real +</div>
-            <div class="matriz-cell matriz-tp" id="mat-tp">VP<br><small>—</small></div>
-            <div class="matriz-cell matriz-fn" id="mat-fn">FN<br><small>—</small></div>
-            <div class="matriz-label" style="writing-mode:horizontal-tb;">Real −</div>
-            <div class="matriz-cell matriz-fp" id="mat-fp">FP<br><small>—</small></div>
-            <div class="matriz-cell matriz-tn" id="mat-tn">VN<br><small>—</small></div>
+            <div class="matriz-label">Real +</div>
+            <div class="matriz-cell matriz-tp" id="mat-tp">VP<br><small>-</small></div>
+            <div class="matriz-cell matriz-fn" id="mat-fn">FN<br><small>-</small></div>
+            <div class="matriz-label">Real -</div>
+            <div class="matriz-cell matriz-fp" id="mat-fp">FP<br><small>-</small></div>
+            <div class="matriz-cell matriz-tn" id="mat-tn">VN<br><small>-</small></div>
           </div>
-          <p style="font-size:0.78rem;text-align:center;margin-top:16px;color:var(--carbon);opacity:0.5;">VP = Verdadero Positivo · VN = Verdadero Negativo · FP = Falso Positivo · FN = Falso Negativo</p>
         </div>
 
-        <!-- IMPORTANCIA DE VARIABLES -->
         <div class="chart-container" style="margin-bottom:0;">
           <h3>Importancia de variables</h3>
-          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">¿Qué factores tienen más peso en el modelo? Reemplaza con los datos reales.</p>
-          <div class="var-importance" id="var-importance">
+          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">Que factores tienen mas peso en el modelo? Reemplaza con los datos reales.</p>
+          <div class="var-importance">
             <div class="var-row">
-              <span class="var-name">Variable 1 — [nombre]</span>
+              <span class="var-name">Variable 1 - [nombre]</span>
               <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="85%"></div></div>
               <span class="var-pct">85%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 2 — [nombre]</span>
+              <span class="var-name">Variable 2 - [nombre]</span>
               <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="72%"></div></div>
               <span class="var-pct">72%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 3 — [nombre]</span>
+              <span class="var-name">Variable 3 - [nombre]</span>
               <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="58%"></div></div>
               <span class="var-pct">58%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 4 — [nombre]</span>
+              <span class="var-name">Variable 4 - [nombre]</span>
               <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="41%"></div></div>
               <span class="var-pct">41%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 5 — [nombre]</span>
+              <span class="var-name">Variable 5 - [nombre]</span>
               <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="27%"></div></div>
               <span class="var-pct">27%</span>
             </div>
@@ -450,143 +383,112 @@
         </div>
       </div>
 
-      <!-- GRÁFICO CURVA ROC o DISTRIBUCIÓN -->
       <div class="chart-container">
-        <h3>Distribución de predicciones del modelo</h3>
-        <p style="font-size:0.82rem;color:#666;margin-bottom:16px;">Reemplaza con la curva ROC o distribución real del modelo elegido.</p>
+        <h3>Distribucion de predicciones del modelo</h3>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:16px;">Reemplaza con la curva ROC o distribucion real del modelo elegido.</p>
         <div class="chart-canvas-wrap" style="height:280px;"><canvas id="chart-ml"></canvas></div>
       </div>
 
-      <!-- CONCLUSIÓN ML -->
       <div style="background:linear-gradient(135deg,var(--magenta),var(--purpura));border-radius:20px;padding:40px;color:var(--blanco);margin-top:32px;">
-        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--crema);margin-bottom:16px;">¿Qué nos dice el modelo?</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--crema);margin-bottom:16px;">Que nos dice el modelo?</div>
         <p style="font-size:0.95rem;line-height:1.8;color:rgba(253,238,233,0.85);" id="ml-conclusion">
-          Reemplaza este párrafo con la conclusión real del modelo una vez el equipo lo haya entrenado y evaluado. Explica en lenguaje accesible qué aprendió el modelo, qué variables resultaron más importantes, y qué implica eso para entender la violencia contra la mujer en Colombia.
+          Reemplaza este parrafo con la conclusion real del modelo una vez el equipo lo haya entrenado y evaluado.
         </p>
       </div>
-
-    </div><!-- /tab ml -->
-
-  </div><!-- /section tabs -->
-
-  <div style="max-width:1200px;margin:0 auto;padding:0 40px 40px;display:flex;justify-content:space-between;">
-    <a href="analisis.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">← Análisis</a>
-    <a href="testimonios.html" class="btn-primary">Testimonios →</a>
+    </div>
   </div>
 
-  <footer>
-    <div class="footer__inner">
-      <div><div class="footer__brand-name">CATTLEYA</div><p class="footer__tagline">Datos que no callan.</p></div>
-      <div class="footer__col"><h4>Secciones</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="analisis.html">Análisis</a></li><li><a href="lucha.html">Lucha</a></li></ul></div>
-      <div class="footer__col"><h4>Proyecto</h4><ul><li><a href="equipo.html">Equipo</a></li><li><a href="yo-decido.html">Entregables</a></li></ul></div>
-    </div>
-    <div class="footer__bottom"><span>© 2025 Cattleya · Proyecto de Grado</span></div>
-  </footer>
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px 40px;display:flex;justify-content:space-between;">
+    <a href="analisis.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">&larr; Analisis</a>
+    <a href="testimonios.html" class="btn-primary">Testimonios &rarr;</a>
+  </div>
+
+  <cat-footer></cat-footer>
 
   <script src="js/main.js"></script>
   <script>
-    // NAVBAR
-    const logo = document.getElementById("navbar-logo");
-    const nav  = document.getElementById("navbar");
-    window.addEventListener("scroll", () => { const s=window.scrollY>80; logo.src=s?"assets/logo-magenta.png":"assets/logo-claro.png"; nav.classList.toggle("scrolled",s); });
-    const ham = document.getElementById("hamburger");
-    const mob = document.getElementById("mobile-menu");
-    ham.addEventListener("click", () => { ham.classList.toggle("open"); mob.classList.toggle("open"); });
-    mob.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { ham.classList.remove("open"); mob.classList.remove("open"); }));
-
-    // TABS
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-      btn.addEventListener("click", function() {
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-        this.classList.add("active");
-        document.getElementById("tab-" + this.dataset.tab).classList.add("active");
-        // Animar barras de importancia al abrir tab ML
-        if (this.dataset.tab === "ml") animateBars();
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach((item) => item.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(`tab-${this.dataset.tab}`).classList.add('active');
+        if (this.dataset.tab === 'ml') animateBars();
       });
     });
 
-    // BARRAS IMPORTANCIA ANIMADAS
     function animateBars() {
-      document.querySelectorAll(".var-bar-fill").forEach(bar => {
-        const target = bar.dataset.width;
-        setTimeout(() => { bar.style.width = target; }, 100);
+      document.querySelectorAll('.var-bar-fill').forEach((bar) => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.width;
+        }, 100);
       });
     }
 
-    // ══════════════════════════════════════
-    // DATOS — reemplaza aquí con datos reales
-    // ══════════════════════════════════════
-
-    // Métricas ML (reemplazar con valores reales)
-    // document.getElementById("met-accuracy").textContent  = "XX%";
-    // document.getElementById("met-precision").textContent = "XX%";
-    // document.getElementById("met-recall").textContent    = "XX%";
-    // document.getElementById("met-f1").textContent        = "XX%";
-
-    // Matriz confusión (reemplazar con valores reales)
-    // document.getElementById("mat-tp").innerHTML = "VP<br><small>XXX</small>";
-    // document.getElementById("mat-tn").innerHTML = "VN<br><small>XXX</small>";
-    // document.getElementById("mat-fp").innerHTML = "FP<br><small>XXX</small>";
-    // document.getElementById("mat-fn").innerHTML = "FN<br><small>XXX</small>";
-
-    // GRÁFICO PRUEBA 1 (placeholder: distribución chi-cuadrado)
-    new Chart(document.getElementById("chart-prueba1").getContext("2d"), {
-      type: "bar",
+    new Chart(document.getElementById('chart-prueba1').getContext('2d'), {
+      type: 'bar',
       data: {
-        labels: ["Física","Psicológica","Sexual","Económica","Negligencia"],
+        labels: ['Fisica', 'Psicologica', 'Sexual', 'Economica', 'Negligencia'],
         datasets: [
-          { label: "Observado", data: [38,29,18,11,4], backgroundColor: "#9D2D6A", borderRadius: 6 },
-          { label: "Esperado",  data: [32,32,16,14,6], backgroundColor: "rgba(157,45,106,0.25)", borderRadius: 6 }
+          { label: 'Observado', data: [38, 29, 18, 11, 4], backgroundColor: '#9D2D6A', borderRadius: 6 },
+          { label: 'Esperado', data: [32, 32, 16, 14, 6], backgroundColor: 'rgba(157,45,106,0.25)', borderRadius: 6 }
         ]
       },
       options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: { font: { family: "DM Sans" } } } },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } },
         scales: {
-          y: { grid: { color: "rgba(0,0,0,0.05)" }, ticks: { font: { family: "DM Sans" } } },
-          x: { grid: { display: false }, ticks: { font: { family: "DM Sans" } } }
+          y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans' } } },
+          x: { grid: { display: false }, ticks: { font: { family: 'DM Sans' } } }
         }
       }
     });
 
-    // GRÁFICO CORRELACIÓN (placeholder: heatmap simulado con radar)
-    new Chart(document.getElementById("chart-correlacion").getContext("2d"), {
-      type: "radar",
+    new Chart(document.getElementById('chart-correlacion').getContext('2d'), {
+      type: 'radar',
       data: {
-        labels: ["Edad víctima","Región","Tipo relación","Hora del día","Reincidencia","Denuncia previa"],
+        labels: ['Edad victima', 'Region', 'Tipo relacion', 'Hora del dia', 'Reincidencia', 'Denuncia previa'],
         datasets: [{
-          label: "Correlación con tipo de violencia",
+          label: 'Correlacion con tipo de violencia',
           data: [0.72, 0.58, 0.81, 0.34, 0.69, 0.77],
-          borderColor: "#9D2D6A",
-          backgroundColor: "rgba(157,45,106,0.12)",
-          pointBackgroundColor: "#9D2D6A",
+          borderColor: '#9D2D6A',
+          backgroundColor: 'rgba(157,45,106,0.12)',
+          pointBackgroundColor: '#9D2D6A',
           borderWidth: 2
         }]
       },
       options: {
-        responsive: true, maintainAspectRatio: false,
-        scales: { r: { min: 0, max: 1, ticks: { stepSize: 0.25, font: { family: "DM Sans", size: 11 } }, pointLabels: { font: { family: "DM Sans", size: 11 } } } },
-        plugins: { legend: { labels: { font: { family: "DM Sans" } } } }
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            min: 0,
+            max: 1,
+            ticks: { stepSize: 0.25, font: { family: 'DM Sans', size: 11 } },
+            pointLabels: { font: { family: 'DM Sans', size: 11 } }
+          }
+        },
+        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } }
       }
     });
 
-    // GRÁFICO ML (placeholder: distribución de scores del modelo)
-    new Chart(document.getElementById("chart-ml").getContext("2d"), {
-      type: "line",
+    new Chart(document.getElementById('chart-ml').getContext('2d'), {
+      type: 'line',
       data: {
-        labels: ["0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0"],
+        labels: ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0'],
         datasets: [
-          { label: "Clase positiva", data: [2,5,8,12,18,22,28,35,28,18,8], borderColor: "#9D2D6A", backgroundColor: "rgba(157,45,106,0.15)", fill: true, tension: 0.4 },
-          { label: "Clase negativa", data: [10,22,30,24,18,12,8,5,3,2,1], borderColor: "#F28C28", backgroundColor: "rgba(242,140,40,0.1)", fill: true, tension: 0.4 }
+          { label: 'Clase positiva', data: [2, 5, 8, 12, 18, 22, 28, 35, 28, 18, 8], borderColor: '#9D2D6A', backgroundColor: 'rgba(157,45,106,0.15)', fill: true, tension: 0.4 },
+          { label: 'Clase negativa', data: [10, 22, 30, 24, 18, 12, 8, 5, 3, 2, 1], borderColor: '#F28C28', backgroundColor: 'rgba(242,140,40,0.1)', fill: true, tension: 0.4 }
         ]
       },
       options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: { font: { family: "DM Sans" } } } },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } },
         scales: {
-          x: { title: { display: true, text: "Score de predicción", font: { family: "DM Sans" } }, grid: { display: false } },
-          y: { title: { display: true, text: "Frecuencia", font: { family: "DM Sans" } }, grid: { color: "rgba(0,0,0,0.05)" } }
+          x: { title: { display: true, text: 'Score de prediccion', font: { family: 'DM Sans' } }, grid: { display: false } },
+          y: { title: { display: true, text: 'Frecuencia', font: { family: 'DM Sans' } }, grid: { color: 'rgba(0,0,0,0.05)' } }
         }
       }
     });

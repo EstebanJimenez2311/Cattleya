@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alertas — CATTLEYA</title>
+  <title>Alertas - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="components/index.js"></script>
 </head>
 <body>
-    <cat-navbar active="cattleya"></cat-navbar>
+  <cat-navbar active="cattleya"></cat-navbar>
 
-  <div class="page-hero">
-    <div class="page-hero__letter-badge">
-      <strong>A</strong> · Octava letra de CATTLEYA
-    </div>
-    <h1>Alertas</h1>
-    <p>Las cifras más urgentes. Los datos que no podemos seguir ignorando.</p>
-  </div>
+  <cat-page-hero
+    letter="A"
+    position="Octava"
+    title="Alertas"
+    subtitle="Las cifras mas urgentes. Los datos que no podemos seguir ignorando.">
+  </cat-page-hero>
 
   <div class="section">
     <span class="section-label">Cifras de alerta</span>
-    <h2 class="section-title">Números que<br><em>exigen respuesta</em></h2>
+    <h2 class="section-title">Numeros que<br><em>exigen respuesta</em></h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:48px;">
       <div style="background:linear-gradient(135deg,var(--magenta),var(--purpura));border-radius:20px;padding:36px;color:var(--blanco);">
         <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--naranja);margin-bottom:8px;">182K</div>
@@ -36,48 +35,25 @@
       </div>
       <div style="background:linear-gradient(135deg,var(--carbon),#111);border-radius:20px;padding:36px;color:var(--blanco);">
         <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--naranja);margin-bottom:8px;">78%</div>
-        <div style="font-size:0.9rem;opacity:0.85;line-height:1.5;">de las víctimas de violencia intrafamiliar registradas son mujeres</div>
+        <div style="font-size:0.9rem;opacity:0.85;line-height:1.5;">de las victimas de violencia intrafamiliar registradas son mujeres</div>
       </div>
     </div>
   </div>
+
   <div class="section" style="padding-top:0;">
     <div class="cta-banner">
       <h2>Los datos son claros. La respuesta nos toca a todos.</h2>
       <p>Conocer es el primer paso. Actuar es el siguiente.</p>
-      <a href="lucha.html" class="btn-outline" style="border-color:rgba(255,255,255,0.6);">Ver cómo actuar →</a>
+      <a href="lucha.html" class="btn-outline" style="border-color:rgba(255,255,255,0.6);">Ver como actuar &rarr;</a>
     </div>
   </div>
 
   <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;">
-    <a href="yo-decido.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">← Yo Decido</a>
-    <a href="index.html" class="btn-primary">Volver al inicio →</a>
+    <a href="yo-decido.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">&larr; Yo Decido</a>
+    <a href="index.html" class="btn-primary">Volver al inicio &rarr;</a>
   </div>
-  <footer>
-    <div class="footer__inner">
-      <div>
-        <div class="footer__brand-name">CATTLEYA</div>
-        <p class="footer__tagline">Datos que no callan.</p>
-      </div>
-      <div class="footer__col">
-        <h4>Secciones</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="analisis.html">Análisis</a></li>
-          <li><a href="lucha.html">Lucha</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Proyecto</h4>
-        <ul>
-          <li><a href="equipo.html">Equipo</a></li>
-          <li><a href="yo-decido.html">Entregables</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <span>© 2025 Cattleya · Proyecto de Grado</span>
-    </div>
-  </footer>
+
+  <cat-footer></cat-footer>
   <script src="js/main.js"></script>
 </body>
 </html>

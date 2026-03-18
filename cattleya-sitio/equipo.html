@@ -3,90 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipo — CATTLEYA</title>
+  <title>Equipo - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="components/index.js"></script>
 </head>
 <body>
-    <cat-navbar active="cattleya"></cat-navbar>
+  <cat-navbar active="cattleya"></cat-navbar>
 
-  <div class="page-hero">
-    <div class="page-hero__letter-badge">
-      <strong>E</strong> · Sexta letra de CATTLEYA
-    </div>
-    <h1>Equipo</h1>
-    <p>Quiénes somos, por qué elegimos este tema y qué aprendimos en el camino.</p>
-  </div>
+  <cat-page-hero
+    letter="E"
+    position="Sexta"
+    title="Equipo"
+    subtitle="Quienes somos, por que elegimos este tema y que aprendimos en el camino.">
+  </cat-page-hero>
 
   <div class="section">
     <span class="section-label">Sobre nosotros</span>
-    <h2 class="section-title">El equipo<br><em>detrás de Cattleya</em></h2>
+    <h2 class="section-title">El equipo<br><em>detras de Cattleya</em></h2>
     <p style="font-size:1.05rem;line-height:1.8;color:var(--carbon);opacity:0.8;max-width:760px;margin-bottom:48px;">
-      Somos estudiantes de Técnico en Programación para Analítica de Datos. Elegimos este tema porque creemos que los datos tienen el poder de visibilizar realidades que muchas veces permanecen en silencio.
+      Somos estudiantes de Tecnico en Programacion para Analitica de Datos. Elegimos este tema porque creemos que los datos tienen el poder de visibilizar realidades que muchas veces permanecen en silencio.
     </p>
     <div class="cards-grid">
       <div class="card" style="text-align:center;">
-        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">👤</div>
+        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">1</div>
         <div class="card__title">Integrante 1</div>
-        <div class="card__text">Rol en el proyecto. Backend / Análisis / Frontend. [Agregar nombre y descripción real]</div>
+        <div class="card__text">Rol en el proyecto. Backend / Analisis / Frontend. [Agregar nombre y descripcion real]</div>
       </div>
       <div class="card" style="text-align:center;">
-        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">👤</div>
+        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">2</div>
         <div class="card__title">Integrante 2</div>
-        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
+        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripcion real]</div>
       </div>
       <div class="card" style="text-align:center;">
-        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">👤</div>
+        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">3</div>
         <div class="card__title">Integrante 3</div>
-        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
+        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripcion real]</div>
       </div>
       <div class="card" style="text-align:center;">
-        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">👤</div>
+        <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">4</div>
         <div class="card__title">Integrante 4</div>
-        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
+        <div class="card__text">Rol en el proyecto. [Agregar nombre y descripcion real]</div>
       </div>
     </div>
   </div>
-  <div class="section--bg">
+
+  <div class="section--bg" id="vision">
     <div class="section__inner">
-      <span class="section-label">¿Por qué Cattleya?</span>
-      <h2 class="section-title">El significado detrás del nombre</h2>
+      <span class="section-label">Por que Cattleya?</span>
+      <h2 class="section-title">El significado detras del nombre</h2>
       <p style="font-size:1.05rem;line-height:1.8;color:var(--carbon);opacity:0.8;max-width:760px;">
-        La Cattleya es la orquídea nacional de Colombia. Florece en condiciones adversas, es resistente y extraordinariamente bella. La elegimos como símbolo porque las mujeres que han sobrevivido la violencia demuestran exactamente esa clase de fortaleza. Los datos que analizamos no son solo números: son historias de resistencia.
+        La Cattleya es la orquidea nacional de Colombia. Florece en condiciones adversas, es resistente y extraordinariamente bella. La elegimos como simbolo porque las mujeres que han sobrevivido la violencia demuestran exactamente esa clase de fortaleza. Los datos que analizamos no son solo numeros: son historias de resistencia.
       </p>
     </div>
   </div>
 
   <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;">
-    <a href="lucha.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">← Lucha</a>
-    <a href="yo-decido.html" class="btn-primary">Yo Decido →</a>
+    <a href="lucha.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">&larr; Lucha</a>
+    <a href="yo-decido.html" class="btn-primary">Yo Decido &rarr;</a>
   </div>
-  <footer>
-    <div class="footer__inner">
-      <div>
-        <div class="footer__brand-name">CATTLEYA</div>
-        <p class="footer__tagline">Datos que no callan.</p>
-      </div>
-      <div class="footer__col">
-        <h4>Secciones</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="analisis.html">Análisis</a></li>
-          <li><a href="lucha.html">Lucha</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Proyecto</h4>
-        <ul>
-          <li><a href="equipo.html">Equipo</a></li>
-          <li><a href="yo-decido.html">Entregables</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <span>© 2025 Cattleya · Proyecto de Grado</span>
-    </div>
-  </footer>
+
+  <cat-footer></cat-footer>
   <script src="js/main.js"></script>
 </body>
 </html>
