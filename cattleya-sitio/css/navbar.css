@@ -1,9 +1,4 @@
-/* ============================================
-   CATTLEYA — Navbar
-   Pill flotante. No modificar estructura base.
-   ============================================ */
-
-/* Wrapper posicionador — centra la pill y la fija arriba */
+/* NavBar Styles */
 .nav-wrapper {
   position: fixed;
   top: 20px;

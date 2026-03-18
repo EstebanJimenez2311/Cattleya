@@ -1,9 +1,9 @@
-/* ============================================
+/*
    CATTLEYA — Hoja de estilos principal
    Importa los módulos en orden de cascada.
    Para editar un componente específico ve al
    archivo CSS correspondiente en /css/.
-   ============================================ */
+*/
 
 @import url('./base.css');
 @import url('./navbar.css');
