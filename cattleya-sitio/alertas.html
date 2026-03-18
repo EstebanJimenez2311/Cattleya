@@ -5,44 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alertas — CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="components/index.js"></script>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-    <a class="navbar__brand" href="index.html">
-      <img src="assets/logo-claro.png" alt="Cattleya" class="navbar__logo">
-      <span class="navbar__name">CATTLEYA</span>
-    </a>
-    <ul class="navbar__links">
-      <li><a href="index.html">Inicio</a></li>
-      <li>
-        <a href="#">Análisis <span class="dropdown-arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="analisis.html">📊 Estadística Descriptiva</a>
-          <a href="tendencias.html">📈 Tendencias y Machine Learning</a>
-          <a href="analisis.html#powerbi">🖥️ Power BI</a>
-        </div>
-      </li>
-      <li>
-        <a href="#">Información y educación <span class="dropdown-arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="contexto.html">📚 Contexto y Marco Legal</a>
-          <a href="testimonios.html">📰 Noticias y Testimonios</a>
-          <a href="lucha.html">🆘 Línea de Ayuda</a>
-        </div>
-      </li>
-      <li>
-        <a href="#">¿Qué es Cattleya? <span class="dropdown-arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
-          <a href="equipo.html#vision">🎯 Visión y Misión</a>
-          <a href="equipo.html">👥 El Equipo</a>
-          <hr>
-          <a href="yo-decido.html">📁 Entregables</a>
-        </div>
-      </li>
-      <li><a href="lucha.html" class="navbar__panico">🆘 Necesito Ayuda</a></li>
-    </ul>
-  </nav>
+    <cat-navbar active="cattleya"></cat-navbar>
 
   <div class="page-hero">
     <div class="page-hero__letter-badge">
