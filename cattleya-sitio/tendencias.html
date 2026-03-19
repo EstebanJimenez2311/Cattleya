@@ -306,28 +306,30 @@
       </div>
 
       <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--purpura);margin-bottom:20px;">Metricas de evaluacion</h3>
-      <div class="metricas-grid">
-        <div class="metrica-card">
-          <div class="metrica-card__label">Accuracy</div>
-          <div class="metrica-card__valor" id="met-accuracy">-%</div>
-          <div class="metrica-card__desc">Porcentaje de predicciones correctas</div>
+      <cat-surface padding="24px" radius="24px">
+        <div class="metricas-grid" style="margin-bottom:0;">
+          <div class="metrica-card">
+            <div class="metrica-card__label">Accuracy</div>
+            <div class="metrica-card__valor" id="met-accuracy">-%</div>
+            <div class="metrica-card__desc">Porcentaje de predicciones correctas</div>
+          </div>
+          <div class="metrica-card">
+            <div class="metrica-card__label">Precision</div>
+            <div class="metrica-card__valor" id="met-precision">-%</div>
+            <div class="metrica-card__desc">De los positivos predichos, cuantos son reales</div>
+          </div>
+          <div class="metrica-card">
+            <div class="metrica-card__label">Recall</div>
+            <div class="metrica-card__valor" id="met-recall">-%</div>
+            <div class="metrica-card__desc">De los positivos reales, cuantos encontro</div>
+          </div>
+          <div class="metrica-card">
+            <div class="metrica-card__label">F1-Score</div>
+            <div class="metrica-card__valor" id="met-f1">-%</div>
+            <div class="metrica-card__desc">Balance entre precision y recall</div>
+          </div>
         </div>
-        <div class="metrica-card">
-          <div class="metrica-card__label">Precision</div>
-          <div class="metrica-card__valor" id="met-precision">-%</div>
-          <div class="metrica-card__desc">De los positivos predichos, cuantos son reales</div>
-        </div>
-        <div class="metrica-card">
-          <div class="metrica-card__label">Recall</div>
-          <div class="metrica-card__valor" id="met-recall">-%</div>
-          <div class="metrica-card__desc">De los positivos reales, cuantos encontro</div>
-        </div>
-        <div class="metrica-card">
-          <div class="metrica-card__label">F1-Score</div>
-          <div class="metrica-card__valor" id="met-f1">-%</div>
-          <div class="metrica-card__desc">Balance entre precision y recall</div>
-        </div>
-      </div>
+      </cat-surface>
 
       <div style="background:#fff3cd;border-radius:12px;padding:16px 20px;margin-bottom:32px;border-left:4px solid #856404;font-size:0.85rem;color:#856404;">
         <strong>Para el equipo:</strong> Cuando tengan las metricas del modelo, reemplacen los valores placeholder en el bloque JS al final de esta pagina.
