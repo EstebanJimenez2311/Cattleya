@@ -1,7 +1,7 @@
 /**
  * <cat-navbar active="inicio|analisis|educacion|cattleya">
  *
- * Navbar tipo pill flotante. Diseño extraído del equipo de diseño.
+ * Navbar tipo pill flotante.
  * Incluye dropdowns en desktop y menú hamburger en mobile.
  *
  * Uso:
@@ -53,7 +53,7 @@ class CatNavbar extends HTMLElement {
             </a>
 
             <a href="analisis.html" class="cat-nav-link${this._activeClass('analisis')}">
-              Power BI
+              Análisis
             </a>
 
             <!-- Dropdown: Información y educación -->
@@ -63,9 +63,9 @@ class CatNavbar extends HTMLElement {
                 Información y educación <span class="cat-caret">▾</span>
               </button>
               <div class="cat-drop-menu" id="cat-dd1-menu">
-                <a href="contexto.html">📚 Metodología y Marco Legal</a>
-                <a href="testimonios.html">📰 Noticias y blogs</a>
-                <a href="lucha.html">🆘 Línea de ayuda</a>
+                <a href="contexto.html">Metodología y Marco Legal</a>
+                <a href="testimonios.html">Noticias y blogs</a>
+                <a href="lucha.html">Línea de ayuda</a>
               </div>
             </div>
 
@@ -80,11 +80,11 @@ class CatNavbar extends HTMLElement {
                 ¿Qué es Cattleya? <span class="cat-caret">▾</span>
               </button>
               <div class="cat-drop-menu" id="cat-dd2-menu">
-                <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
-                <a href="equipo.html#vision">🎯 Visión / Misión</a>
-                <a href="equipo.html">👥 Equipo</a>
+                <a href="cattleya.html">El Acrónimo C·A·T·T·L·E·Y·A</a>
+                <a href="equipo.html#vision">Visión / Misión</a>
+                <a href="equipo.html">Equipo</a>
                 <hr class="cat-drop-hr">
-                <a href="yo-decido.html">📁 Entregables</a>
+                <a href="yo-decido.html">Entregables</a>
               </div>
             </div>
 
@@ -110,9 +110,9 @@ class CatNavbar extends HTMLElement {
             Información y educación <span class="cat-mob-caret">▾</span>
           </button>
           <div class="cat-mob-sub">
-            <a href="contexto.html">📚 Metodología y Marco Legal</a>
-            <a href="testimonios.html">📰 Noticias y blogs</a>
-            <a href="lucha.html">🆘 Línea de ayuda</a>
+            <a href="contexto.html">Metodología y Marco Legal</a>
+            <a href="testimonios.html">Noticias y blogs</a>
+            <a href="lucha.html">Línea de ayuda</a>
           </div>
 
           <a href="tendencias.html" class="cat-mob-item">Prototipo</a>
@@ -124,10 +124,10 @@ class CatNavbar extends HTMLElement {
             ¿Qué es Cattleya? <span class="cat-mob-caret">▾</span>
           </button>
           <div class="cat-mob-sub">
-            <a href="cattleya.html">🌸 El Acrónimo C·A·T·T·L·E·Y·A</a>
-            <a href="equipo.html#vision">🎯 Visión / Misión</a>
-            <a href="equipo.html">👥 Equipo</a>
-            <a href="yo-decido.html">📁 Entregables</a>
+            <a href="cattleya.html">El Acrónimo C·A·T·T·L·E·Y·A</a>
+            <a href="equipo.html#vision">Visión / Misión</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="yo-decido.html">Entregables</a>
           </div>
         </div>
 
