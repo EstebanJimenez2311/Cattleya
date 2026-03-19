@@ -18,6 +18,7 @@ const components = [
   'cat-page-hero',
   'cat-stat-card',
   'cat-card',
+  'cat-surface',
   'cat-chart',
   'cat-cta-banner',
   'cat-section-header',
