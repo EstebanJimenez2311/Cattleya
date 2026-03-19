@@ -15,6 +15,7 @@
       gap: 60px;
       align-items: center;
     }
+
     @media (max-width: 900px) {
       .preview-grid {
         grid-template-columns: 1fr;
@@ -30,13 +31,8 @@
   <section class="hero" id="hero">
     <div class="hero-bg-image" aria-hidden="true"></div>
     <div class="hero-overlay"></div>
-    <div class="petals-container" id="petalsContainer" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span>
-    </div>
+    <div class="hero-pulse" aria-hidden="true"></div>
+    <div class="hero-sparkle" aria-hidden="true"></div>
 
     <div class="hero-dots" aria-hidden="true">
       <span></span><span></span><span></span>
@@ -83,43 +79,70 @@
 
   <section class="stats">
     <div class="stats-inner">
-      <div class="stat-card">
-        <span class="stat-icon">
+      <div class="stat-card fade-up" style="--fd:0s">
+        <div class="stat-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
             <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4m0 0L9 7"/>
           </svg>
-        </span>
+        </div>
         <span class="stat-number">6 Regiones</span>
         <span class="stat-label">Cobertura Nacional</span>
+        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
       </div>
 
-      <div class="stat-card">
-        <span class="stat-icon">
+      <div class="stat-card fade-up" style="--fd:0.15s">
+        <div class="stat-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <line x1="16" y1="2" x2="16" y2="6"/>
             <line x1="8" y1="2" x2="8" y2="6"/>
             <line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
-        </span>
-        <span class="stat-number">2018–2025</span>
+        </div>
+        <span class="stat-number">2018-2025</span>
         <span class="stat-label">Período de Análisis</span>
+        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
       </div>
 
-      <div class="stat-card">
-        <span class="stat-icon">
+      <div class="stat-card fade-up" style="--fd:0.3s">
+        <div class="stat-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
             <polyline points="17 6 23 6 23 12"/>
           </svg>
-        </span>
+        </div>
         <span class="stat-number">+12%</span>
         <span class="stat-label">Incremento Reportado</span>
+        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="quote-section">
+    <div class="quote-orchid-left" aria-hidden="true"></div>
+    <div class="quote-orchid-right" aria-hidden="true"></div>
+
+    <div class="quote-inner fade-up">
+      <span class="quote-number">"</span>
+      <blockquote class="quote-text">
+        Los datos no solo informan.<br>También ayudan a transformar realidades.
+      </blockquote>
+      <div class="quote-divider"></div>
+      <p class="quote-author">- Compromiso Cattleya</p>
+    </div>
+
+    <div class="quote-wave" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 200" preserveAspectRatio="none">
+        <path d="M0,90 C160,45 320,140 480,90 C640,40 800,130 960,85 C1120,40 1280,125 1440,80 C1600,35 1760,115 1920,75 L1920,200 L0,200 Z" fill="#3d0f2a" opacity="0.15"/>
+        <path d="M0,110 C120,65 280,155 440,108 C600,61 760,148 920,105 C1080,62 1240,145 1400,105 C1560,65 1740,138 1920,100 L1920,200 L0,200 Z" fill="#3d0f2a" opacity="0.30"/>
+        <path d="M0,130 C100,95 240,165 400,128 C560,91 720,160 880,125 C1040,90 1200,158 1360,122 C1520,86 1720,150 1920,118 L1920,200 L0,200 Z" fill="#3d0f2a" opacity="0.55"/>
+        <path d="M0,155 C80,135 200,175 360,152 C520,129 680,170 840,150 C1000,130 1160,168 1320,148 C1480,128 1680,165 1920,148 L1920,200 L0,200 Z" fill="#3d0f2a" opacity="0.78"/>
+        <path d="M0,175 C240,155 480,192 720,172 C960,152 1200,190 1440,170 C1620,155 1780,182 1920,168 L1920,200 L0,200 Z" fill="#3d0f2a"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- <section class="section">
     <div class="preview-grid">
       <div>
         <cat-section-header
@@ -134,7 +157,7 @@
         title="Distribución por tipo de violencia">
       </cat-chart>
     </div>
-  </section>
+  </section> -->
 
   <div class="section" style="padding-top:0;">
     <cat-cta-banner
@@ -146,6 +169,7 @@
   </div>
 
   <cat-footer></cat-footer>
+  <script src="js/main.js"></script>
 
 </body>
 </html>
