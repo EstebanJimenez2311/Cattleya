@@ -52,9 +52,16 @@ class CatNavbar extends HTMLElement {
               Inicio
             </a>
 
-            <a href="analisis.html" class="cat-nav-link${this._activeClass('analisis')}">
-              Análisis
-            </a>
+            <!-- Dropdown: Análisis -->
+            <div class="cat-dropdown" id="cat-dd-analisis">
+              <button class="cat-nav-btn${this._activeClass('analisis')}"
+                      onclick="this.closest('.cat-dropdown').querySelector('.cat-drop-menu').classList.toggle('open'); this.classList.toggle('active')">
+                Análisis <span class="cat-caret">▾</span>
+              </button>
+              <div class="cat-drop-menu" id="cat-dd-analisis-menu">
+                <a href="raiz-datos.html">La Raíz de los Datos</a>
+              </div>
+            </div>
 
             <!-- Dropdown: Información y educación -->
             <div class="cat-dropdown" id="cat-dd1">
@@ -101,7 +108,15 @@ class CatNavbar extends HTMLElement {
         <!-- ── MENÚ MOBILE ── -->
         <div class="cat-mobile-menu" id="cat-mobile-menu">
           <a href="index.html" class="cat-mob-item">Inicio</a>
-          <a href="analisis.html" class="cat-mob-item">Power BI</a>
+          <button class="cat-mob-item" onclick="
+            const s = this.nextElementSibling;
+            s.classList.toggle('open');
+            this.classList.toggle('active');">
+            Análisis <span class="cat-mob-caret">▾</span>
+          </button>
+          <div class="cat-mob-sub">
+            <a href="raiz-datos.html">La Raíz de los Datos</a>
+          </div>
 
           <button class="cat-mob-item" onclick="
             const s = this.nextElementSibling;
