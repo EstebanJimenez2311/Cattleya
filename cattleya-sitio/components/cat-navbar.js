@@ -77,10 +77,6 @@ class CatNavbar extends HTMLElement {
               </div>
             </div>
 
-            <a href="tendencias.html" class="cat-nav-link">
-              Prototipo
-            </a>
-
             <!-- Dropdown: ¿Qué es Cattleya? -->
             <div class="cat-dropdown" id="cat-dd2">
               <button class="cat-nav-btn${this._activeClass('cattleya')}"
@@ -131,8 +127,6 @@ class CatNavbar extends HTMLElement {
             <a href="testimonios.html">Noticias y blogs</a>
             <a href="lucha.html">Línea de ayuda</a>
           </div>
-
-          <a href="tendencias.html" class="cat-mob-item">Prototipo</a>
 
           <button class="cat-mob-item" onclick="
             const s = this.nextElementSibling;
