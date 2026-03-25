@@ -19,7 +19,7 @@ class CatFooter extends HTMLElement {
           <div class="footer__col">
             <h4>Análisis</h4>
             <ul>
-              <li><a href="analisis.html">Estadística Descriptiva</a></li>
+              <li><a href="analisis.html">Leamos las raíces</a></li>
               <li><a href="tendencias.html">Tendencias y ML</a></li>
             </ul>
           </div>
