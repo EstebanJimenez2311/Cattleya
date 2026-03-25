@@ -9,7 +9,7 @@ class CatFooter extends HTMLElement {
     this.innerHTML = `
       <footer class="footer">
         <div class="footer-grid">
-          <div class="footer-brand fade-up" style="--fd:0s">
+          <div class="footer-brand">
             <a href="index.html" class="footer-logo">
               <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
                 <ellipse cx="18" cy="18" rx="10" ry="14" fill="#F6871D" opacity="0.9"/>
@@ -33,20 +33,20 @@ class CatFooter extends HTMLElement {
             </div>
           </div>
 
-          <div class="footer-col fade-up" style="--fd:0.1s">
+          <div class="footer-col">
             <h4>Explorar</h4>
             <a href="index.html">Inicio</a>
             <a href="raiz-datos.html">Power Bi</a>
             <a href="analisis.html">Prototipo</a>
           </div>
 
-          <div class="footer-col fade-up" style="--fd:0.2s">
+          <div class="footer-col">
             <h4>Recursos</h4>
             <a href="contexto.html">Metodología</a>
             <a href="testimonios.html">Información y educación</a>
           </div>
 
-          <div class="footer-col fade-up" style="--fd:0.3s">
+          <div class="footer-col">
             <h4>Contacto</h4>
             <a href="lucha.html">Línea de ayuda</a>
             <a href="equipo.html">Nosotros</a>
