@@ -74,7 +74,6 @@ class CatNavbar extends HTMLElement {
               <div class="cat-drop-menu" id="cat-dd1-menu">
                 <a href="contexto.html">Metodología y Marco Legal</a>
                 <a href="testimonios.html">Noticias y blogs</a>
-                <a href="lucha.html">Línea de ayuda</a>
               </div>
             </div>
 
@@ -127,7 +126,6 @@ class CatNavbar extends HTMLElement {
           <div class="cat-mob-sub">
             <a href="contexto.html">Metodología y Marco Legal</a>
             <a href="testimonios.html">Noticias y blogs</a>
-            <a href="lucha.html">Línea de ayuda</a>
           </div>
 
           <button class="cat-mob-item" onclick="
