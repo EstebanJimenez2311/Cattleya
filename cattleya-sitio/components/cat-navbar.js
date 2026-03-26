@@ -60,6 +60,8 @@ class CatNavbar extends HTMLElement {
               </button>
               <div class="cat-drop-menu" id="cat-dd-analisis-menu">
                 <a href="raiz-datos.html">La Raíz de los Datos</a>
+                <a href="analisis.html">Leamos las raíces</a>
+                <a href="tendencias.html">Patrones de Crecimiento</a>
               </div>
             </div>
 
@@ -111,6 +113,8 @@ class CatNavbar extends HTMLElement {
           </button>
           <div class="cat-mob-sub">
             <a href="raiz-datos.html">La Raíz de los Datos</a>
+            <a href="analisis.html">Leamos las raíces</a>
+            <a href="tendencias.html">Patrones de Crecimiento</a>
           </div>
 
           <button class="cat-mob-item" onclick="
