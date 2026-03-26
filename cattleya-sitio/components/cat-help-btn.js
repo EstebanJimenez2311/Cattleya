@@ -46,7 +46,15 @@ class CatHelpBtn extends HTMLElement {
         }
       </style>
       <a href="lucha.html" class="cat-help-fab" aria-label="¿Necesitas ayuda?">
-        <span class="cat-help-fab__icon">🆘</span>
+        <span class="cat-help-fab__icon">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="12" cy="17" r="1" fill="currentColor"/>
+    <path d="M10.29 3.86L1.82 18A2 2 0 003.53 21h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+          stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </svg>
+</span>
         ¿Necesitas Ayuda?
       </a>
     `;
