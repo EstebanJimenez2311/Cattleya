@@ -61,7 +61,7 @@ class RSSImporter:
             feed = feedparser.parse(source['url'])
             fuente = source['fuente']
 
-            print(f"  📡 Feed {fuente}: {len(feed.entries)} entradas encontradas")
+            print(f"  Feed {fuente}: {len(feed.entries)} entradas encontradas")
 
             for entry in feed.entries[:10]:  # Limitar a 10 por fuente
                 titulo = entry.title if hasattr(entry, 'title') else ''
@@ -69,17 +69,17 @@ class RSSImporter:
                 url = entry.link if hasattr(entry, 'link') else ''
                 published = entry.published if hasattr(entry, 'published') else ''
 
-                print(f"    📄 Procesando: {titulo[:30]}...")
+                print(f"    Procesando: {titulo[:30]}...")
 
                 # Filtrar por contenido relacionado con violencia
                 if not self.is_violence_related(titulo, descripcion):
-                    print(f"      🚫 Filtrada (no violencia): {titulo[:30]}...")
+                    print(f"      Filtrada (no violencia): {titulo[:30]}...")
                     self.filtered_count += 1
                     continue
 
                 # Verificar duplicados
                 if self.is_duplicate(url, titulo):
-                    print(f"      🔄 Duplicada: {titulo[:30]}...")
+                    print(f"      Duplicada: {titulo[:30]}...")
                     self.duplicate_count += 1
                     continue
 
@@ -98,23 +98,22 @@ class RSSImporter:
                 )
 
                 self.imported_count += 1
-                print(f"      ✅ Importada: {titulo[:30]}...")
+                print(f"      Importada: {titulo[:30]}...")
 
         except Exception as e:
-            print(f"❌ Error importando de {fuente}: {str(e)}")
+            print(f"Error importando de {fuente}: {str(e)}")
 
     def import_all(self):
         """Importa de todas las fuentes RSS"""
-        print("🚀 Iniciando importación de noticias RSS...")
-        print(f"📡 Fuentes: {len(self.RSS_SOURCES)}")
+        print("Iniciando importación de noticias RSS...")
+        print(f"Fuentes: {len(self.RSS_SOURCES)}")
 
         for source in self.RSS_SOURCES:
-            print(f"\n📄 Procesando {source['fuente']}...")
+            print(f"Procesando {source['fuente']}...")
             self.import_from_source(source)
 
-        print("""
-📊 Resumen de importación:""")
-        print(f"✅ Importadas: {self.imported_count}")
-        print(f"🚫 Filtradas: {self.filtered_count}")
-        print(f"🔄 Duplicadas: {self.duplicate_count}")
-        print("🎉 Importación completada!")
+        print("Resumen de importación:")
+        print(f"Importadas: {self.imported_count}")
+        print(f"Filtradas: {self.filtered_count}")
+        print(f"Duplicadas: {self.duplicate_count}")
+        print("Importación completada!")
