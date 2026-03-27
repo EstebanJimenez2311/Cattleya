@@ -1,4 +1,11 @@
 (function () {
+  // ============================================
+  //  CATTLEYA - Sistema de Noticias
+  // ============================================
+  // Backend: Django REST API (http://127.0.0.1:8000)
+  // NO usa Netlify Functions serverless
+  // ============================================
+
   const MAX_RENDER = 6;
   const DEBUG = true;
 
@@ -46,7 +53,8 @@
         console.log('[CattleyaNoticias] Fetching desde API Django...');
       }
 
-      // Fetch directo a la API de Django
+      // Fetch directo a la API de Django REST Framework
+      // NO usa Netlify Functions serverless
       const response = await fetch('http://127.0.0.1:8000/api/noticias/recientes/');
 
       if (!response.ok) {

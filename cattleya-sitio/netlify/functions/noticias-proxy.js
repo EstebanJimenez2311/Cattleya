@@ -1,9 +1,13 @@
 /**
- * Netlify Function: noticias-proxy
+ * Netlify Function: noticias-proxy (DEPRECATED)
  * Ruta: /.netlify/functions/noticias-proxy?url=ENCODED_URL
  *
- * Actua como proxy para feeds RSS colombianos, evitando
- * restricciones CORS en el browser.
+ * ⚠️ DEPRECATED: Esta función ya no se usa.
+ * Ahora el backend Django maneja la importación de RSS directamente.
+ * El frontend se conecta a la API de Django: http://127.0.0.1:8000/api/noticias/
+ *
+ * Esta función se mantiene solo como referencia histórica.
+ * Para producción, usar el backend Django con CORS habilitado.
  */
 
 const https = require('https');
