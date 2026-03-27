@@ -230,6 +230,7 @@
       if (DEBUG) {
         console.log('[CattleyaNoticias] click prev', { current: current });
       }
+      stopAutoPlay();
       goTo(current - 1);
       startAutoPlay();
     });
@@ -238,6 +239,7 @@
       if (DEBUG) {
         console.log('[CattleyaNoticias] click next', { current: current });
       }
+      stopAutoPlay();
       goTo(current + 1);
       startAutoPlay();
     });
@@ -257,9 +259,12 @@
       wrapper.addEventListener('mouseleave', startAutoPlay);
     }
 
-    measureSlides();
-    goTo(0);
-    startAutoPlay();
+    // Esperar a que el DOM se haya renderizado completamente antes de medir
+    window.requestAnimationFrame(() => {
+      measureSlides();
+      goTo(0);
+      startAutoPlay();
+    });
   }
 
   function renderNoticias(container, noticias) {
