@@ -1,0 +1,849 @@
+:root {
+  --cattleya-magenta: #9d2d6a;
+  --cattleya-magenta-dark: #7c1f55;
+  --cattleya-plum: #4f294f;
+  --cattleya-orange: #f28c28;
+  --cattleya-gold: #f6c66d;
+  --cattleya-cream: #fdf0ea;
+  --cattleya-rose: #f8e9f1;
+  --cattleya-white: #fffdfd;
+  --cattleya-ink: #31212e;
+  --cattleya-muted: #735b68;
+  --cattleya-border: rgba(157, 45, 106, 0.16);
+  --cattleya-shadow: 0 20px 48px rgba(111, 33, 78, 0.12);
+}
+
+body,
+textarea,
+input,
+select,
+button {
+  font-family: "DM Sans", sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(242, 140, 40, 0.12), transparent 24%),
+    linear-gradient(180deg, #fffaf8 0%, #fdf4f7 100%);
+  color: var(--cattleya-ink);
+}
+
+#header {
+  background: linear-gradient(135deg, var(--cattleya-plum), var(--cattleya-magenta));
+  color: #fff;
+  box-shadow: var(--cattleya-shadow);
+  border-bottom: 0;
+}
+
+#header a:link,
+#header a:visited,
+#header a:hover {
+  color: #fff;
+}
+
+.cattleya-branding {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cattleya-branding__mark {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.24);
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.cattleya-branding__copy h1 {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.cattleya-branding__copy p {
+  margin: 2px 0 0;
+  color: rgba(255,255,255,0.76);
+  font-size: 0.86rem;
+}
+
+.cattleya-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  font-size: 0.84rem;
+}
+
+.cattleya-toolbar a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+}
+
+div.breadcrumbs {
+  background: rgba(157, 45, 106, 0.08);
+  color: var(--cattleya-plum);
+  border-bottom: 1px solid rgba(157, 45, 106, 0.1);
+}
+
+div.breadcrumbs a {
+  color: var(--cattleya-magenta-dark);
+}
+
+#content {
+  padding: 16px 20px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#content,
+#content-main,
+.dashboard-grid,
+[class*="content"],
+main {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  box-sizing: border-box;
+}
+
+.cattleya-dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: calc(272px + 6rem) minmax(0, 1fr) 220px;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 150px);
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 0;
+  overflow: visible;
+}
+
+.cattleya-dashboard-left,
+.cattleya-dashboard-center,
+.cattleya-dashboard-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  overflow: visible;
+  height: 100%;
+}
+
+.col-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.module,
+.inline-group,
+.dashboard .module table,
+#changelist-filter,
+.submit-row,
+.object-tools a,
+.selector,
+.results,
+form .aligned div,
+.form-row {
+  border-radius: 18px;
+}
+
+.module,
+.inline-group,
+#changelist-filter,
+.submit-row,
+.selector,
+.results,
+#content-related {
+  background: rgba(255, 253, 253, 0.92);
+  border: 1px solid var(--cattleya-border);
+  box-shadow: var(--cattleya-shadow);
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+  background: linear-gradient(135deg, rgba(157,45,106,0.12), rgba(242,140,40,0.12));
+  color: var(--cattleya-plum);
+  border-radius: 18px 18px 0 0;
+  font-weight: 700;
+}
+
+a:link,
+a:visited {
+  color: var(--cattleya-magenta-dark);
+}
+
+a:hover {
+  color: var(--cattleya-magenta);
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  background: linear-gradient(135deg, var(--cattleya-orange), #dc7413);
+  border: 0;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 700;
+  box-shadow: 0 12px 28px rgba(242, 140, 40, 0.24);
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+  background: linear-gradient(135deg, var(--cattleya-magenta), var(--cattleya-magenta-dark));
+  box-shadow: 0 12px 28px rgba(157, 45, 106, 0.26);
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a.button:hover {
+  filter: brightness(1.03);
+}
+
+input,
+textarea,
+select {
+  border-radius: 12px;
+  border: 1px solid rgba(157, 45, 106, 0.18);
+  padding: 10px 12px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--cattleya-magenta);
+  box-shadow: 0 0 0 4px rgba(157, 45, 106, 0.12);
+}
+
+.cattleya-admin-hero {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 22px;
+  border-radius: 20px;
+  color: #fff;
+  background:
+    radial-gradient(circle at top right, rgba(242, 140, 40, 0.28), transparent 26%),
+    linear-gradient(135deg, var(--cattleya-magenta), var(--cattleya-plum));
+  box-shadow: var(--cattleya-shadow);
+  overflow: visible;
+  flex: 1;
+  min-height: 0;
+}
+
+.cattleya-admin-hero__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 18px;
+}
+
+.cattleya-admin-hero__logo {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  transform: none;
+  filter:
+    drop-shadow(0 0 18px rgba(255, 214, 236, 0.12))
+    drop-shadow(0 0 42px rgba(255, 181, 216, 0.08))
+    drop-shadow(0 28px 40px rgba(0, 0, 0, 0.22));
+  opacity: 0.96;
+}
+
+.cattleya-admin-hero__logo--dark {
+  display: none;
+}
+
+.cattleya-admin-hero__ornament {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.cattleya-admin-hero__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cattleya-admin-sidecard {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+.cattleya-admin-sidecard h2 {
+  margin: 0 0 10px;
+  color: var(--cattleya-ink);
+  font-size: 1.45rem;
+}
+
+.cattleya-admin-sidecard p:last-child {
+  margin: 0;
+  color: var(--cattleya-muted);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.cattleya-kicker {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.cattleya-admin-hero h1,
+.cattleya-admin-hero h2,
+.cattleya-login-copy h1 {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 2.8vw, 2.8rem);
+  line-height: 1.02;
+}
+
+.cattleya-admin-hero__lead,
+.cattleya-login-copy p {
+  max-width: 100%;
+  margin: 0;
+  color: rgba(255,255,255,0.84);
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.cattleya-admin-hero__pill {
+  width: 90%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.16);
+  text-align: center;
+}
+
+.cattleya-admin-hero__pill strong {
+  display: block;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.cattleya-admin-hero__pill span {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255,255,255,0.78);
+  font-size: 0.95rem;
+}
+
+.cattleya-admin-module-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.cattleya-admin-module-links a,
+.cattleya-admin-module-links span {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+}
+
+.cattleya-dashboard-center {
+  padding: 4px 0 0;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.metrics-grid,
+.cattleya-dashboard-quickstats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+  min-width: 0;
+}
+
+.cattleya-quickstat span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--cattleya-muted);
+  font-weight: 700;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.cattleya-quickstat strong {
+  display: block;
+  color: var(--cattleya-ink);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.cattleya-dashboard-right {
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.cattleya-admin-logo-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.cattleya-admin-logo-panel__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cattleya-admin-sidebar-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 20px rgba(255, 214, 236, 0.12))
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.18));
+}
+
+.cattleya-admin-sidebar-logo--dark {
+  display: none;
+}
+
+.cattleya-admin-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cattleya-admin-action {
+  display: block;
+  padding: 16px 18px;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--cattleya-ink) !important;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.cattleya-admin-action:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.cattleya-metric-card,
+.cattleya-app-card,
+.cattleya-login-card,
+.login #content {
+  background: rgba(255, 253, 253, 0.92);
+  border: 1px solid var(--cattleya-border);
+  box-shadow: var(--cattleya-shadow);
+}
+
+.cattleya-metric-card {
+  padding: 22px;
+  border-radius: 22px;
+}
+
+.cattleya-metric-card span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--cattleya-muted);
+  font-size: 0.92rem;
+}
+
+.cattleya-metric-card strong {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--cattleya-plum);
+}
+
+.cattleya-metric-card--magenta {
+  background: linear-gradient(180deg, rgba(248,233,241,0.94), rgba(255,255,255,0.98));
+}
+
+.cattleya-metric-card--orange {
+  background: linear-gradient(180deg, rgba(255,244,232,0.95), rgba(255,255,255,0.98));
+}
+
+.cattleya-metric-card--plum {
+  background: linear-gradient(180deg, rgba(242,233,243,0.95), rgba(255,255,255,0.98));
+}
+
+.cattleya-metric-card--gold {
+  background: linear-gradient(180deg, rgba(255,248,228,0.95), rgba(255,255,255,0.98));
+}
+
+.cattleya-admin-panel {
+  margin-bottom: 0;
+}
+
+.cattleya-admin-panel__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+.cattleya-admin-panel__header h2 {
+  margin: 0;
+  color: var(--cattleya-plum);
+  font-size: 1.25rem;
+}
+
+.cattleya-admin-panel__header p {
+  margin: 0;
+  color: var(--cattleya-muted);
+}
+
+.cattleya-admin-panel--compact {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.cattleya-module-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cattleya-module-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(157, 45, 106, 0.08);
+}
+
+.cattleya-module-row:first-child {
+  border-top: 0;
+}
+
+.cattleya-module-row__name {
+  font-weight: 700;
+  color: var(--cattleya-ink);
+  font-size: 1rem;
+}
+
+.cattleya-module-row__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+  font-size: 0.95rem;
+  min-width: 0;
+}
+
+.cattleya-module-row__actions a,
+.cattleya-module-row__actions span {
+  color: var(--cattleya-muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.dashboard #content-related,
+.dashboard .module table {
+  display: none;
+}
+
+.login {
+  background:
+    radial-gradient(circle at top left, rgba(157,45,106,0.12), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(242,140,40,0.12), transparent 26%),
+    linear-gradient(180deg, #fffaf8 0%, #fceff4 100%);
+}
+
+.cattleya-login-shell {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(320px, 420px);
+  gap: 28px;
+  align-items: center;
+  max-width: 1040px;
+  margin: 24px auto 0;
+}
+
+.cattleya-login-copy {
+  padding: 32px;
+}
+
+.cattleya-login-copy p {
+  color: var(--cattleya-muted);
+  max-width: 540px;
+}
+
+.cattleya-login-card,
+.login #content {
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.login #container {
+  background: transparent;
+  border: 0;
+  min-width: 0;
+}
+
+.login #content {
+  padding: 28px;
+}
+
+.login .submit-row {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid,
+  .cattleya-admin-panel__header,
+  .cattleya-login-shell {
+    grid-template-columns: 1fr;
+    display: grid;
+    height: auto;
+  }
+
+  .cattleya-dashboard-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .cattleya-dashboard-top,
+  .cattleya-dashboard-left,
+  .cattleya-dashboard-center,
+  .cattleya-dashboard-right {
+    overflow: visible;
+  }
+
+  .cattleya-admin-hero {
+    min-height: auto;
+  }
+
+  .cattleya-module-row {
+    grid-template-columns: 1fr;
+  }
+
+  #content {
+    padding: 20px 16px;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 640px) {
+  .cattleya-dashboard-quickstats {
+    grid-template-columns: 1fr;
+  }
+}
+
+html[data-theme="dark"] {
+  --cattleya-ink: #f7eaf1;
+  --cattleya-muted: #d3bfd0;
+  --cattleya-border: rgba(255, 196, 221, 0.14);
+  --cattleya-shadow: 0 24px 54px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top right, rgba(242, 140, 40, 0.1), transparent 24%),
+    linear-gradient(180deg, #1c1220 0%, #120c18 100%);
+  color: var(--cattleya-ink);
+}
+
+html[data-theme="dark"] #header {
+  background: linear-gradient(135deg, #552347, #7c1f55);
+}
+
+html[data-theme="dark"] div.breadcrumbs {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ead7e7;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="dark"] div.breadcrumbs a,
+html[data-theme="dark"] a:link,
+html[data-theme="dark"] a:visited {
+  color: #ffb9dc;
+}
+
+html[data-theme="dark"] .module,
+html[data-theme="dark"] .inline-group,
+html[data-theme="dark"] #changelist-filter,
+html[data-theme="dark"] .selector,
+html[data-theme="dark"] .results,
+html[data-theme="dark"] #content-related,
+html[data-theme="dark"] .cattleya-metric-card,
+html[data-theme="dark"] .cattleya-app-card,
+html[data-theme="dark"] .cattleya-login-card,
+html[data-theme="dark"] .login #content {
+  background: rgba(30, 21, 33, 0.92);
+  border-color: rgba(255, 196, 221, 0.12);
+  box-shadow: var(--cattleya-shadow);
+}
+
+html[data-theme="dark"] .module h2,
+html[data-theme="dark"] .module caption,
+html[data-theme="dark"] .inline-group h2 {
+  background: linear-gradient(135deg, rgba(157,45,106,0.3), rgba(242,140,40,0.2));
+  color: #fff3f8;
+}
+
+html[data-theme="dark"] .cattleya-admin-hero__logo--light {
+  display: none;
+}
+
+html[data-theme="dark"] .cattleya-admin-hero__logo--dark {
+  display: block;
+}
+
+html[data-theme="dark"] .cattleya-admin-hero__logo,
+html[data-theme="dark"] .cattleya-admin-sidebar-logo {
+  filter:
+    drop-shadow(0 0 22px rgba(255, 228, 239, 0.16))
+    drop-shadow(0 0 54px rgba(255, 130, 186, 0.12))
+    drop-shadow(0 30px 42px rgba(0, 0, 0, 0.34));
+}
+
+html[data-theme="dark"] .cattleya-admin-sidebar-logo--light {
+  display: none;
+}
+
+html[data-theme="dark"] .cattleya-admin-sidebar-logo--dark {
+  display: block;
+}
+
+html[data-theme="dark"] .cattleya-admin-sidecard {
+  background: transparent;
+  border-color: transparent;
+}
+
+html[data-theme="dark"] .cattleya-admin-panel__header h2,
+html[data-theme="dark"] .cattleya-app-card__title h3,
+html[data-theme="dark"] .cattleya-metric-card strong,
+html[data-theme="dark"] #content h1,
+html[data-theme="dark"] #content h2,
+html[data-theme="dark"] #content h3,
+html[data-theme="dark"] .form-row label,
+html[data-theme="dark"] .aligned label,
+html[data-theme="dark"] fieldset .description,
+html[data-theme="dark"] .help,
+html[data-theme="dark"] p.help,
+html[data-theme="dark"] .cattleya-app-card__title span,
+html[data-theme="dark"] .cattleya-metric-card span,
+html[data-theme="dark"] .cattleya-admin-panel__header p {
+  color: var(--cattleya-ink);
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background: #171119;
+  color: #fff3f8;
+  border-color: rgba(255, 139, 185, 0.34);
+}
+
+html[data-theme="dark"] input:focus,
+html[data-theme="dark"] textarea:focus,
+html[data-theme="dark"] select:focus {
+  border-color: #ff8cc0;
+  box-shadow: 0 0 0 4px rgba(255, 140, 192, 0.16);
+}
+
+html[data-theme="dark"] .form-row.errors,
+html[data-theme="dark"] .errors,
+html[data-theme="dark"] ul.errorlist,
+html[data-theme="dark"] p.errornote {
+  background: rgba(92, 19, 30, 0.72);
+  color: #ffd7e2;
+  border-color: rgba(255, 133, 151, 0.34);
+}
+
+html[data-theme="dark"] .submit-row {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] #nav-sidebar {
+  background: rgba(18, 12, 24, 0.92);
+  border-right: 1px solid rgba(255, 196, 221, 0.08);
+}
+
+html[data-theme="dark"] #nav-sidebar .current-model,
+html[data-theme="dark"] #nav-sidebar .current-app .section,
+html[data-theme="dark"] #nav-sidebar .section:link,
+html[data-theme="dark"] #nav-sidebar .section:visited,
+html[data-theme="dark"] #nav-sidebar a:link,
+html[data-theme="dark"] #nav-sidebar a:visited {
+  color: #f6dfe9;
+}
+
+html[data-theme="dark"] #nav-filter {
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff3f8;
+  border-color: rgba(255, 196, 221, 0.12);
+}
+
+html[data-theme="dark"] #changelist table thead th,
+html[data-theme="dark"] thead th,
+html[data-theme="dark"] tfoot td {
+  background: rgba(255, 255, 255, 0.04);
+  color: #f8e7ef;
+}
+
+html[data-theme="dark"] tr:nth-child(even),
+html[data-theme="dark"] .row-form-errors,
+html[data-theme="dark"] tr.form-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html[data-theme="dark"] .selector-chosen h2,
+html[data-theme="dark"] .selector-available h2 {
+  color: #fff3f8;
+}

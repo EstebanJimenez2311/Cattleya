@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Cattleya Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'admin/css/cattleya-admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div class="cattleya-branding">
+  <div class="cattleya-branding__mark">C</div>
+  <div class="cattleya-branding__copy">
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">Cattleya Admin</a></h1>
+    <p>Monitoreo, datos y gestion editorial</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block nav-global %}
+<div class="cattleya-toolbar">
+  <span>Proyecto Cattleya</span>
+  <a href="/" target="_blank" rel="noopener noreferrer">Ver sitio</a>
+</div>
+{% endblock %}
