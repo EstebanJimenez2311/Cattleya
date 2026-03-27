@@ -108,7 +108,35 @@
     return { icon: '🟢', className: 'bajo', label: 'Riesgo bajo' };
   }
 
+  function getNoticiasContainer(container) {
+    if (container && container.isConnected) {
+      return container;
+    }
+
+    return document.getElementById('testimonios-container');
+  }
+
+  async function waitForNoticiasContainer() {
+    if (window.customElements && typeof window.customElements.whenDefined === 'function') {
+      try {
+        await window.customElements.whenDefined('cat-surface');
+      } catch (error) {
+        if (DEBUG) {
+          console.warn('[CattleyaNoticias] No fue posible esperar cat-surface:', error);
+        }
+      }
+    }
+
+    await new Promise((resolve) => window.requestAnimationFrame(resolve));
+    return getNoticiasContainer();
+  }
+
   function renderState(container, type, message) {
+    container = getNoticiasContainer(container);
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = `
       <div class="noticias-estado noticias-estado--${type}">
         <p>${escapeHtml(message)}</p>
@@ -280,6 +308,11 @@
   }
 
   function renderNoticias(container, noticias) {
+    container = getNoticiasContainer(container);
+    if (!container) {
+      return;
+    }
+
     const slides = noticias.slice(0, MAX_RENDER).map(buildSlide).join('');
     const dots = noticias
       .slice(0, MAX_RENDER)
@@ -303,7 +336,7 @@
   }
 
   async function init() {
-    const container = document.getElementById('testimonios-container');
+    let container = await waitForNoticiasContainer();
     if (!container) {
       console.error('[CattleyaNoticias] contenedor NO ENCONTRADO');
       return;
@@ -323,6 +356,7 @@
         return;
       }
 
+      container = getNoticiasContainer(container);
       console.log('[CattleyaNoticias] Llamando renderNoticias con', noticias.length, 'noticias');
       renderNoticias(container, noticias);
       console.log('[CattleyaNoticias] renderNoticias completado');

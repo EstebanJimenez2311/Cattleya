@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+/* Contenedor principal de noticias */
+#testimonios-container {
+  width: 100%;
+  display: block;
+  min-width: 0;
+}
+
 .carrusel-wrapper {
   position: relative;
   overflow: hidden;
@@ -12,6 +19,8 @@
   min-height: 420px;
   display: flex;
   align-items: stretch;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .carrusel-track {
