@@ -97,6 +97,10 @@
   }
 
   function getRiskBadge(risk) {
+    if (risk === 'critico') {
+      return { icon: '🔴', className: 'critico', label: 'Riesgo critico' };
+    }
+
     if (risk === 'alto') {
       return { icon: '🔴', className: 'alto', label: 'Alto riesgo' };
     }
