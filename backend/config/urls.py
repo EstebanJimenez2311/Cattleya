@@ -3,6 +3,8 @@ from django.urls import path, include
 
 from .views import healthcheck
 
+import config.admin  # noqa: F401
+
 admin.site.site_header = "Cattleya Admin"
 admin.site.site_title = "Cattleya Dashboard"
 admin.site.index_title = "Panel de gestion y monitoreo"
@@ -14,3 +16,4 @@ urlpatterns = [
     path("api/analisis/", include("analisis.urls")),
     path("api/estadisticas/", include("estadisticas.urls")),
 ]
+
