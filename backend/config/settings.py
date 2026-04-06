@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "config.auth.AdminSessionMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -129,6 +130,11 @@ USE_X_FORWARDED_HOST = True
 SECURE_SSL_REDIRECT = env_bool("DJANGO_SECURE_SSL_REDIRECT", not DEBUG)
 SESSION_COOKIE_SECURE = env_bool("DJANGO_SESSION_COOKIE_SECURE", not DEBUG)
 CSRF_COOKIE_SECURE = env_bool("DJANGO_CSRF_COOKIE_SECURE", not DEBUG)
+SESSION_SAVE_EVERY_REQUEST = env_bool("DJANGO_SESSION_SAVE_EVERY_REQUEST", True)
+SESSION_COOKIE_AGE = int(os.getenv("DJANGO_SESSION_COOKIE_AGE", str(60 * 60 * 12)))
+ADMIN_SESSION_COOKIE_AGE = int(os.getenv("DJANGO_ADMIN_SESSION_COOKIE_AGE", str(60 * 60 * 12)))
+ADMIN_SESSION_IDLE_TIMEOUT = int(os.getenv("DJANGO_ADMIN_SESSION_IDLE_TIMEOUT", str(60 * 60)))
+ADMIN_REMEMBER_ME_AGE = int(os.getenv("DJANGO_ADMIN_REMEMBER_ME_AGE", str(60 * 60 * 24 * 14)))
 
 CORS_ALLOW_ALL_ORIGINS = env_bool("DJANGO_CORS_ALLOW_ALL_ORIGINS", DEBUG)
 
