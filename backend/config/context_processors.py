@@ -7,7 +7,7 @@ def cattleya_admin_context(request):
 
     total_noticias = Noticia.objects.count()
     verificadas = Noticia.objects.filter(verificada=True).count()
-    riesgo_alto = Noticia.objects.filter(nivel_riesgo="alto").count()
+    riesgo_alto = Noticia.objects.filter(nivel_riesgo__in=["alto", "critico"]).count()
     fuentes_activas = (
         Noticia.objects.exclude(fuente__isnull=True)
         .exclude(fuente__exact="")
