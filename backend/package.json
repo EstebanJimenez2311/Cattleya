@@ -1,0 +1,20 @@
+{
+  "name": "cattleya-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Scripts de arranque para el backend Django de Cattleya",
+  "scripts": {
+    "setup": "powershell -ExecutionPolicy Bypass -File .\\scripts\\bootstrap.ps1",
+    "bootstrap": "powershell -ExecutionPolicy Bypass -File .\\scripts\\bootstrap.ps1",
+    "start": "powershell -ExecutionPolicy Bypass -File .\\scripts\\runserver.ps1",
+    "dev": "powershell -ExecutionPolicy Bypass -File .\\scripts\\runserver.ps1",
+    "migrate": ".\\venv\\Scripts\\python.exe manage.py migrate",
+    "makemigrations": ".\\venv\\Scripts\\python.exe manage.py makemigrations",
+    "scrape": ".\\venv\\Scripts\\python.exe manage.py scrape_noticias",
+    "repair:urls": ".\\venv\\Scripts\\python.exe manage.py reparar_urls_noticias",
+    "seed:test": ".\\venv\\Scripts\\python.exe manage.py cargar_datos_prueba",
+    "mark:test": ".\\venv\\Scripts\\python.exe manage.py marcar_noticias_prueba",
+    "superuser": "powershell -ExecutionPolicy Bypass -File .\\scripts\\create_superuser.ps1",
+    "check": ".\\venv\\Scripts\\python.exe manage.py check"
+  }
+}

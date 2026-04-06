@@ -1,0 +1,282 @@
+[
+  {
+    "model": "noticias.noticia",
+    "pk": 1,
+    "fields": {
+      "titulo": "Mujer denuncia agresión por su pareja en Bogotá",
+      "descripcion": "La víctima reportó violencia física y amenazas en el sur de la ciudad.",
+      "contenido": "Las autoridades iniciaron investigación tras la denuncia presentada ante la Fiscalía.",
+      "fecha_publicacion": "2026-03-20T08:15:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/justicia/agresion-mujer-bogota",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 2,
+    "fields": {
+      "titulo": "Caso de violencia intrafamiliar en Medellín genera rechazo",
+      "descripcion": "Una mujer resultó lesionada tras discusión con su pareja.",
+      "contenido": "Vecinos alertaron a la policía, quienes capturaron al agresor.",
+      "fecha_publicacion": "2026-03-19T19:40:00-05:00",
+      "fuente": "El Colombiano",
+      "url": "https://www.elcolombiano.com/medellin/violencia-intrafamiliar",
+      "ciudad": "Medellín",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 3,
+    "fields": {
+      "titulo": "Investigan presunto feminicidio en Barranquilla",
+      "descripcion": "Una mujer fue hallada sin vida en su vivienda.",
+      "contenido": "Las autoridades manejan hipótesis de feminicidio.",
+      "fecha_publicacion": "2026-03-18T07:20:00-05:00",
+      "fuente": "El Heraldo",
+      "url": "https://www.elheraldo.co/judicial/feminicidio-barranquilla",
+      "ciudad": "Barranquilla",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 4,
+    "fields": {
+      "titulo": "Denuncian acoso laboral contra mujer en Cali",
+      "descripcion": "La víctima asegura haber sido hostigada por su jefe.",
+      "contenido": "El caso fue llevado ante el Ministerio de Trabajo.",
+      "fecha_publicacion": "2026-03-17T14:10:00-05:00",
+      "fuente": "El Espectador",
+      "url": "https://www.elespectador.com/cali/acoso-laboral",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 5,
+    "fields": {
+      "titulo": "Capturan a hombre por agresión a su pareja en Cartagena",
+      "descripcion": "El agresor fue detenido tras denuncia ciudadana.",
+      "contenido": "La víctima fue trasladada a un centro médico.",
+      "fecha_publicacion": "2026-03-16T11:00:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/cartagena/agresion-pareja",
+      "ciudad": "Cartagena",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 6,
+    "fields": {
+      "titulo": "Mujer denuncia violencia económica en relación de pareja",
+      "descripcion": "Asegura que su pareja controlaba todos sus ingresos.",
+      "contenido": "El caso evidencia nuevas formas de violencia.",
+      "fecha_publicacion": "2026-03-15T09:50:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/economia/violencia-economica",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 7,
+    "fields": {
+      "titulo": "Intento de feminicidio en Soledad deja mujer herida",
+      "descripcion": "La víctima sobrevivió tras ataque con arma blanca.",
+      "contenido": "El agresor fue capturado por la policía.",
+      "fecha_publicacion": "2026-03-14T21:30:00-05:00",
+      "fuente": "Zona Cero",
+      "url": "https://zonacero.com/judicial/intento-feminicidio",
+      "ciudad": "Soledad",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 8,
+    "fields": {
+      "titulo": "Aumentan denuncias por violencia psicológica en Bucaramanga",
+      "descripcion": "Autoridades reportan incremento en casos de control emocional.",
+      "contenido": "Se intensifican campañas de prevención.",
+      "fecha_publicacion": "2026-03-13T10:00:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/bucaramanga/violencia-psicologica",
+      "ciudad": "Bucaramanga",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 9,
+    "fields": {
+      "titulo": "Mujer denuncia agresión en transporte público en Bogotá",
+      "descripcion": "El caso ocurrió en un bus del sistema masivo.",
+      "contenido": "La policía busca al agresor.",
+      "fecha_publicacion": "2026-03-12T06:45:00-05:00",
+      "fuente": "El Espectador",
+      "url": "https://www.elespectador.com/bogota/agresion-transporte",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 10,
+    "fields": {
+      "titulo": "Violencia intrafamiliar deja mujer herida en Santa Marta",
+      "descripcion": "El agresor huyó tras el ataque.",
+      "contenido": "La víctima fue atendida en hospital local.",
+      "fecha_publicacion": "2026-03-11T18:25:00-05:00",
+      "fuente": "El Heraldo",
+      "url": "https://www.elheraldo.co/santa-marta/violencia",
+      "ciudad": "Santa Marta",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 11,
+    "fields": {
+      "titulo": "Denuncian abuso sexual en entorno familiar en Pereira",
+      "descripcion": "Autoridades investigan el caso tras denuncia.",
+      "contenido": "Se activaron rutas de atención a la víctima.",
+      "fecha_publicacion": "2026-03-10T12:10:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/pereira/abuso",
+      "ciudad": "Pereira",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 12,
+    "fields": {
+      "titulo": "Capturado por violencia contra su expareja en Manizales",
+      "descripcion": "El hombre fue detenido tras incumplir medida de protección.",
+      "contenido": "La víctima había denunciado previamente.",
+      "fecha_publicacion": "2026-03-09T15:00:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/manizales/captura",
+      "ciudad": "Manizales",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 13,
+    "fields": {
+      "titulo": "Mujer denuncia amenazas constantes en relación de pareja",
+      "descripcion": "El caso fue reportado ante la Fiscalía.",
+      "contenido": "Se investiga posible violencia psicológica.",
+      "fecha_publicacion": "2026-03-08T17:45:00-05:00",
+      "fuente": "El Espectador",
+      "url": "https://www.elespectador.com/amenazas",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 14,
+    "fields": {
+      "titulo": "Intento de agresión a mujer en vía pública en Cali",
+      "descripcion": "El ataque fue frustrado por transeúntes.",
+      "contenido": "El sospechoso fue capturado.",
+      "fecha_publicacion": "2026-03-07T13:30:00-05:00",
+      "fuente": "El País",
+      "url": "https://www.elpais.com.co/cali/agresion",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 15,
+    "fields": {
+      "titulo": "Denuncian violencia económica en hogar de Cartagena",
+      "descripcion": "La víctima no tenía acceso a sus propios recursos.",
+      "contenido": "El caso fue remitido a comisaría de familia.",
+      "fecha_publicacion": "2026-03-06T08:20:00-05:00",
+      "fuente": "El Heraldo",
+      "url": "https://www.elheraldo.co/cartagena/economica",
+      "ciudad": "Cartagena",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 16,
+    "fields": {
+      "titulo": "Mujer resulta herida tras discusión en Medellín",
+      "descripcion": "Vecinos alertaron a las autoridades.",
+      "contenido": "El agresor fue detenido.",
+      "fecha_publicacion": "2026-03-05T22:10:00-05:00",
+      "fuente": "El Colombiano",
+      "url": "https://www.elcolombiano.com/agresion",
+      "ciudad": "Medellín",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 17,
+    "fields": {
+      "titulo": "Denuncian acoso callejero en Barranquilla",
+      "descripcion": "La víctima grabó al agresor.",
+      "contenido": "El video se volvió viral en redes.",
+      "fecha_publicacion": "2026-03-04T09:10:00-05:00",
+      "fuente": "Zona Cero",
+      "url": "https://zonacero.com/acoso",
+      "ciudad": "Barranquilla",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 18,
+    "fields": {
+      "titulo": "Caso de violencia psicológica en pareja en Bogotá",
+      "descripcion": "La víctima denunció manipulación y amenazas.",
+      "contenido": "Se activaron rutas de atención.",
+      "fecha_publicacion": "2026-03-03T11:55:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/psicologica",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 19,
+    "fields": {
+      "titulo": "Capturan a hombre por intento de feminicidio en Cali",
+      "descripcion": "El ataque ocurrió en una vivienda.",
+      "contenido": "La víctima sobrevivió y está en recuperación.",
+      "fecha_publicacion": "2026-03-02T20:40:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/cali/feminicidio",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 20,
+    "fields": {
+      "titulo": "Mujer denuncia agresión en entorno laboral en Bogotá",
+      "descripcion": "Señala hostigamiento constante.",
+      "contenido": "El caso está en investigación.",
+      "fecha_publicacion": "2026-03-01T07:30:00-05:00",
+      "fuente": "El Espectador",
+      "url": "https://www.elespectador.com/laboral",
+      "ciudad": "Bogotá",
+      "verificada": false
+    }
+  }
+]
