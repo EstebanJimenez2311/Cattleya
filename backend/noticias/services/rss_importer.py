@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import sys
 
+from bs4 import BeautifulSoup
 from noticias.models import Noticia
 
 from .article_scraper import ArticleScraper
@@ -80,24 +81,44 @@ class RSSImporter:
         description = clean_text(extracted_summary or fallback_description)
         return description
 
+    def _extract_title(self, html, fallback_title=""):
+        soup = BeautifulSoup(html, "html.parser")
+
+        og_title = soup.find("meta", attrs={"property": "og:title"})
+        if og_title and og_title.get("content"):
+            return clean_text(og_title["content"])
+
+        twitter_title = soup.find("meta", attrs={"name": "twitter:title"})
+        if twitter_title and twitter_title.get("content"):
+            return clean_text(twitter_title["content"])
+
+        title_tag = soup.find("title")
+        if title_tag:
+            title_text = clean_text(title_tag.get_text(" ", strip=True))
+            if title_text:
+                return title_text.split(" | ")[0].split(" - ")[0].strip()
+
+        h1_tag = soup.find("h1")
+        if h1_tag:
+            return clean_text(h1_tag.get_text(" ", strip=True))
+
+        return clean_text(fallback_title)
+
     def _process_entry(self, source_config, entry):
         title = clean_text(getattr(entry, "title", ""))
         description_hint = clean_text(getattr(entry, "summary", "") or getattr(entry, "description", ""))
         raw_url = clean_text(getattr(entry, "link", ""))
         url = normalize_url(raw_url)
 
-        if not title or not raw_url:
+        if not raw_url:
             self.summary["filtered"] += 1
-            self._log(f"[FILTER] Descartada: {title or 'sin titulo'}")
+            self._log("[FILTER] Descartada: sin URL")
             return "filtered"
 
-        if not self._is_relevant(title, description_hint):
+        if title and not self._is_relevant(title, description_hint):
             self.summary["filtered"] += 1
             self._log(f"[FILTER] Descartada: {title}")
             return "filtered"
-
-        self.summary["relevant_processed"] += 1
-        self._log(f"[FILTER] Relevante: {title}")
 
         if Noticia.objects.filter(url=url).exists():
             self.summary["duplicates"] += 1
@@ -108,16 +129,25 @@ class RSSImporter:
             self._log("[SCRAPER] Extrayendo articulo...")
             html, final_url = self.scraper.fetch_html(raw_url)
             url = normalize_url(final_url or raw_url)
+            title = self._extract_title(html, title)
             description = self._build_description(source_config, html, description_hint)
         except Exception as error:
             self.summary["errors"] += 1
             self._log(f"[ERROR] fallo en scraping: {error}")
             return "error"
 
+        if not title:
+            self.summary["filtered"] += 1
+            self._log("[FILTER] Descartada: sin titulo")
+            return "filtered"
+
         if not is_gender_violence_related(title, description):
             self.summary["filtered"] += 1
             self._log(f"[FILTER] Descartada: {title}")
             return "filtered"
+
+        self.summary["relevant_processed"] += 1
+        self._log(f"[FILTER] Relevante: {title}")
 
         if len(description) < 100:
             self.summary["filtered"] += 1
@@ -169,6 +199,11 @@ class RSSImporter:
             result = self._process_entry(source_config, entry)
             if result != "filtered":
                 relevant_count += 1
+
+    def import_entries(self, source_config, entries):
+        self._log(f"[INFO] Procesando backfill de {source_config.name}...")
+        for entry in entries:
+            self._process_entry(source_config, entry)
 
     def import_all(self):
         for source in SOURCES:

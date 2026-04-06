@@ -29,9 +29,8 @@ def _read_html_listing(source_config, timeout):
     return [SimpleNamespace(**item) for item in items]
 
 
-def _read_sitemap(source_config, timeout):
-    response = _fetch(source_config.feed_url, timeout)
-    root = ET.fromstring(response.text)
+def _parse_sitemap_entries(xml_text):
+    root = ET.fromstring(xml_text)
     items = []
     ns = {
         "sm": "http://www.sitemaps.org/schemas/sitemap/0.9",
@@ -43,22 +42,53 @@ def _read_sitemap(source_config, timeout):
         title = node.find("news:news/news:title", ns)
         publication_date = node.find("news:news/news:publication_date", ns)
         keywords = node.find("news:news/news:keywords", ns)
+        lastmod = node.find("sm:lastmod", ns)
 
-        if loc is None or title is None:
+        if loc is None:
             continue
 
         items.append(
             SimpleNamespace(
-                title=" ".join("".join(title.itertext()).split()),
+                title=" ".join("".join(title.itertext()).split()) if title is not None else "",
                 link=" ".join("".join(loc.itertext()).split()),
                 summary=" ".join("".join(keywords.itertext()).split()) if keywords is not None else "",
                 published=" ".join("".join(publication_date.itertext()).split())
                 if publication_date is not None
-                else "",
+                else " ".join("".join(lastmod.itertext()).split()) if lastmod is not None else "",
             )
         )
 
     return items
+
+
+def _parse_sitemap_index(xml_text):
+    root = ET.fromstring(xml_text)
+    ns = {
+        "sm": "http://www.sitemaps.org/schemas/sitemap/0.9",
+    }
+    items = []
+
+    for node in root.findall("sm:sitemap", ns):
+        loc = node.find("sm:loc", ns)
+        if loc is None:
+            continue
+        items.append(" ".join("".join(loc.itertext()).split()))
+
+    return items
+
+
+def read_sitemap_url(url, timeout=20):
+    response = _fetch(url, timeout)
+    return _parse_sitemap_entries(response.text)
+
+
+def read_sitemap_index_url(url, timeout=20):
+    response = _fetch(url, timeout)
+    return _parse_sitemap_index(response.text)
+
+
+def _read_sitemap(source_config, timeout):
+    return read_sitemap_url(source_config.feed_url, timeout)
 
 
 def read_feed(source_config, timeout=20):
