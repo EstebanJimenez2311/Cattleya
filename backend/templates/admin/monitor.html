@@ -1,0 +1,75 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}Panel técnico | {{ site_title }}{% endblock %}
+
+{% block content %}
+<div class="module">
+  <h1>Panel técnico</h1>
+  <p>Monitor de operaciones internas y accesos a endpoints de análisis y estadísticas.</p>
+</div>
+
+<div class="dashboard-grid" style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+  <section class="module aligned">
+    <h2>Análisis</h2>
+    <div class="form-row">
+      <div><strong>Total de resultados</strong></div>
+      <div>{{ total_analisis }}</div>
+    </div>
+    <div class="form-row">
+      <div><strong>Última actualización</strong></div>
+      <div>{% if ultima_actualizacion %}{{ ultima_actualizacion }}{% else %}N/A{% endif %}</div>
+    </div>
+    <div class="submit-row" style="margin-top: 1rem;">
+      <a class="default" href="/api/analisis/resultados/" target="_blank">Ver endpoint /api/analisis/resultados/</a>
+    </div>
+  </section>
+
+  <section class="module aligned">
+    <h2>Estadísticas</h2>
+    <div class="form-row">
+      <div><strong>Total noticias</strong></div>
+      <div>{{ total_noticias }}</div>
+    </div>
+    <div class="form-row" style="margin-top: 1rem;">
+      <strong>Conteo por riesgo</strong>
+    </div>
+    <table class="listing" style="width: 100%; margin-top: 0.5rem;">
+      <thead>
+        <tr><th>Riesgo</th><th>Conteo</th></tr>
+      </thead>
+      <tbody>
+        {% for nivel, cantidad in distribucion_riesgo.items %}
+        <tr><td>{{ nivel }}</td><td>{{ cantidad }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="form-row" style="margin-top: 1rem;">
+      <strong>Conteo por ámbito</strong>
+    </div>
+    <table class="listing" style="width: 100%; margin-top: 0.5rem;">
+      <thead>
+        <tr><th>Ámbito</th><th>Conteo</th></tr>
+      </thead>
+      <tbody>
+        {% for ambito, cantidad in distribucion_ambito.items %}
+        <tr><td>{{ ambito }}</td><td>{{ cantidad }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="submit-row" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <a class="default" href="/api/estadisticas/resumen/" target="_blank">Ver /api/estadisticas/resumen/</a>
+      <a class="default" href="/api/estadisticas/tendencia/" target="_blank">Ver /api/estadisticas/tendencia/</a>
+    </div>
+  </section>
+
+  <section class="module aligned">
+    <h2>Operaciones</h2>
+    <p>Ejecuta la carga de análisis desde el admin.</p>
+    <form method="post" style="margin-top: 1rem;">
+      {% csrf_token %}
+      <button type="submit" class="default">Ejecutar cargar_analisis</button>
+    </form>
+  </section>
+</div>
+{% endblock %}
