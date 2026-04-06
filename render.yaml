@@ -1,0 +1,58 @@
+services:
+  - type: web
+    name: cattleya-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: ./scripts/render-start.sh
+    healthCheckPath: /health/
+    plan: free
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: 127.0.0.1,localhost
+      - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        value: ""
+      - key: DJANGO_CORS_ALLOW_ALL_ORIGINS
+        value: "False"
+      - key: DJANGO_CORS_ALLOWED_ORIGINS
+        value: https://cattleya.netlify.app
+      - key: DJANGO_SECURE_SSL_REDIRECT
+        value: "True"
+      - key: DJANGO_SESSION_COOKIE_SECURE
+        value: "True"
+      - key: DJANGO_CSRF_COOKIE_SECURE
+        value: "True"
+      - key: DB_ENGINE
+        value: postgres
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: cattleya-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: cattleya-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: cattleya-db
+          property: password
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: cattleya-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: cattleya-db
+          property: port
+      - key: POSTGRES_SSLMODE
+        value: require
+
+databases:
+  - name: cattleya-db
+    plan: free
