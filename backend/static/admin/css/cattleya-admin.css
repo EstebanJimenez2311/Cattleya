@@ -847,3 +847,24 @@ html[data-theme="dark"] .selector-chosen h2,
 html[data-theme="dark"] .selector-available h2 {
   color: #fff3f8;
 }
+
+.cattleya-remember-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cattleya-remember-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.cattleya-login-copy .help {
+  margin-top: 10px;
+  color: var(--cattleya-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
