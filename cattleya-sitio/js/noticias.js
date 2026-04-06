@@ -8,6 +8,23 @@
 
   const MAX_RENDER = 6;
   const DEBUG = true;
+  const API_BASE_URL = resolveApiBaseUrl();
+
+  function resolveApiBaseUrl() {
+    const runtimeConfig = window.CATTLEYA_CONFIG || {};
+    const configuredBase = String(runtimeConfig.API_BASE_URL || '').trim().replace(/\/+$/, '');
+
+    if (configuredBase) {
+      return configuredBase;
+    }
+
+    const hostname = window.location.hostname;
+    if (hostname === '127.0.0.1' || hostname === 'localhost') {
+      return 'http://127.0.0.1:8000';
+    }
+
+    return '';
+  }
 
   function normalizeText(text) {
     return String(text || '')
@@ -55,7 +72,12 @@
 
       // Fetch directo a la API de Django REST Framework
       // NO usa Netlify Functions serverless
-      const response = await fetch('http://127.0.0.1:8000/api/noticias/recientes/');
+      const endpoint = `${API_BASE_URL}/api/noticias/recientes/`;
+      if (!API_BASE_URL) {
+        throw new Error('API_BASE_URL no configurada');
+      }
+
+      const response = await fetch(endpoint);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
