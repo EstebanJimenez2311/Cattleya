@@ -1,0 +1,282 @@
+[
+  {
+    "model": "noticias.noticia",
+    "pk": 21,
+    "fields": {
+      "titulo": "Mujer denuncia maltrato fisico reiterado en Kennedy",
+      "descripcion": "La victima reporto golpes, amenazas y aislamiento economico despues de varios meses de agresion dentro del hogar.",
+      "contenido": "Comisaria de familia y fiscalia activaron medidas de proteccion para la mujer afectada.",
+      "fecha_publicacion": "2026-02-28T08:10:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/bogota/mujer-denuncia-maltrato-fisico-reiterado-en-kennedy",
+      "ciudad": "Bogota",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 22,
+    "fields": {
+      "titulo": "Investigan abuso sexual contra una mujer en zona rural de Medellin",
+      "descripcion": "Autoridades recopilan testimonios y evidencia luego de una denuncia por violencia sexual ocurrida en una vereda cercana.",
+      "contenido": "La mujer recibio atencion medica y acompanamiento institucional mientras avanza la investigacion.",
+      "fecha_publicacion": "2026-02-27T10:25:00-05:00",
+      "fuente": "El Colombiano",
+      "url": "https://www.elcolombiano.com/medellin/investigan-abuso-sexual-contra-una-mujer-en-zona-rural",
+      "ciudad": "Medellin",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 23,
+    "fields": {
+      "titulo": "Capturan a presunto agresor por ataque con arma blanca a su pareja en Cali",
+      "descripcion": "La victima fue trasladada a un centro asistencial luego de una agresion que fue reportada por vecinos del sector.",
+      "contenido": "La policia judicial recolecta pruebas para avanzar en el proceso penal por tentativa de feminicidio.",
+      "fecha_publicacion": "2026-02-26T12:45:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/cali/capturan-a-presunto-agresor-por-ataque-con-arma-blanca-a-su-pareja",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 24,
+    "fields": {
+      "titulo": "Denuncian violencia psicologica y amenazas contra lideresa en Barranquilla",
+      "descripcion": "La mujer aseguro haber recibido mensajes intimidatorios y seguimiento constante luego de denunciar un caso de maltrato.",
+      "contenido": "Organizaciones sociales pidieron medidas urgentes de proteccion para la lideresa y su familia.",
+      "fecha_publicacion": "2026-02-25T07:50:00-05:00",
+      "fuente": "El Heraldo",
+      "url": "https://www.elheraldo.co/barranquilla/denuncian-violencia-psicologica-y-amenazas-contra-lideresa",
+      "ciudad": "Barranquilla",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 25,
+    "fields": {
+      "titulo": "Investigan feminicidio de una joven en el sur de Cartagena",
+      "descripcion": "Familiares denunciaron antecedentes de agresion y control por parte de la expareja de la victima antes del crimen.",
+      "contenido": "La fiscalia priorizo la investigacion y analisa medidas para proteger a testigos del caso.",
+      "fecha_publicacion": "2026-02-24T18:05:00-05:00",
+      "fuente": "El Universal",
+      "url": "https://www.eluniversal.com.co/cartagena/investigan-feminicidio-de-una-joven-en-el-sur",
+      "ciudad": "Cartagena",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 26,
+    "fields": {
+      "titulo": "Mujer denuncia violencia economica y patrimonial en Bucaramanga",
+      "descripcion": "La victima aseguro que su pareja retenia documentos, dinero y acceso a cuentas bancarias como forma de control.",
+      "contenido": "Las autoridades orientaron a la mujer para activar rutas legales y medidas de proteccion.",
+      "fecha_publicacion": "2026-02-23T09:40:00-05:00",
+      "fuente": "Vanguardia",
+      "url": "https://www.vanguardia.com/area-metropolitana/bucaramanga/mujer-denuncia-violencia-economica-y-patrimonial",
+      "ciudad": "Bucaramanga",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 27,
+    "fields": {
+      "titulo": "Activan ruta de atencion por agresion sexual a mujer en Soacha",
+      "descripcion": "El caso fue conocido por personal de salud que alerto a las autoridades tras detectar signos de violencia sexual.",
+      "contenido": "La mujer ya recibe acompanamiento psicosocial y apoyo juridico especializado.",
+      "fecha_publicacion": "2026-02-22T14:20:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/cundinamarca/activan-ruta-de-atencion-por-agresion-sexual-a-mujer-en-soacha",
+      "ciudad": "Bogota",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 28,
+    "fields": {
+      "titulo": "Denuncian maltrato intrafamiliar contra adulta mayor en Medellin",
+      "descripcion": "Vecinos alertaron sobre agresiones verbales y fisicas cometidas de forma reiterada dentro de la vivienda.",
+      "contenido": "La fiscalia indaga responsabilidades y la victima fue remitida a un hogar de proteccion temporal.",
+      "fecha_publicacion": "2026-02-21T11:15:00-05:00",
+      "fuente": "El Colombiano",
+      "url": "https://www.elcolombiano.com/medellin/denuncian-maltrato-intrafamiliar-contra-adulta-mayor",
+      "ciudad": "Medellin",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 29,
+    "fields": {
+      "titulo": "Aumentan reportes de acoso y agresion contra mujeres en transporte de Cali",
+      "descripcion": "Las victimas reportaron tocamientos, amenazas y maltrato verbal en rutas urbanas durante las horas de la noche.",
+      "contenido": "La alcaldia anuncio refuerzo de vigilancia y acompanamiento a las denunciantes.",
+      "fecha_publicacion": "2026-02-20T16:35:00-05:00",
+      "fuente": "El Pais",
+      "url": "https://www.elpais.com.co/cali/aumentan-reportes-de-acoso-y-agresion-contra-mujeres-en-transporte",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 30,
+    "fields": {
+      "titulo": "Mujer denuncia violencia de pareja y amenazas de muerte en Barranquilla",
+      "descripcion": "La victima afirmo que el agresor incumplio medidas de alejamiento y continuo con hostigamientos despues de la denuncia.",
+      "contenido": "Se solicito captura del presunto agresor mientras la mujer permanece bajo proteccion.",
+      "fecha_publicacion": "2026-02-19T13:10:00-05:00",
+      "fuente": "El Heraldo",
+      "url": "https://www.elheraldo.co/judicial/mujer-denuncia-violencia-de-pareja-y-amenazas-de-muerte",
+      "ciudad": "Barranquilla",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 31,
+    "fields": {
+      "titulo": "Capturan a hombre por abuso y maltrato contra su expareja en Cartagena",
+      "descripcion": "La fiscalia imputo cargos luego de recopilar evidencia sobre agresiones fisicas y control economico contra la victima.",
+      "contenido": "La victima recibio apoyo de medicina legal y orientacion por parte de la comisaria de familia.",
+      "fecha_publicacion": "2026-02-18T17:55:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/cartagena/capturan-a-hombre-por-abuso-y-maltrato-contra-su-expareja",
+      "ciudad": "Cartagena",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 32,
+    "fields": {
+      "titulo": "Investigan ataque con combustible contra una mujer en Bucaramanga",
+      "descripcion": "La victima sufrio lesiones graves en un hecho que es investigado como violencia feminicida por las autoridades.",
+      "contenido": "Fiscalia y policia judicial realizan busqueda del responsable mientras avanza la atencion a la mujer.",
+      "fecha_publicacion": "2026-02-17T06:30:00-05:00",
+      "fuente": "Vanguardia",
+      "url": "https://www.vanguardia.com/judicial/investigan-ataque-con-combustible-contra-una-mujer",
+      "ciudad": "Bucaramanga",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 33,
+    "fields": {
+      "titulo": "Mujer denuncia agresion y hostigamiento en entorno laboral en Bogota",
+      "descripcion": "La trabajadora aseguro haber sido victima de maltrato verbal, acoso y represalias despues de rechazar insinuaciones.",
+      "contenido": "El caso fue remitido a inspeccion laboral y a la ruta institucional de atencion a mujeres.",
+      "fecha_publicacion": "2026-02-16T09:00:00-05:00",
+      "fuente": "El Espectador",
+      "url": "https://www.elespectador.com/bogota/mujer-denuncia-agresion-y-hostigamiento-en-entorno-laboral",
+      "ciudad": "Bogota",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 34,
+    "fields": {
+      "titulo": "Intento de feminicidio en Soledad deja a una mujer en estado critico",
+      "descripcion": "Familiares denunciaron antecedentes de violencia fisica y amenazas por parte de la pareja sentimental de la victima.",
+      "contenido": "La policia anuncio operativos para ubicar al agresor y reforzar la proteccion a la familia.",
+      "fecha_publicacion": "2026-02-15T20:10:00-05:00",
+      "fuente": "Zona Cero",
+      "url": "https://zonacero.com/judicial/intento-de-feminicidio-en-soledad-deja-a-una-mujer-en-estado-critico",
+      "ciudad": "Barranquilla",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 35,
+    "fields": {
+      "titulo": "Denuncian violencia sexual contra estudiante universitaria en Medellin",
+      "descripcion": "El caso genero protestas y llamados para reforzar protocolos de prevencion y atencion a victimas dentro del campus.",
+      "contenido": "La universidad activo ruta interna y acompana a la estudiante en el proceso judicial.",
+      "fecha_publicacion": "2026-02-14T15:40:00-05:00",
+      "fuente": "El Colombiano",
+      "url": "https://www.elcolombiano.com/medellin/denuncian-violencia-sexual-contra-estudiante-universitaria",
+      "ciudad": "Medellin",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 36,
+    "fields": {
+      "titulo": "Mujer reporta maltrato economico y amenazas tras separacion en Cali",
+      "descripcion": "La victima dijo que su expareja sigue controlando deudas, documentos y transferencias para impedir su autonomia.",
+      "contenido": "Defensoria y comisaria brindan acompanamiento mientras se define una orden de alejamiento.",
+      "fecha_publicacion": "2026-02-13T08:35:00-05:00",
+      "fuente": "El Pais",
+      "url": "https://www.elpais.com.co/cali/mujer-reporta-maltrato-economico-y-amenazas-tras-separacion",
+      "ciudad": "Cali",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 37,
+    "fields": {
+      "titulo": "Fiscalia investiga abuso sexual y agresion fisica contra mujer en Barrancabermeja",
+      "descripcion": "La denuncia describe un ataque ocurrido despues de una reunion familiar y activa atencion especializada para la victima.",
+      "contenido": "El caso fue priorizado por la fiscalia seccional por el alto nivel de riesgo identificado.",
+      "fecha_publicacion": "2026-02-12T19:15:00-05:00",
+      "fuente": "Vanguardia",
+      "url": "https://www.vanguardia.com/judicial/fiscalia-investiga-abuso-sexual-y-agresion-fisica-contra-mujer",
+      "ciudad": "Bucaramanga",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 38,
+    "fields": {
+      "titulo": "Capturan a presunto agresor por violencia intrafamiliar en Bosa",
+      "descripcion": "La victima denuncio golpes, insultos y destruccion de bienes despues de una nueva agresion en su vivienda.",
+      "contenido": "La policia informo que el capturado tenia antecedentes por violencia de pareja.",
+      "fecha_publicacion": "2026-02-11T07:05:00-05:00",
+      "fuente": "El Tiempo",
+      "url": "https://www.eltiempo.com/bogota/capturan-a-presunto-agresor-por-violencia-intrafamiliar-en-bosa",
+      "ciudad": "Bogota",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 39,
+    "fields": {
+      "titulo": "Denuncian acoso persistente y maltrato psicologico contra periodista en Cartagena",
+      "descripcion": "La comunicadora afirmo haber recibido amenazas y hostigamiento digital despues de publicar una investigacion.",
+      "contenido": "La fundacion para la libertad de prensa pidio medidas de proteccion y celeridad en la investigacion.",
+      "fecha_publicacion": "2026-02-10T12:00:00-05:00",
+      "fuente": "El Universal",
+      "url": "https://www.eluniversal.com.co/cartagena/denuncian-acoso-persistente-y-maltrato-psicologico-contra-periodista",
+      "ciudad": "Cartagena",
+      "verificada": false
+    }
+  },
+  {
+    "model": "noticias.noticia",
+    "pk": 40,
+    "fields": {
+      "titulo": "Investigan feminicidio de una mujer en zona rural de Bucaramanga",
+      "descripcion": "Las autoridades indagan denuncias previas por maltrato y amenazas en un caso que genera alarma por la falta de proteccion.",
+      "contenido": "La familia de la victima exige justicia y mejores rutas de prevencion para otras mujeres en riesgo.",
+      "fecha_publicacion": "2026-02-09T18:45:00-05:00",
+      "fuente": "Caracol Radio",
+      "url": "https://caracol.com.co/santander/investigan-feminicidio-de-una-mujer-en-zona-rural-de-bucaramanga",
+      "ciudad": "Bucaramanga",
+      "verificada": false
+    }
+  }
+]

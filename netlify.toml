@@ -1,0 +1,9 @@
+[build]
+  publish = "cattleya-sitio"
+  # functions = "cattleya-sitio/netlify/functions"  # Deshabilitado - ahora usamos backend Django
+
+[[headers]]
+  # for = "/.netlify/functions/*"  # Deshabilitado - no usamos serverless functions
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

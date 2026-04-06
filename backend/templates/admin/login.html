@@ -1,0 +1,17 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+<div class="cattleya-login-shell">
+  <section class="cattleya-login-copy">
+    <p class="cattleya-kicker">Acceso seguro</p>
+    <h1>Cattleya Admin</h1>
+    <p>
+      Ingresa al panel interno para gestionar fuentes, revisar noticias y mantener consistente la operacion del proyecto.
+    </p>
+  </section>
+
+  <section class="cattleya-login-card">
+    {{ block.super }}
+  </section>
+</div>
+{% endblock %}

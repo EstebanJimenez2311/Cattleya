@@ -1,0 +1,110 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div class="cattleya-dashboard-shell">
+  <section class="dashboard-grid">
+    <div class="cattleya-dashboard-left">
+      <article class="cattleya-admin-hero">
+        <div class="cattleya-admin-hero__content">
+          <div>
+            <p class="cattleya-kicker">Dashboard interno</p>
+            <h2>Centro de control de Cattleya</h2>
+            <p class="cattleya-admin-hero__lead">
+              Administra noticias, revisa casos y pulso editorial.
+            </p>
+          </div>
+
+          <div class="cattleya-admin-hero__ornament" aria-hidden="true">
+            <img class="cattleya-admin-hero__logo cattleya-admin-hero__logo--light" src="{% static 'admin/img/cattleya-logo-light.png' %}" alt="">
+            <img class="cattleya-admin-hero__logo cattleya-admin-hero__logo--dark" src="{% static 'admin/img/cattleya-logo-dark.png' %}" alt="">
+          </div>
+
+          <div class="cattleya-admin-hero__footer">
+            <div class="cattleya-admin-hero__pill">
+              <strong>{{ cattleya_admin_summary.total_noticias }}</strong>
+              <span>registros activos</span>
+            </div>
+
+            <nav class="cattleya-admin-module-links" aria-label="Enlaces rapidos a modulos">
+              <a href="#cattleya-modulos">Auth</a>
+              <span>&middot;</span>
+              <a href="#cattleya-modulos">Noticias</a>
+              <span>&middot;</span>
+              <a href="#cattleya-modulos">Casos</a>
+              <span>&middot;</span>
+              <a href="#cattleya-modulos">Fuentes</a>
+            </nav>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <section class="col-main cattleya-dashboard-center">
+      <div class="metrics-grid cattleya-dashboard-quickstats">
+        {% for metric in cattleya_admin_metrics %}
+        <article class="cattleya-quickstat">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+        </article>
+        {% endfor %}
+      </div>
+
+      <article class="cattleya-admin-sidecard">
+        <p class="cattleya-kicker">Vista rapida</p>
+        <h2>Ritmo editorial</h2>
+        <p>
+          {{ cattleya_admin_summary.verificadas }} casos verificados listos para seguimiento y contexto en el panel.
+        </p>
+      </article>
+
+      <section class="cattleya-admin-panel cattleya-admin-panel--compact" id="cattleya-modulos">
+        <div class="cattleya-admin-panel__header">
+          <div>
+            <p class="cattleya-kicker">Modulos</p>
+            <h2>Gestion del sistema</h2>
+          </div>
+        </div>
+
+        <div class="cattleya-module-table">
+          {% for app in app_list %}
+          <div class="cattleya-module-row">
+            <div class="cattleya-module-row__name">{{ app.name }}</div>
+            <div class="cattleya-module-row__actions">
+              {% for model in app.models %}
+                {% if model.admin_url %}
+                <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                {% else %}
+                <span>{{ model.name }}</span>
+                {% endif %}
+                {% if model.add_url %}
+                <a href="{{ model.add_url }}">Agregar</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    </section>
+
+    <aside class="cattleya-dashboard-right">
+      <nav class="cattleya-admin-actions" aria-label="Accesos rapidos">
+        <a class="cattleya-admin-action" href="/" target="_blank" rel="noopener noreferrer">Ver sitio</a>
+        <a class="cattleya-admin-action" href="/admin/monitor/">Panel técnico</a>
+        <a class="cattleya-admin-action" href="{% url 'admin:password_change' %}">Cambiar contrasena</a>
+        <a class="cattleya-admin-action" href="#cattleya-modulos">Modulos del sistema</a>
+      </nav>
+
+      <div class="cattleya-admin-logo-panel cattleya-admin-logo-panel--sidebar" aria-hidden="true">
+        <div class="cattleya-admin-logo-panel__inner">
+          <img class="cattleya-admin-sidebar-logo cattleya-admin-sidebar-logo--light" src="{% static 'admin/img/cattleya-logo-light.png' %}" alt="">
+          <img class="cattleya-admin-sidebar-logo cattleya-admin-sidebar-logo--dark" src="{% static 'admin/img/cattleya-logo-dark.png' %}" alt="">
+        </div>
+      </div>
+    </aside>
+  </section>
+</div>
+{% endblock %}
