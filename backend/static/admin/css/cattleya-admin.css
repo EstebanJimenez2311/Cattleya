@@ -641,6 +641,10 @@ select:focus {
   background: transparent;
 }
 
+.dashboard-grid .listing {
+  width: 100%;
+}
+
 @media (max-width: 900px) {
   .dashboard-grid,
   .cattleya-admin-panel__header,
@@ -674,11 +678,264 @@ select:focus {
     padding: 20px 16px;
     overflow: visible;
   }
+
+  .cattleya-toolbar {
+    display: none;
+  }
+
+  #header {
+    padding: 14px 16px;
+  }
+
+  #branding {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+
+  #user-tools {
+    float: none;
+    width: 100%;
+    margin-top: 12px;
+    text-align: left;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .cattleya-branding {
+    align-items: flex-start;
+  }
+
+  .cattleya-branding__copy h1 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .cattleya-admin-actions {
+    gap: 10px;
+  }
+
+  .cattleya-admin-action {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .cattleya-admin-panel--compact,
+  .cattleya-admin-sidecard,
+  .cattleya-metric-card,
+  .module,
+  .inline-group,
+  #changelist-filter,
+  .results,
+  #content-related {
+    border-radius: 16px;
+  }
+
+  .cattleya-admin-panel__header {
+    gap: 8px;
+  }
+
+  .cattleya-admin-panel__header h2,
+  .cattleya-admin-sidecard h2 {
+    font-size: 1.2rem;
+  }
+
+  .cattleya-admin-hero {
+    padding: 18px;
+  }
+
+  .cattleya-admin-hero__content {
+    gap: 14px;
+  }
+
+  .cattleya-admin-hero__ornament {
+    min-height: 24px;
+  }
+
+  .cattleya-admin-hero__logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .cattleya-admin-hero__pill {
+    width: 100%;
+    padding: 14px 16px;
+  }
+
+  .cattleya-admin-hero__pill strong,
+  .cattleya-quickstat strong,
+  .cattleya-metric-card strong {
+    font-size: 1.7rem;
+  }
+
+  .cattleya-admin-sidebar-logo {
+    width: 96px;
+    height: 96px;
+  }
+
+  #nav-sidebar {
+    width: 100%;
+  }
+
+  #changelist {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  #changelist-filter {
+    position: static;
+    width: 100%;
+    margin: 0;
+  }
+
+  #changelist .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  #changelist .actions label,
+  #changelist .actions select,
+  #changelist .actions button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .object-tools {
+    float: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding: 0;
+  }
+
+  .object-tools li {
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
+
+  .object-tools a,
+  .object-tools form,
+  .object-tools .button,
+  .object-tools input[type="submit"],
+  .object-tools button {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .results {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .results table,
+  .listing {
+    min-width: 640px;
+  }
+
+  .submit-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submit-row input,
+  .submit-row a,
+  .submit-row button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .aligned .form-row,
+  form .aligned div,
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .selector {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 @media (max-width: 640px) {
+  #content {
+    padding: 16px 12px;
+  }
+
+  .cattleya-branding {
+    gap: 10px;
+  }
+
+  .cattleya-branding__mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 1.15rem;
+  }
+
+  .cattleya-login-copy,
+  .login #content,
+  .cattleya-admin-panel--compact,
+  .cattleya-admin-sidecard,
+  .cattleya-metric-card,
+  .module {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .cattleya-login-shell {
+    gap: 18px;
+    margin-top: 14px;
+  }
+
+  .metrics-grid,
   .cattleya-dashboard-quickstats {
     grid-template-columns: 1fr;
+  }
+
+  .cattleya-module-row {
+    padding: 10px 0;
+  }
+
+  .cattleya-module-row__actions {
+    gap: 8px;
+    font-size: 0.92rem;
+  }
+
+  .results table,
+  .listing {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 420px) {
+  .cattleya-admin-hero h1,
+  .cattleya-admin-hero h2,
+  .cattleya-login-copy h1 {
+    font-size: 1.7rem;
+  }
+
+  .button,
+  input[type="submit"],
+  input[type="button"],
+  .submit-row input,
+  a.button {
+    padding: 11px 14px;
+    font-size: 0.92rem;
+  }
+
+  #user-tools {
+    font-size: 0.78rem;
   }
 }
 
