@@ -6,68 +6,315 @@
   <title>Yo Decido - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+
+    /* ══════════════════════════════════════════════
+       SECCIÓN 1 — ENTREGABLES (Estilo Behance)
+    ══════════════════════════════════════════════ */
+
     .entregables-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
+      /* columnas auto-ajustables con tarjetas más amplias */
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 28px;
+      margin-top: 0;
     }
+
+    @media (min-width: 1100px) {
+      .card--featured {
+        grid-column: span 2;
+      }
+    }
+
+    .card--featured .entregable-card__preview {
+      aspect-ratio: 2 / 1;
+    }
+
+    /* Tarjeta contenedor — posición relative para el overlay */
     .entregable-card {
-      background: var(--blanco);
-      border: 2px solid var(--crema);
+      position: relative;
       border-radius: 20px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: border-color 0.3s, transform 0.3s;
+      overflow: hidden;
+      background: var(--blanco);
+      box-shadow: 0 4px 24px rgba(139, 36, 103, 0.08);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.35s ease;
+      cursor: pointer;
     }
+
     .entregable-card:hover {
-      border-color: var(--magenta);
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 44px rgba(139, 36, 103, 0.18);
     }
+
+    /* ── Vista previa / imagen superior ── */
+    .entregable-card__preview {
+      /* Relación de aspecto fija 16:9 para todas las tarjetas */
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--magenta), var(--purpura));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Imagen real cuando esté disponible — mantiene aspect-ratio */
+    .entregable-card__preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .entregable-card:hover .entregable-card__preview img {
+      transform: scale(1.05);
+    }
+
+    /* Ícono decorativo de fondo cuando no hay imagen */
+    .entregable-card__preview-icon {
+      font-size: 3.5rem;
+      opacity: 0.35;
+      user-select: none;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .entregable-card:hover .entregable-card__preview-icon {
+      opacity: 0.55;
+      transform: scale(1.1);
+    }
+
+    /* Badge de tipo — sobre la imagen */
     .entregable-card__tipo {
-      display: inline-block;
-      background: var(--crema);
-      color: var(--magenta);
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--blanco);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       padding: 4px 12px;
       border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .entregable-card__estado {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--blanco);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      width: fit-content;
+      z-index: 2;
     }
+
+    /* ── Overlay con degradado — aparece en hover ── */
+    .entregable-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(61, 15, 42, 0.92) 0%,
+        rgba(130, 33, 87, 0.7)  45%,
+        transparent             75%
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 3;
+    }
+
+    .entregable-card:hover .entregable-card__overlay {
+      opacity: 1;
+    }
+
+    .entregable-card__overlay-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blanco);
+      margin-bottom: 6px;
+      line-height: 1.3;
+      transform: translateY(8px);
+      transition: transform 0.35s ease 0.05s;
+    }
+
+    .entregable-card:hover .entregable-card__overlay-title {
+      transform: translateY(0);
+    }
+
+    .entregable-card__overlay-desc {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.55;
+      margin-bottom: 14px;
+      transform: translateY(8px);
+      transition: transform 0.35s ease 0.08s;
+    }
+
+    .entregable-card:hover .entregable-card__overlay-desc {
+      transform: translateY(0);
+    }
+
+    /* ── Área inferior (siempre visible) — título + botón ── */
+    .entregable-card__body {
+      padding: 18px 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--blanco);
+    }
+
     .entregable-card__title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--purpura);
-    }
-    .entregable-card__desc {
-      font-size: 0.88rem;
-      color: var(--carbon);
-      opacity: 0.7;
-      line-height: 1.6;
+      line-height: 1.3;
       flex: 1;
     }
+
+    /* Botón de descarga */
     .btn-download {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: var(--crema);
       color: var(--magenta);
-      padding: 10px 20px;
+      padding: 8px 16px;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      transition: background 0.2s, color 0.2s;
-      width: fit-content;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      flex-shrink: 0;
     }
+
     .btn-download:hover {
       background: var(--magenta);
       color: var(--blanco);
+      transform: translateY(-1px);
     }
+
+
+    /* ══════════════════════════════════════════════
+       SECCIÓN 2 — FUENTES DE DATOS (Logos)
+    ══════════════════════════════════════════════ */
+
+    /* Grid flexible y simétrico */
+    .logos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 0;
+    }
+
+    /* Tarjeta de logo */
+    .logo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      background: var(--blanco);
+      border-radius: 20px;
+      padding: 32px 28px 24px;
+      border: 1.5px solid rgba(157, 45, 106, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      /* Ancho base — se ajusta automáticamente */
+      flex: 1 1 220px;
+      max-width: 260px;
+      text-align: center;
+    }
+
+    .logo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 40px rgba(139, 36, 103, 0.14);
+      border-color: rgba(157, 45, 106, 0.25);
+    }
+
+    /* Contenedor circular/cuadrado para el logo */
+    .logo-card__icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      background: #f5f0f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .logo-card:hover .logo-card__icon-wrap {
+      background: #ede3eb;
+    }
+
+    /* Imagen del logo — escala de grises por defecto */
+    .logo-card__icon-wrap img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      /* Escala de grises al 100% por defecto */
+      filter: grayscale(100%) opacity(0.6);
+      transition: filter 0.35s ease, transform 0.3s ease;
+    }
+
+    /* Al hover recupera el color original */
+    .logo-card:hover .logo-card__icon-wrap img {
+      filter: grayscale(0%) opacity(1);
+      transform: scale(1.08);
+    }
+
+    /* Placeholder de texto cuando no hay imagen */
+    .logo-card__icon-placeholder {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--magenta);
+      font-family: 'Playfair Display', serif;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .logo-card:hover .logo-card__icon-placeholder {
+      opacity: 1;
+    }
+
+    .logo-card__title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--purpura);
+      line-height: 1.3;
+    }
+
+    .logo-card__text {
+      font-size: 0.82rem;
+      color: var(--carbon);
+      opacity: 0.65;
+      line-height: 1.6;
+    }
+
   </style>
   <script src="components/index.js"></script>
 </head>
@@ -75,6 +322,7 @@
 
   <cat-navbar active="cattleya"></cat-navbar>
 
+  <!-- ══ HERO — NO MODIFICAR ══ -->
   <cat-page-hero
     letter="Y"
     position="Septima"
@@ -82,85 +330,226 @@
     subtitle="Empoderamiento a traves de la informacion. Aqui puedes acceder a todos los entregables del proyecto y los datos originales.">
   </cat-page-hero>
 
+
+  <!-- ══════════════════════════════════════════════════
+       SECCIÓN 1: ENTREGABLES — Diseño Portafolio Visual
+  ══════════════════════════════════════════════════ -->
   <div class="section">
     <span class="section-label">Entregables del proyecto</span>
     <h2 class="section-title">Documentacion completa</h2>
     <p class="section-subtitle">Todos los documentos requeridos para la sustentacion del proyecto de grado.</p>
 
     <cat-surface padding="24px" radius="24px">
-    <div class="entregables-grid" style="margin-top:0;">
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Informe</span>
-        <div class="entregable-card__title">Informe de Tratamiento de Datos</div>
-        <div class="entregable-card__desc">Proceso de limpieza, transformacion y preparacion del dataset gubernamental. Incluye descripcion de variables, manejo de valores nulos y criterios de calidad.</div>
-        <a href="#" class="btn-download">Descargar PDF</a>
-      </div>
+      <div class="entregables-grid">
 
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Informe</span>
-        <div class="entregable-card__title">Informe de Analisis</div>
-        <div class="entregable-card__desc">Resultados del analisis descriptivo, inferencial y del modelo de machine learning. Conclusiones y recomendaciones basadas en los datos.</div>
-        <a href="#" class="btn-download">Descargar PDF</a>
-      </div>
+        <!--
+          ╔══════════════════════════════════════════════╗
+          ║  TARJETA DE ENTREGABLE — DUPLICA ESTE BLOQUE  ║
+          ║  para agregar más entregables al portafolio   ║
+          ╚══════════════════════════════════════════════╝
 
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Codigo</span>
-        <div class="entregable-card__title">Notebook EDA - Jupyter</div>
-        <div class="entregable-card__desc">Codigo Python completo con el analisis exploratorio de datos, visualizaciones, estadistica descriptiva e inferencial.</div>
-        <a href="#" class="btn-download">Descargar .ipynb</a>
-      </div>
+          Instrucciones:
+          1. Copia el bloque completo <article class="entregable-card"> … </article>
+          2. Cambia: data-tipo, preview (color o <img src="">), title, desc, href y texto del botón
+          3. Colores de preview sugeridos:
+             - Informes:   linear-gradient(135deg, var(--magenta), var(--purpura))
+             - Código:     linear-gradient(135deg, #1e1b2e, #3d1a2e)
+             - Datos:      linear-gradient(135deg, var(--naranja), #d4700a)
+             - Web/GitHub: linear-gradient(135deg, var(--carbon), #1a1a2e)
+        -->
 
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Codigo</span>
-        <div class="entregable-card__title">Notebook Machine Learning</div>
-        <div class="entregable-card__desc">Modelo predictivo entrenado, metricas de evaluacion, matriz de confusion y analisis de importancia de variables.</div>
-        <a href="#" class="btn-download">Descargar .ipynb</a>
-      </div>
+        <!-- TARJETA 1 — Informe de Análisis Final (Featured) -->
+        <article class="entregable-card card--featured">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, var(--purpura), #3d0a28);">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/informe-analisis-final.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">📘</span>
+            <span class="entregable-card__tipo">Informe</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">Informe de Análisis Final</div>
+              <div class="entregable-card__overlay-desc">Integra análisis descriptivo, inferencial y hallazgos profundos de la Fiscalía para consolidar conclusiones y recomendaciones estratégicas.</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">Informe de Análisis Final</div>
+            <a href="#" class="btn-download" target="_blank">Ver Informe →</a>
+          </div>
+        </article>
 
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Datos</span>
-        <div class="entregable-card__title">Dataset Procesado</div>
-        <div class="entregable-card__desc">Dataset limpio y procesado listo para analisis. Fuente: datos gubernamentales de Colombia (fuente original publica).</div>
-        <a href="#" class="btn-download">Descargar CSV</a>
-      </div>
+        <!-- TARJETA 2 — Dashboard Power BI (Featured) -->
+        <article class="entregable-card card--featured">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, #F2C811, #D8A800);">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/dashboard-powerbi.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">📊</span>
+            <span class="entregable-card__tipo">Dashboard</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">Análisis de Datos Interactivo</div>
+              <div class="entregable-card__overlay-desc">Visualización dinámica de indicadores de violencia de género, tendencias territoriales y perfiles de víctimas extraídos del dataset oficial procesado.</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">Dashboard Power BI</div>
+            <a href="https://app.powerbi.com/" class="btn-download" target="_blank">Ver Reporte →</a>
+          </div>
+        </article>
 
-      <div class="entregable-card">
-        <span class="entregable-card__tipo">Web</span>
-        <div class="entregable-card__title">Codigo Fuente del Sitio</div>
-        <div class="entregable-card__desc">Repositorio completo del sitio web CATTLEYA. HTML, CSS, JS y todos los assets utilizados en el proyecto.</div>
-        <a href="https://github.com" class="btn-download" target="_blank">Ver en GitHub &rarr;</a>
+        <!-- TARJETA 3 — EDA Medicina Legal -->
+        <article class="entregable-card">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, #1e1b2e, #4a2060);">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/eda-medicina-legal.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">🧪</span>
+            <span class="entregable-card__tipo">EDA</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">EDA Medicina Legal</div>
+              <div class="entregable-card__overlay-desc">Exploración estadística y visual de patrones de violencia de género con foco en variables críticas y comportamiento territorial.</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">EDA Medicina Legal</div>
+            <a href="https://rpubs.com/sharon_2wqw/1417797" class="btn-download" target="_blank">Ver EDA →</a>
+          </div>
+        </article>
+
+        <!-- TARJETA 4 — Notebooks de Limpieza -->
+        <article class="entregable-card">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, var(--magenta), var(--purpura));">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/notebooks-limpieza.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">🧹</span>
+            <span class="entregable-card__tipo">Código</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">Notebooks de Limpieza</div>
+              <div class="entregable-card__overlay-desc">Pipeline de preparación de datos: depuración, tratamiento de nulos, estandarización y validaciones de calidad.</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">Notebooks de Limpieza</div>
+            <a href="#" class="btn-download" target="_blank">Ver Notebooks →</a>
+          </div>
+        </article>
+
+        <!-- TARJETA 5 — Notebook Machine Learning -->
+        <article class="entregable-card">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, #0d1b2a, #1e3a5f);">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/notebook-ml.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">🤖</span>
+            <span class="entregable-card__tipo">Machine Learning</span>
+            <span class="entregable-card__estado">En Revisión</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">Notebook Machine Learning</div>
+              <div class="entregable-card__overlay-desc">Modelo predictivo con métricas de evaluación, matriz de confusión e interpretación de variables relevantes.</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">Notebook Machine Learning</div>
+            <a href="#" class="btn-download" target="_blank">Ver Modelo →</a>
+          </div>
+        </article>
+
+        <!-- TARJETA 6 — Repositorio del Proyecto -->
+        <article class="entregable-card">
+          <div class="entregable-card__preview"
+               style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+            <!-- Reemplaza el ícono por: <img src="assets/previews/github.png" alt="Vista previa"> -->
+            <span class="entregable-card__preview-icon">💻</span>
+            <span class="entregable-card__tipo">Repositorio</span>
+            <div class="entregable-card__overlay">
+              <div class="entregable-card__overlay-title">Repositorio del Proyecto</div>
+              <div class="entregable-card__overlay-desc">Código fuente del sitio y componentes técnicos del proyecto CATTLEYA (HTML, CSS, JS y assets).</div>
+            </div>
+          </div>
+          <div class="entregable-card__body">
+            <div class="entregable-card__title">Repositorio del Proyecto</div>
+            <a href="https://github.com" class="btn-download" target="_blank">GitHub →</a>
+          </div>
+        </article>
+
+        <!-- ═══ FIN DEL BLOQUE DUPLICABLE ═══ -->
+
       </div>
-    </div>
     </cat-surface>
   </div>
 
+
+  <!-- ══════════════════════════════════════════════════
+       SECCIÓN 2: FUENTES DE DATOS — Logos de Transparencia
+  ══════════════════════════════════════════════════ -->
   <div class="section--bg">
     <div class="section__inner">
       <span class="section-label">Transparencia</span>
       <h2 class="section-title">Fuentes de los datos</h2>
       <p class="section-subtitle">Todos los datos utilizados provienen de fuentes gubernamentales publicas y verificables.</p>
+
       <cat-surface padding="24px" radius="24px">
-      <div class="cards-grid" style="margin-top: 0;">
-        <div class="card">
-          <div class="card__icon">1</div>
-          <div class="card__title">Fuente 1 - [Nombre entidad]</div>
-          <div class="card__text">Descripcion de la base de datos utilizada, ano de publicacion y enlace de acceso publico. Reemplaza con la fuente real.</div>
+        <div class="logos-grid">
+
+          <!--
+            ╔══════════════════════════════════════════════╗
+            ║  TARJETA DE FUENTE — DUPLICA ESTE BLOQUE      ║
+            ║  para agregar más fuentes/logos               ║
+            ╚══════════════════════════════════════════════╝
+
+            Instrucciones:
+            1. Copia el bloque completo <div class="logo-card"> … </div>
+            2. Reemplaza <img src=""> con la ruta real del logo
+            3. Si no tienes imagen, usa el placeholder de texto
+            4. El filtro grayscale se aplica automáticamente por CSS
+               y recupera el color al hacer hover — no requiere JS
+          -->
+
+          <!-- FUENTE 1 — Entidad gubernamental principal -->
+          <div class="logo-card">
+            <div class="logo-card__icon-wrap">
+              <!--
+                Opción A — Logo real:
+                <img src="assets/logos/nombre-entidad.png" alt="Nombre Entidad">
+
+                Opción B — Placeholder hasta tener el logo:
+              -->
+              <span class="logo-card__icon-placeholder">1</span>
+            </div>
+            <div class="logo-card__title">Fuente 1 — [Nombre entidad]</div>
+            <div class="logo-card__text">Descripcion de la base de datos, año de publicacion y enlace de acceso publico.</div>
+          </div>
+
+          <!-- FUENTE 2 — Segunda entidad -->
+          <div class="logo-card">
+            <div class="logo-card__icon-wrap">
+              <!--
+                Reemplaza con:
+                <img src="assets/logos/nombre-entidad-2.png" alt="Nombre Entidad 2">
+              -->
+              <span class="logo-card__icon-placeholder">2</span>
+            </div>
+            <div class="logo-card__title">Fuente 2 — [Nombre entidad]</div>
+            <div class="logo-card__text">Segunda fuente de datos. Agrega todas las que utilizaron en el analisis.</div>
+          </div>
+
+          <!-- FUENTE 3 — Marco teórico / bibliografía -->
+          <div class="logo-card">
+            <div class="logo-card__icon-wrap">
+              <!--
+                Reemplaza con:
+                <img src="assets/logos/marco-teorico.png" alt="Marco Teórico">
+              -->
+              <span class="logo-card__icon-placeholder">B</span>
+            </div>
+            <div class="logo-card__title">Marco teórico</div>
+            <div class="logo-card__text">Referencias bibliograficas para el contexto legal y conceptual del proyecto.</div>
+          </div>
+
+          <!-- ═══ FIN DEL BLOQUE DUPLICABLE ═══ -->
+
         </div>
-        <div class="card">
-          <div class="card__icon">2</div>
-          <div class="card__title">Fuente 2 - [Nombre entidad]</div>
-          <div class="card__text">Segunda fuente de datos. Agrega todas las que utilizaron en el analisis.</div>
-        </div>
-        <div class="card">
-          <div class="card__icon">B</div>
-          <div class="card__title">Marco teorico</div>
-          <div class="card__text">Referencias bibliograficas utilizadas para el contexto legal y conceptual del proyecto.</div>
-        </div>
-      </div>
       </cat-surface>
     </div>
   </div>
 
+
+  <!-- ══ NAVEGACIÓN INFERIOR — NO MODIFICAR ══ -->
   <div style="max-width:1200px; margin: 0 auto; padding: 40px; display: flex; justify-content: space-between;">
     <a href="equipo.html" class="btn-outline" style="border-color: var(--magenta); color: var(--magenta);">&larr; Equipo</a>
     <a href="alertas.html" class="btn-primary">Alertas &rarr;</a>
