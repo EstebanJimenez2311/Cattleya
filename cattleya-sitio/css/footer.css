@@ -192,7 +192,7 @@
 }
 
 .footer-logo-text {
-  color: var(--white);
+  color: #F28C28;
   font-size: 16px;
   font-weight: 600;
 }
@@ -200,7 +200,7 @@
 .footer-description {
   font-size: 13px;
   line-height: 1.75;
-  color: rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.78);
   margin-bottom: 22px;
 }
 
@@ -215,6 +215,7 @@
   border-radius: 50%;
   background: none;
   border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.78);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,7 +224,7 @@
 }
 
 .social-icon:hover {
-  border-color: var(--accent);
+  border-color: #F28C28;
   background: rgba(246,135,29,0.14);
   transform: translateY(-2px);
 }
@@ -231,14 +232,14 @@
 .footer-col h4 {
   font-size: 14px;
   font-weight: 600;
-  color: var(--white);
+  color: #F28C28;
   margin-bottom: 18px;
 }
 
 .footer-col a {
   display: block;
   font-size: 13px;
-  color: rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.78);
   text-decoration: none;
   margin-bottom: 10px;
   transition: color 0.28s, transform 0.28s;
@@ -258,7 +259,7 @@
 }
 
 .footer-col a:hover {
-  color: var(--accent);
+  color: #F28C28;
   transform: translateX(6px);
 }
 
@@ -281,7 +282,7 @@
 
 .footer-bottom p {
   font-size: 12px;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.62);
 }
 
 .footer-bottom-links {
@@ -291,13 +292,13 @@
 
 .footer-bottom-links a {
   font-size: 12px;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.62);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .footer-bottom-links a:hover {
-  color: rgba(255,255,255,0.65);
+  color: #F28C28;
 }
 
 @media (max-width: 768px) {
