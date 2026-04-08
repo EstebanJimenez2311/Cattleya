@@ -2,12 +2,13 @@
 //  CATTLEYA - JS Global
 // ============================================
 
-// Reveal shared content blocks when they enter the viewport.
-const revealTargets = document.querySelectorAll(
-  '.fade-up, .fade-up-slow, .fade-left, .fade-right, .section-title, .stat-card, .card, .acronimo__item, .chart-container, .entregable-card, .linea-card'
-);
+function initRevealAnimations() {
+  const revealTargets = document.querySelectorAll(
+    '.fade-up, .fade-up-slow, .fade-left, .fade-right, .section-title, .stat-card, .card, .acronimo__item, .chart-container, .entregable-card, .linea-card'
+  );
 
-if (revealTargets.length) {
+  if (!revealTargets.length) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -34,6 +35,8 @@ if (revealTargets.length) {
   }, { threshold: 0.12 });
 
   revealTargets.forEach((el) => {
+    if (el.dataset.revealBound === 'true') return;
+
     const usesClassAnimation =
       el.classList.contains('fade-up') ||
       el.classList.contains('fade-up-slow') ||
@@ -47,6 +50,15 @@ if (revealTargets.length) {
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     }
 
+    el.dataset.revealBound = 'true';
     observer.observe(el);
   });
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initRevealAnimations);
+} else {
+  initRevealAnimations();
+}
+
+window.addEventListener('load', initRevealAnimations);
