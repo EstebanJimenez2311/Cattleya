@@ -6,6 +6,98 @@
   <title>Equipo - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    .side-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .side-hero__text {
+      display: grid;
+      gap: 16px;
+      align-content: center;
+    }
+
+    .side-hero__text .section-label,
+    .side-hero__text .section-title {
+      margin-bottom: 0;
+    }
+
+    .side-hero__description {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--carbon);
+      opacity: 0.8;
+      max-width: 760px;
+      margin: 0;
+    }
+
+    .side-hero__visual {
+      position: relative;
+    }
+
+    .side-hero__visual::before {
+      content: '';
+      position: absolute;
+      inset: 20px -10px -16px 24px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(157, 45, 106, 0.18), rgba(242, 140, 40, 0.16));
+      filter: blur(18px);
+      z-index: 0;
+    }
+
+    .side-hero__media {
+      position: relative;
+      z-index: 1;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 44px rgba(74, 32, 96, 0.16);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 244, 248, 0.98));
+    }
+
+    .side-hero__image {
+      width: 100%;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+      min-height: 360px;
+    }
+
+    .side-hero__media:hover .side-hero__image,
+    .side-hero__image:focus-visible {
+      transform: scale(1.03);
+    }
+
+    .side-hero__zoom-btn {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 54px;
+      height: 54px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      background: rgba(61, 15, 42, 0.42);
+      color: var(--blanco);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .side-hero__zoom-btn:hover,
+    .side-hero__zoom-btn:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(74, 32, 96, 0.68);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
     .team-groups {
       display: grid;
       gap: 28px;
@@ -103,9 +195,88 @@
       line-height: 1.35;
     }
 
+    .team-lightbox {
+      position: fixed;
+      inset: 0;
+      padding: 28px;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 1500;
+    }
+
+    .team-lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .team-lightbox__dialog {
+      position: relative;
+      max-width: min(92vw, 1200px);
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-lightbox__image {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 24px;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.35);
+      background: var(--blanco);
+    }
+
+    .team-lightbox__close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--blanco);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .team-lightbox__close:hover,
+    .team-lightbox__close:focus-visible {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.24);
+    }
+
     @media (max-width: 960px) {
       .members-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 992px) {
+      .side-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .side-hero__visual {
+        order: 2;
+      }
+
+      .side-hero__image {
+        min-height: 300px;
       }
     }
 
@@ -116,6 +287,22 @@
 
       .member-card {
         padding: 26px 22px;
+      }
+
+      .side-hero__zoom-btn {
+        width: 48px;
+        height: 48px;
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .team-lightbox {
+        padding: 18px;
+      }
+
+      .team-lightbox__close {
+        top: 12px;
+        right: 12px;
       }
     }
   </style>
@@ -132,11 +319,34 @@
   </cat-page-hero>
 
   <div class="section">
-    <span class="section-label">Sobre nosotros</span>
-    <h2 class="section-title">El equipo<br><em>detrás de Cattleya</em></h2>
-    <p style="font-size:1.05rem;line-height:1.8;color:var(--carbon);opacity:0.8;max-width:760px;margin-bottom:48px;">
-      Somos estudiantes de Técnico en Programación para Analítica de Datos. Elegimos este tema porque creemos que los datos tienen el poder de visibilizar realidades que muchas veces permanecen en silencio.
-    </p>
+    <div class="side-hero">
+      <div class="side-hero__text fade-up" style="--fd:0.04s;">
+        <span class="section-label">Sobre nosotros</span>
+        <h2 class="section-title">El equipo<br><em>detrás de Cattleya</em></h2>
+        <p class="side-hero__description">
+          Somos estudiantes de Técnico en Programación para Analítica de Datos. Elegimos este tema porque creemos que los datos tienen el poder de visibilizar realidades que muchas veces permanecen en silencio.
+        </p>
+      </div>
+
+      <div class="side-hero__visual fade-up" style="--fd:0.16s;">
+        <div class="side-hero__media">
+          <img
+            src="img/Grupo.jpeg"
+            alt="Foto grupal del equipo CATTLEYA"
+            class="side-hero__image"
+            id="teamGroupImage"
+          >
+          <button type="button" class="side-hero__zoom-btn" id="teamGroupZoomBtn" aria-label="Ampliar foto grupal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 3h6v6"/>
+              <path d="M9 21H3v-6"/>
+              <path d="M21 3l-7 7"/>
+              <path d="M3 21l7-7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="team-groups">
       <cat-surface padding="28px" radius="24px">
@@ -247,9 +457,57 @@
     <a href="yo-decido.html" class="btn-primary">Yo Decido &rarr;</a>
   </div>
 
+  <div class="team-lightbox" id="teamLightbox" aria-hidden="true">
+    <div class="team-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Foto grupal ampliada">
+      <button type="button" class="team-lightbox__close" id="teamLightboxClose" aria-label="Cerrar imagen ampliada">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12"/>
+          <path d="M18 6L6 18"/>
+        </svg>
+      </button>
+      <img src="img/Grupo.jpeg" alt="Foto grupal del equipo CATTLEYA ampliada" class="team-lightbox__image">
+    </div>
+  </div>
+
   <cat-chatbot-btn></cat-chatbot-btn>
   <cat-footer></cat-footer>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    const teamLightbox = document.getElementById('teamLightbox');
+    const teamGroupImage = document.getElementById('teamGroupImage');
+    const teamGroupZoomBtn = document.getElementById('teamGroupZoomBtn');
+    const teamLightboxClose = document.getElementById('teamLightboxClose');
+
+    if (teamLightbox && teamGroupImage && teamGroupZoomBtn && teamLightboxClose) {
+      const openTeamLightbox = () => {
+        teamLightbox.classList.add('is-open');
+        teamLightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeTeamLightbox = () => {
+        teamLightbox.classList.remove('is-open');
+        teamLightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      teamGroupImage.addEventListener('click', openTeamLightbox);
+      teamGroupZoomBtn.addEventListener('click', openTeamLightbox);
+      teamLightboxClose.addEventListener('click', closeTeamLightbox);
+
+      teamLightbox.addEventListener('click', (event) => {
+        if (event.target === teamLightbox) {
+          closeTeamLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && teamLightbox.classList.contains('is-open')) {
+          closeTeamLightbox();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
