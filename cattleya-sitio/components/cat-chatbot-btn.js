@@ -1,8 +1,8 @@
 /**
  * <cat-chatbot-btn>
  *
- * Boton flotante que abre un panel de chat para conversar con
- * el asistente de orientacion de Cattleya.
+ * Botón flotante que abre un panel de chat para conversar con
+ * el asistente de orientación de Cattleya.
  */
 if (!customElements.get('cat-chatbot-btn')) {
 class CatChatbotBtn extends HTMLElement {
@@ -13,7 +13,7 @@ class CatChatbotBtn extends HTMLElement {
     this._conversation = [
       {
         role: 'assistant',
-        content: 'Hola, soy el asistente de Cattleya. Puedo orientarte sobre violencia basada en genero, rutas de ayuda y senales de riesgo.'
+        content: 'Hola, soy el asistente de Cattleya. Puedo orientarte sobre violencia basada en género, rutas de ayuda y señales de riesgo.'
       }
     ];
     this._isSending = false;
@@ -562,10 +562,10 @@ class CatChatbotBtn extends HTMLElement {
               <div class="cat-chatbot__header-copy">
                 <p class="cat-chatbot__eyebrow">Apoyo inmediato</p>
                 <p class="cat-chatbot__title">Asistente Cattleya</p>
-                <p class="cat-chatbot__subtitle">Orientacion sobre VBG, rutas de ayuda y evaluacion inicial de riesgo.</p>
+                <p class="cat-chatbot__subtitle">Orientación sobre VBG, rutas de ayuda y evaluación inicial de riesgo.</p>
                 <div class="cat-chatbot__presence">
                   <span class="cat-chatbot__status-dot" aria-hidden="true"></span>
-                  <span>En linea</span>
+                  <span>En línea</span>
                   <span class="cat-chatbot__presence-meta">
                     <span>•</span>
                     <span class="cat-chatbot__attempts" id="catChatbotAttempts"></span>
@@ -577,12 +577,12 @@ class CatChatbotBtn extends HTMLElement {
           </div>
           <div class="cat-chatbot__messages" id="catChatbotMessages"></div>
           <div class="cat-chatbot__composer">
-            <p class="cat-chatbot__safety">Si estas en peligro inmediato, llama a la Linea 155 o al 123.</p>
-            <p class="cat-chatbot__hint">Si hay riesgo inmediato, llama a la Linea 155 o al 123.</p>
-            <div class="cat-chatbot__quick-replies" aria-label="Sugerencias rapidas">
-              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Cuales son las rutas de ayuda disponibles en Colombia?"><span class="cat-chatbot__quick-icon">🚨</span><span>Rutas de Ayuda</span></button>
-              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Cuales son las principales senales de riesgo en un caso de violencia?"><span class="cat-chatbot__quick-icon">🛑</span><span>Senales de Riesgo</span></button>
-              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Necesito hablar con una persona o recibir orientacion humana. Que opciones tengo?"><span class="cat-chatbot__quick-icon">📞</span><span>Hablar con Humano</span></button>
+            <p class="cat-chatbot__safety">Si estás en peligro inmediato, llama a la Línea 155 o al 123.</p>
+            <p class="cat-chatbot__hint">Si hay riesgo inmediato, llama a la Línea 155 o al 123.</p>
+            <div class="cat-chatbot__quick-replies" aria-label="Sugerencias rápidas">
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="¿Cuáles son las rutas de ayuda disponibles en Colombia?"><span class="cat-chatbot__quick-icon">🚨</span><span>Rutas de Ayuda</span></button>
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="¿Cuáles son las principales señales de riesgo en un caso de violencia?"><span class="cat-chatbot__quick-icon">🛑</span><span>Señales de Riesgo</span></button>
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Necesito hablar con una persona o recibir orientación humana. ¿Qué opciones tengo?"><span class="cat-chatbot__quick-icon">📞</span><span>Hablar con Humano</span></button>
             </div>
             <form class="cat-chatbot__form" id="catChatbotForm">
               <div class="cat-chatbot__input-shell">
@@ -748,7 +748,7 @@ class CatChatbotBtn extends HTMLElement {
 
     if (this._input) {
       this._input.placeholder = isLocked
-        ? 'Ya usaste tus intentos en esta sesion.'
+        ? 'Ya usaste tus intentos en esta sesión.'
         : 'Escribe una pregunta clara y breve...';
     }
   }
@@ -784,7 +784,7 @@ class CatChatbotBtn extends HTMLElement {
     if (this._getRemainingAttempts() <= 0) {
       this._conversation.push({
         role: 'assistant',
-        content: `Ya alcanzaste los ${this._maxAttempts} intentos de esta sesion. Recarga la pagina si necesitas volver a intentar.`
+        content: `Ya alcanzaste los ${this._maxAttempts} intentos de esta sesión. Recarga la página si necesitas volver a intentar.`
       });
       this._renderMessages();
       this._updateAttemptUI();
@@ -847,7 +847,7 @@ class CatChatbotBtn extends HTMLElement {
       throw new Error(data.error || `HTTP ${response.status}`);
     }
 
-    return String(data.reply || '').trim() || 'No recibi una respuesta del asistente.';
+    return String(data.reply || '').trim() || 'No recibí una respuesta del asistente.';
   }
 
   _buildPayloadMessages() {
@@ -922,6 +922,7 @@ class CatChatbotBtn extends HTMLElement {
     return normalized.includes('155')
       || normalized.includes('123')
       || normalized.includes('peligro inmediato')
+      || normalized.includes('línea 155')
       || normalized.includes('linea 155');
   }
 }
