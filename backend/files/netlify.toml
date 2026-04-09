@@ -1,0 +1,9 @@
+[build]
+  publish = "cattleya-sitio"
+  functions = "cattleya-sitio/netlify/functions"
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=1800"
