@@ -5,6 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Equipo - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .team-groups {
+      display: grid;
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .team-group {
+      display: grid;
+      gap: 24px;
+    }
+
+    .team-group__header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .team-group__eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--magenta);
+    }
+
+    .team-group__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      color: var(--purpura);
+      line-height: 1.2;
+    }
+
+    .team-group__text {
+      font-size: 0.96rem;
+      line-height: 1.75;
+      color: var(--carbon);
+      opacity: 0.76;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .members-grid--frontend {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .member-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 244, 248, 0.98));
+      border: 1px solid rgba(74, 32, 96, 0.1);
+      border-radius: 24px;
+      padding: 30px 26px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(74, 32, 96, 0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(74, 32, 96, 0.14);
+      border-color: rgba(74, 32, 96, 0.2);
+    }
+
+    .member-avatar-wrap {
+      width: 108px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 22px;
+      padding: 8px;
+      border-radius: 50%;
+      border: 1px solid #4a2060;
+      background: #fff;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .member-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .member-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--purpura);
+      margin-bottom: 0;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 960px) {
+      .members-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .members-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .member-card {
+        padding: 26px 22px;
+      }
+    }
+  </style>
   <script src="components/index.js"></script>
 </head>
 <body>
@@ -23,30 +137,99 @@
     <p style="font-size:1.05rem;line-height:1.8;color:var(--carbon);opacity:0.8;max-width:760px;margin-bottom:48px;">
       Somos estudiantes de Técnico en Programación para Analítica de Datos. Elegimos este tema porque creemos que los datos tienen el poder de visibilizar realidades que muchas veces permanecen en silencio.
     </p>
-    <cat-surface padding="24px" radius="24px">
-      <div class="cards-grid" style="margin-top:0;">
-        <div class="card" style="text-align:center;">
-          <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">1</div>
-          <div class="card__title">Integrante 1</div>
-          <div class="card__text">Rol en el proyecto. Backend / Análisis / Frontend. [Agregar nombre y descripción real]</div>
+
+    <div class="team-groups">
+      <cat-surface padding="28px" radius="24px">
+        <div class="team-group">
+          <div class="team-group__header">
+            <span class="team-group__eyebrow">Area tecnica</span>
+            <h3 class="team-group__title">Backend</h3>
+            <p class="team-group__text">
+              Equipo responsable de la logica, estructura y soporte de datos que sostienen el ecosistema tecnico de CATTLEYA.
+            </p>
+          </div>
+
+          <div class="members-grid members-grid--backend">
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Angelys Granados" class="member-avatar">
+              </div>
+              <div class="member-name">Angelys Granados</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Heather Peña" class="member-avatar">
+              </div>
+              <div class="member-name">Heather Peña</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Sharon Martínez" class="member-avatar">
+              </div>
+              <div class="member-name">Sharon Martínez</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Kenny Meza" class="member-avatar">
+              </div>
+              <div class="member-name">Kenny Meza</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Antenor Prent" class="member-avatar">
+              </div>
+              <div class="member-name">Antenor Prent</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Jesus Utria" class="member-avatar">
+              </div>
+              <div class="member-name">Jesus Utria</div>
+            </article>
+          </div>
         </div>
-        <div class="card" style="text-align:center;">
-          <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">2</div>
-          <div class="card__title">Integrante 2</div>
-          <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
+      </cat-surface>
+
+      <cat-surface padding="28px" radius="24px">
+        <div class="team-group">
+          <div class="team-group__header">
+            <span class="team-group__eyebrow">Area tecnica</span>
+            <h3 class="team-group__title">Frontend</h3>
+            <p class="team-group__text">
+              Equipo encargado de traducir la identidad del proyecto en una interfaz clara, visual y coherente con la narrativa de CATTLEYA.
+            </p>
+          </div>
+
+          <div class="members-grid members-grid--frontend">
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Guillermo Tovar" class="member-avatar">
+              </div>
+              <div class="member-name">Guillermo Tovar</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Jeiseer Wilches" class="member-avatar">
+              </div>
+              <div class="member-name">Jeiseer Wilches</div>
+            </article>
+
+            <article class="member-card">
+              <div class="member-avatar-wrap">
+                <img src="img/members/placeholder.jpg" alt="Foto de Esteban Jiménez" class="member-avatar">
+              </div>
+              <div class="member-name">Esteban Jiménez</div>
+            </article>
+          </div>
         </div>
-        <div class="card" style="text-align:center;">
-          <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">3</div>
-          <div class="card__title">Integrante 3</div>
-          <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="width:80px;height:80px;background:var(--crema);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;">4</div>
-          <div class="card__title">Integrante 4</div>
-          <div class="card__text">Rol en el proyecto. [Agregar nombre y descripción real]</div>
-        </div>
-      </div>
-    </cat-surface>
+      </cat-surface>
+    </div>
   </div>
 
   <div class="section--bg" id="vision">
