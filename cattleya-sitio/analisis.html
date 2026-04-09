@@ -3,31 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leamos las Raíces - CATTLEYA</title>
+  <title>Leamos las Raices - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <script src="data/charts.js"></script>
   <script src="components/index.js"></script>
   <style>
     .preview-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 48px;
       align-items: center;
     }
 
     .analysis-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
-      margin-top: 40px;
+      margin-top: 24px;
+    }
+
+    .analysis-grid--featured {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .analisis-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .analisis-meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .analisis-meta__item {
+      background: rgba(157, 45, 106, 0.06);
+      border: 1px solid rgba(157, 45, 106, 0.14);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .analisis-meta__label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--magenta);
+      margin-bottom: 8px;
+    }
+
+    .analisis-meta__value {
+      margin: 0;
+      color: #3d2330;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .analisis-source-note {
+      margin-top: 18px;
+      color: #5e4551;
+      line-height: 1.7;
+      max-width: 920px;
+    }
+
+    .analisis-method-note {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(253,238,233,0.95));
+      border: 1px solid rgba(157, 45, 106, 0.12);
+      color: #5a4450;
+      line-height: 1.7;
+    }
+
+    .analisis-method-note strong {
+      color: var(--purpura);
+    }
+
+    .analisis-note {
+      margin-top: -6px;
+      color: #6b5561;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .analisis-stats,
+      .analisis-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .analysis-grid--featured {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 900px) {
       .preview-grid,
-      .analysis-grid {
+      .analysis-grid,
+      .analisis-stats,
+      .analisis-meta {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 24px;
       }
     }
   </style>
@@ -39,24 +119,37 @@
   <cat-page-hero
     letter="A"
     position="Segunda"
-    title="Leamos las Raíces"
-    subtitle="Leer las raíces es mirar lo que sostiene la historia: estadística descriptiva, distribuciones y patrones en los datos sobre violencia contra la mujer en Colombia.">
+    title="Leamos las Raices"
+    subtitle="Este tablero transforma en visualizaciones los datos vivos del backend para identificar volumen, composicion y vacios de calidad en los registros."
+    data-analisis-hero>
   </cat-page-hero>
 
   <div class="section--bg" style="margin-top:0;">
     <div class="section__inner">
       <cat-section-header
-        label="Las raíces en cifras"
-        subtitle="Reemplaza estos valores con los resultados reales del análisis en Python.">
+        label="Pulso del backend"
+        subtitle="Estos indicadores se calculan a partir de los endpoints activos de estadisticas y se actualizan con cada carga de la pagina."
+        data-analisis-stats-header>
       </cat-section-header>
       <cat-surface variant="cream" padding="24px" radius="24px">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
-        <cat-stat-card variant="dark" number="XX,XXX" label="Total de registros analizados"></cat-stat-card>
-        <cat-stat-card variant="dark" number="XX" label="Variables en el dataset"></cat-stat-card>
-        <cat-stat-card variant="dark" number="X.X%" label="Valores nulos / faltantes"></cat-stat-card>
-        <cat-stat-card variant="dark" number="20XX-20XX" label="Rango temporal del dataset"></cat-stat-card>
-      </div>
+        <div class="analisis-stats">
+          <cat-stat-card data-analisis-stat="0" variant="dark" number="N/D" label="Noticias clasificadas"></cat-stat-card>
+          <cat-stat-card data-analisis-stat="1" variant="dark" number="N/D" label="Tipos con incidencia"></cat-stat-card>
+          <cat-stat-card data-analisis-stat="2" variant="dark" number="N/D" label="Ciudades con registro"></cat-stat-card>
+          <cat-stat-card data-analisis-stat="3" variant="dark" number="N/D" label="Periodo observado"></cat-stat-card>
+        </div>
       </cat-surface>
+
+      <div class="analisis-meta" data-analisis-meta-list>
+        <div class="analisis-meta__item">
+          <span class="analisis-meta__label">Fuente de datos</span>
+          <p class="analisis-meta__value">Esperando respuesta del backend</p>
+        </div>
+      </div>
+
+      <p class="analisis-source-note" data-analisis-source>
+        Esta vista leera el backend en vivo y convertira sus respuestas en graficos comparables, claros y consistentes con el branding de Cattleya.
+      </p>
     </div>
   </div>
 
@@ -64,100 +157,114 @@
     <div class="preview-grid">
       <div>
         <cat-section-header
-          label="Leamos las raíces"
-          title="Lo que sostiene la historia,&lt;br&gt;&lt;em&gt;aparece en los datos&lt;/em&gt;"
-          subtitle="Aquí observamos la base del problema: aplicamos análisis exploratorio y estadística descriptiva para identificar patrones, concentraciones y señales tempranas en los reportes de violencia contra la mujer.">
+          label="Lectura visual"
+          title="Donde se concentra&lt;br&gt;&lt;em&gt;la carga del registro&lt;/em&gt;"
+          subtitle="Abrimos con una comparacion ordenada por tipo de violencia para evitar ambiguedades visuales y facilitar la lectura de magnitudes."
+          data-analisis-intro>
         </cat-section-header>
-        <a href="#graficos-eda" class="btn-primary" style="margin-top:32px;display:inline-flex;">Leer las raíces &rarr;</a>
+        <a href="#graficos-eda" class="btn-primary" style="margin-top:32px;display:inline-flex;">Explorar graficos &rarr;</a>
       </div>
       <cat-chart
-        chart-id="chart-home"
-        title="Distribución por tipo de violencia">
+        chart-id="chart-panorama-tipos"
+        title="Distribucion actual por tipo de violencia"
+        description="Ranking horizontal para comparar magnitudes absolutas y participacion relativa sin recurrir a tortas o donuts."
+        height="340">
       </cat-chart>
     </div>
   </section>
 
   <div class="section" id="graficos-eda">
     <cat-section-header
-      label="Raíces del problema"
-      title="¿Qué revelan las raíces?"
-      subtitle="Cada gráfico ayuda a leer la estructura del problema e identificar dónde se concentran sus patrones.">
+      label="Raices del problema"
+      title="Que esta diciendo el backend?"
+      subtitle="Cada grafico responde una pregunta distinta: cuanto entra, como se compone, donde se concentra y que tan confiable es la capa de validacion.">
     </cat-section-header>
+
+    <div class="analysis-grid analysis-grid--featured">
+      <cat-chart
+        chart-id="chart-series-volumen"
+        title="Volumen mensual de noticias y verificacion"
+        description="Linea principal para el total mensual y linea secundaria para noticias verificadas. Permite separar crecimiento de cobertura y calidad de revision.">
+      </cat-chart>
+      <cat-chart
+        chart-id="chart-calidad-registro"
+        title="Estado de verificacion del conjunto actual"
+        description="Barra apilada de una sola escala para leer de inmediato cuanto del conjunto ya fue verificado por el backend.">
+      </cat-chart>
+    </div>
 
     <div class="analysis-grid">
       <cat-chart
-        chart-id="chart-evolucion"
-        title="Evolución anual de casos reportados"
-        description="¿Aumentaron o disminuyeron los casos a lo largo del tiempo?">
+        chart-id="chart-series-composicion"
+        title="Composicion mensual por tipo de violencia"
+        description="Barras apiladas para comparar cambios de composicion entre meses sin perder el volumen absoluto del registro.">
       </cat-chart>
       <cat-chart
-        chart-id="chart-departamentos"
-        title="Distribución por departamento (Top 10)"
-        description="¿Cuáles son las regiones más afectadas?">
+        chart-id="chart-ciudades"
+        title="Ciudades con mayor numero de noticias"
+        description="Ranking territorial. Las entradas sin georreferenciacion explicita se conservan como categoria para no ocultar vacios del dato.">
       </cat-chart>
     </div>
 
-    <div class="analysis-grid" style="margin-top:24px;">
+    <div class="analysis-grid">
       <cat-chart
-        chart-id="chart-edad"
-        title="Distribución por grupo de edad"
-        description="¿Qué grupos etarios son más vulnerables?">
+        chart-id="chart-ambitos"
+        title="Ambitos de violencia con presencia en el backend"
+        description="Comparacion horizontal de los ambitos reportados, filtrando categorias sin casos para evitar ruido visual.">
       </cat-chart>
       <cat-chart
-        chart-id="chart-tipo"
-        title="Tipo de violencia más frecuente"
-        description="¿Qué tipos de violencia predominan en los reportes?">
+        chart-id="chart-cobertura-tipos"
+        title="Cobertura relativa por tipo de violencia"
+        description="Comparacion porcentual para entender peso relativo de cada tipo dentro del conjunto total analizado.">
       </cat-chart>
     </div>
 
-    <div style="margin-top:24px;">
-      <cat-chart
-        chart-id="chart-meses"
-        title="Estacionalidad - casos por mes (promedio histórico)"
-        description="¿Hay meses con mayor incidencia?"
-        height="260">
-      </cat-chart>
-    </div>
+    <p class="analisis-method-note" data-analisis-method>
+      <strong>Como leer este tablero:</strong> los graficos muestran conteos de noticias clasificadas por el backend, no tasas poblacionales ni prevalencia real en territorio. Cuando la ciudad no esta informada o la noticia no ha sido verificada, el vacio se conserva de forma explicita para no disfrazar limitaciones de calidad.
+    </p>
   </div>
 
   <div class="section--bg">
     <div class="section__inner">
       <cat-section-header
         label="Hallazgos"
-        title="Lo que revelan las raíces">
+        title="Lo que revelan estas raices">
       </cat-section-header>
       <cat-surface padding="24px" radius="24px">
-      <div class="cards-grid" style="margin-top:0;">
-        <cat-card
-          icon="[1]"
-          title="Hallazgo 1 - [Raíz identificada]"
-          text="Describe aquí el patrón más revelador de la lectura descriptiva. Reemplaza este texto con el resultado real del notebook.">
-        </cat-card>
-        <cat-card
-          icon="[2]"
-          title="Hallazgo 2 - [Territorio o patrón]"
-          text="Segundo hallazgo importante. Por ejemplo: concentración geográfica, grupo etario más afectado o tipo de violencia predominante.">
-        </cat-card>
-        <cat-card
-          icon="[3]"
-          title="Hallazgo 3 - [Señal clave]"
-          text="Tercer hallazgo. Considera tendencias temporales, variaciones regionales o correlaciones iniciales que ayuden a entender la raíz del problema.">
-        </cat-card>
-      </div>
+        <div class="cards-grid" style="margin-top:0;">
+          <cat-card
+            data-analisis-highlight="0"
+            icon="[1]"
+            title="Hallazgo 1"
+            text="Aqui aparecera el patron principal detectado al cruzar tipos, volumen y calidad del dato.">
+          </cat-card>
+          <cat-card
+            data-analisis-highlight="1"
+            icon="[2]"
+            title="Hallazgo 2"
+            text="Este bloque resumira la senal territorial o de cobertura mas importante del conjunto actual.">
+          </cat-card>
+          <cat-card
+            data-analisis-highlight="2"
+            icon="[3]"
+            title="Hallazgo 3"
+            text="El ultimo bloque destacara el principal riesgo de interpretacion o calidad del registro.">
+          </cat-card>
+        </div>
       </cat-surface>
     </div>
   </div>
 
   <div class="section" style="padding-top:0;">
     <cat-cta-banner
-      title="¿Necesitas ayuda ahora?"
-      text="Si tú o alguien que conoces está en riesgo, no estás sola. Hay personas dispuestas a escucharte y a ayudarte."
-      btn-text="Ver líneas de ayuda &rarr;"
+      title="Necesitas ayuda ahora?"
+      text="Si tu o alguien que conoces esta en riesgo, no estas sola. Hay personas dispuestas a escucharte y a ayudarte."
+      btn-text="Ver lineas de ayuda &rarr;"
       btn-href="lucha.html">
     </cat-cta-banner>
   </div>
 
-  <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;">
+  <div style="max-width:1200px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;">
     <a href="contexto.html" class="btn-outline" style="border-color:var(--magenta);color:var(--magenta);">&larr; Contexto</a>
     <a href="tendencias.html" class="btn-primary">Tendencias &rarr;</a>
   </div>
@@ -166,6 +273,7 @@
   <cat-footer></cat-footer>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/analisis-api.js"></script>
 
 </body>
 </html>

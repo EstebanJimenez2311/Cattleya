@@ -4,17 +4,35 @@ from django.template.response import TemplateResponse
 from django.core.management import call_command
 from django.shortcuts import redirect
 
+from analisis.services import import_analysis_file
+
 
 def monitor_view(request):
     from noticias.models import Noticia
     from analisis.models import ResultadoAnalisis
 
     if request.method == "POST":
+        action = request.POST.get("action")
         try:
-            call_command("cargar_analisis")
-            messages.success(request, "cargar_analisis ejecutado correctamente.")
+            if action == "upload_analysis":
+                archivo = request.FILES.get("archivo")
+                if not archivo:
+                    raise ValueError("Debes seleccionar un archivo JSON.")
+
+                nombre = request.POST.get("nombre") or None
+                descripcion = request.POST.get("descripcion") or None
+                resultado, created = import_analysis_file(
+                    archivo,
+                    nombre=nombre,
+                    descripcion=descripcion,
+                )
+                verbo = "creado" if created else "actualizado"
+                messages.success(request, f"Análisis {verbo} correctamente: {resultado.nombre}.")
+            else:
+                call_command("cargar_analisis")
+                messages.success(request, "cargar_analisis ejecutado correctamente.")
         except Exception as exc:
-            messages.error(request, f"Error al ejecutar cargar_analisis: {exc}")
+            messages.error(request, f"Error al cargar análisis: {exc}")
         return redirect("admin:monitor")
 
     total_analisis = ResultadoAnalisis.objects.count()
@@ -45,6 +63,7 @@ def monitor_view(request):
         "total_noticias": total_noticias,
         "distribucion_riesgo": distribucion_riesgo,
         "distribucion_ambito": distribucion_ambito,
+        "analisis_recientes": ResultadoAnalisis.objects.order_by("-actualizado")[:5],
     }
 
     return TemplateResponse(request, "admin/monitor.html", context)

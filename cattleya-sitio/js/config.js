@@ -1,8 +1,21 @@
-window.CATTLEYA_CONFIG = window.CATTLEYA_CONFIG || {
-  // Reemplaza con la URL publica del backend desplegado.
-  // Ejemplo: "https://cattleya-backend.onrender.com"
-  API_BASE_URL: "https://cattleya-backend.onrender.com",
-  // En produccion, usa la misma URL publica del backend Django.
-  // Ejemplo local: "http://127.0.0.1:8000"
-  CHATBOT_API_BASE_URL: "https://cattleya-backend.onrender.com"
-};
+(function () {
+  const existingConfig = window.CATTLEYA_CONFIG || {};
+  const hostname = window.location.hostname;
+  const isLocalhost =
+    hostname === '127.0.0.1' ||
+    hostname === 'localhost' ||
+    window.location.protocol === 'file:';
+
+  const localBackendUrl = 'http://127.0.0.1:8000';
+  const productionBackendUrl = 'https://cattleya-backend.onrender.com';
+
+  const defaultApiBaseUrl = isLocalhost ? localBackendUrl : productionBackendUrl;
+
+  window.CATTLEYA_CONFIG = Object.assign(
+    {
+      API_BASE_URL: defaultApiBaseUrl,
+      CHATBOT_API_BASE_URL: defaultApiBaseUrl,
+    },
+    existingConfig
+  );
+})();
