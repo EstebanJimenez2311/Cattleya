@@ -78,17 +78,42 @@
       transform: scale(1.05);
     }
 
-    /* Ícono decorativo de fondo cuando no hay imagen */
     .entregable-card__preview-icon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      user-select: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .entregable-card__preview-icon--emoji {
       font-size: 3.5rem;
       opacity: 0.35;
-      user-select: none;
-      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .entregable-card__preview-icon img {
+      display: block;
+      width: auto;
+      max-width: 60%;
+      max-height: 60%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.14));
+      margin: 0 auto;
+    }
+
+    .entregable-card__preview-icon--invert img {
+      filter: brightness(0) invert(1) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.2));
     }
 
     .entregable-card:hover .entregable-card__preview-icon {
+      transform: scale(1.05);
+    }
+
+    .entregable-card:hover .entregable-card__preview-icon--emoji {
       opacity: 0.55;
-      transform: scale(1.1);
     }
 
     /* Badge de tipo — sobre la imagen */
@@ -196,6 +221,24 @@
       color: var(--purpura);
       line-height: 1.3;
       flex: 1;
+    }
+
+    .entregable-card--report .entregable-card__title {
+      font-size: 0.86rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .entregable-card--report .entregable-card__overlay-title {
+      font-size: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-width: 92%;
     }
 
     /* Botón de descarga */
@@ -441,8 +484,9 @@
         <article class="entregable-card">
           <div class="entregable-card__preview"
                style="background: linear-gradient(135deg, var(--purpura), #3d0a28);">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/informe-analisis-final.png" alt="Vista previa"> -->
-            <span class="entregable-card__preview-icon">📘</span>
+            <span class="entregable-card__preview-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="Logo PDF">
+            </span>
             <span class="entregable-card__tipo">Informe</span>
             <div class="entregable-card__overlay">
               <div class="entregable-card__overlay-title">Informe de Análisis Final</div>
@@ -451,54 +495,40 @@
           </div>
           <div class="entregable-card__body">
             <div class="entregable-card__title">Informe de Análisis Final</div>
-            <a href="#" class="btn-download" target="_blank">Ver Informe →</a>
+            <a href="#" class="btn btn-download" target="_blank">Ver Informe →</a>
           </div>
         </article>
 
-        <!-- TARJETA 2 — EDA Medicina Legal -->
-        <article class="entregable-card">
+        <!-- TARJETA 2 — Informe de Medicina Legal -->
+        <article class="entregable-card entregable-card--report">
           <div class="entregable-card__preview"
                style="background: linear-gradient(135deg, #1e1b2e, #4a2060);">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/eda-medicina-legal.png" alt="Vista previa"> -->
-            <span class="entregable-card__preview-icon">🧪</span>
+            <span class="entregable-card__preview-icon">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg"
+                alt="Logo de RStudio"
+              >
+            </span>
             <span class="entregable-card__tipo">EDA</span>
             <div class="entregable-card__overlay">
-              <div class="entregable-card__overlay-title">EDA Medicina Legal</div>
-              <div class="entregable-card__overlay-desc">Exploración estadística y visual de patrones de violencia de género con foco en variables críticas y comportamiento territorial.</div>
+              <div class="entregable-card__overlay-title">Informe de Medicina Legal: Evolución Histórica y Realidad del Feminicidio (2018-2025)</div>
+              <div class="entregable-card__overlay-desc">Analisis estadistico y narrativo sobre la evolucion historica de los registros de Medicina Legal y la realidad del feminicidio en Colombia.</div>
             </div>
           </div>
           <div class="entregable-card__body">
-            <div class="entregable-card__title">EDA Medicina Legal</div>
-            <a href="https://rpubs.com/sharon_2wqw/1417797" class="btn-download" target="_blank">Ver EDA →</a>
+            <div class="entregable-card__title">Informe de Medicina Legal: Evolución Histórica y Realidad del Feminicidio (2018-2025)</div>
+            <a href="https://rpubs.com/sharon_2wqw/1417797" class="btn btn-download" target="_blank">Ver Informe →</a>
           </div>
         </article>
 
-        <!-- TARJETA 3 — Notebooks de Limpieza -->
-        <article class="entregable-card">
-          <div class="entregable-card__preview"
-               style="background: linear-gradient(135deg, var(--magenta), var(--purpura));">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/notebooks-limpieza.png" alt="Vista previa"> -->
-            <span class="entregable-card__preview-icon">🧹</span>
-            <span class="entregable-card__tipo">Código</span>
-            <div class="entregable-card__overlay">
-              <div class="entregable-card__overlay-title">Notebooks de Limpieza</div>
-              <div class="entregable-card__overlay-desc">Pipeline de preparación de datos: depuración, tratamiento de nulos, estandarización y validaciones de calidad.</div>
-            </div>
-          </div>
-          <div class="entregable-card__body">
-            <div class="entregable-card__title">Notebooks de Limpieza</div>
-            <a href="#" class="btn-download" target="_blank">Ver Notebooks →</a>
-          </div>
-        </article>
-
-        <!-- TARJETA 4 — Notebook Machine Learning -->
+        <!-- TARJETA 3 — Notebook Machine Learning -->
         <article class="entregable-card">
           <div class="entregable-card__preview"
                style="background: linear-gradient(135deg, #0d1b2a, #1e3a5f);">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/notebook-ml.png" alt="Vista previa"> -->
-            <span class="entregable-card__preview-icon">🤖</span>
+            <span class="entregable-card__preview-icon entregable-card__preview-icon--invert">
+              <img src="https://cdn-icons-png.flaticon.com/512/2103/2103801.png" alt="Icono de inteligencia artificial">
+            </span>
             <span class="entregable-card__tipo">Machine Learning</span>
-            <span class="entregable-card__estado">En Revisión</span>
             <div class="entregable-card__overlay">
               <div class="entregable-card__overlay-title">Notebook Machine Learning</div>
               <div class="entregable-card__overlay-desc">Modelo predictivo con métricas de evaluación, matriz de confusión e interpretación de variables relevantes.</div>
@@ -506,16 +536,17 @@
           </div>
           <div class="entregable-card__body">
             <div class="entregable-card__title">Notebook Machine Learning</div>
-            <a href="#" class="btn-download" target="_blank">Ver Modelo →</a>
+            <a href="#" class="btn btn-download" target="_blank">Ver Modelo →</a>
           </div>
         </article>
 
-        <!-- TARJETA 5 — Repositorio del Proyecto -->
+        <!-- TARJETA 4 — Repositorio del Proyecto -->
         <article class="entregable-card">
           <div class="entregable-card__preview"
                style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/github.png" alt="Vista previa"> -->
-            <span class="entregable-card__preview-icon">💻</span>
+            <span class="entregable-card__preview-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Logo de GitHub">
+            </span>
             <span class="entregable-card__tipo">Repositorio</span>
             <div class="entregable-card__overlay">
               <div class="entregable-card__overlay-title">Repositorio del Proyecto</div>
@@ -524,16 +555,17 @@
           </div>
           <div class="entregable-card__body">
             <div class="entregable-card__title">Repositorio del Proyecto</div>
-            <a href="https://github.com" class="btn-download" target="_blank">GitHub →</a>
+            <a href="https://github.com/EstebanJimenez2311/Cattleya.git" class="btn btn-download" target="_blank">GitHub →</a>
           </div>
         </article>
 
-        <!-- TARJETA 6 — Dashboard Power BI -->
+        <!-- TARJETA 5 — Dashboard Power BI -->
         <article class="entregable-card">
           <div class="entregable-card__preview"
                style="background: linear-gradient(135deg, #F2C811, #D8A800);">
-            <!-- Reemplaza el ícono por: <img src="assets/previews/dashboard-powerbi.png" alt="Vista previa del Dashboard Power BI"> -->
-            <span class="entregable-card__preview-icon">📊</span>
+            <span class="entregable-card__preview-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Logo de Power BI">
+            </span>
             <span class="entregable-card__tipo">Dashboard</span>
             <div class="entregable-card__overlay">
               <div class="entregable-card__overlay-title">Análisis de Datos Interactivo</div>
@@ -542,7 +574,7 @@
           </div>
           <div class="entregable-card__body">
             <div class="entregable-card__title">Dashboard Power BI</div>
-            <a href="https://app.powerbi.com/" class="btn-download" target="_blank">Ver Reporte →</a>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiN2ZlM2UyOTQtYmFmZi00M2UyLWFjNjYtMWJhNGQ3ZDkzMmQwIiwidCI6IjA1MDdlNWNlLTBmOTUtNDlhYS1hYmRlLWM5MGRjZGVkYmQxMiIsImMiOjR9" class="btn btn-download" target="_blank">Ver Reporte →</a>
           </div>
         </article>
 
