@@ -27,7 +27,11 @@ const components = [
 ];
 
 components.forEach(name => {
+  const src = `${BASE}${name}.js`;
+  const alreadyLoaded = Array.from(document.scripts).some(script => script.src === src);
+  if (alreadyLoaded) return;
+
   const script = document.createElement('script');
-  script.src = `${BASE}${name}.js`;
+  script.src = src;
   document.head.appendChild(script);
 });

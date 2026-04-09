@@ -4,6 +4,7 @@
  * Boton flotante que abre un panel de chat para conversar con
  * el asistente de orientacion de Cattleya.
  */
+if (!customElements.get('cat-chatbot-btn')) {
 class CatChatbotBtn extends HTMLElement {
   connectedCallback() {
     if (this.dataset.rendered === 'true') return;
@@ -26,15 +27,20 @@ class CatChatbotBtn extends HTMLElement {
       <style>
         :host {
           --cat-chatbot-plum: #8d2b61;
-          --cat-chatbot-plum-deep: #5f173d;
-          --cat-chatbot-rose: #f6d8e6;
-          --cat-chatbot-cream: #fff8ef;
-          --cat-chatbot-gold: #c86c16;
-          --cat-chatbot-gold-deep: #8f4710;
-          --cat-chatbot-ink: #2f1730;
-          --cat-chatbot-muted: #78626f;
-          --cat-chatbot-border: rgba(141, 43, 97, 0.14);
-          --cat-chatbot-shadow: 0 30px 90px rgba(63, 20, 43, 0.26);
+          --cat-chatbot-plum-soft: #c18bd4;
+          --cat-chatbot-plum-deep: #4d1a43;
+          --cat-chatbot-lavender: #f6effd;
+          --cat-chatbot-lavender-strong: #ebdef8;
+          --cat-chatbot-cream: #fffaf8;
+          --cat-chatbot-gold: #e67e22;
+          --cat-chatbot-gold-soft: #fff0df;
+          --cat-chatbot-gold-deep: #9c4f13;
+          --cat-chatbot-ink: #381a3f;
+          --cat-chatbot-muted: #735f78;
+          --cat-chatbot-success: #6abf8c;
+          --cat-chatbot-border: rgba(240, 216, 255, 0.75);
+          --cat-chatbot-shell: rgba(255, 255, 255, 0.78);
+          --cat-chatbot-shadow: 0 28px 80px rgba(153, 96, 171, 0.28);
         }
         .cat-chatbot {
           position: fixed;
@@ -51,17 +57,17 @@ class CatChatbotBtn extends HTMLElement {
           align-items: center;
           gap: 10px;
           background:
-            radial-gradient(circle at top left, rgba(255, 208, 131, 0.42), transparent 42%),
-            linear-gradient(135deg, #d97a17, #b55315);
+            radial-gradient(circle at top left, rgba(255, 224, 185, 0.52), transparent 42%),
+            linear-gradient(135deg, #f0953b, #d86f18);
           color: #ffffff;
-          border: 1px solid rgba(255, 232, 204, 0.25);
+          border: 1px solid rgba(255, 240, 225, 0.42);
           border-radius: 999px;
-          padding: 14px 22px;
+          padding: 14px 20px;
           font-size: 0.93rem;
           font-weight: 700;
           cursor: pointer;
           box-shadow:
-            0 14px 34px rgba(181, 83, 21, 0.34),
+            0 16px 34px rgba(230, 126, 34, 0.35),
             inset 0 1px 0 rgba(255, 255, 255, 0.26);
           transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
           white-space: nowrap;
@@ -81,22 +87,43 @@ class CatChatbotBtn extends HTMLElement {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.16);
+          background: rgba(255, 255, 255, 0.22);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
         }
         .cat-chatbot__panel {
           width: min(380px, calc(100vw - 32px));
           height: min(620px, calc(100vh - 120px));
           background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 250, 244, 0.98));
+            linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(251, 243, 255, 0.62) 52%, rgba(255, 248, 252, 0.7));
           border: 1px solid var(--cat-chatbot-border);
-          border-radius: 28px;
+          border-radius: 30px;
           box-shadow: var(--cat-chatbot-shadow);
           overflow: hidden;
           display: none;
           flex-direction: column;
           margin-bottom: 16px;
-          backdrop-filter: blur(16px);
+          backdrop-filter: blur(12px);
+        }
+        .cat-chatbot__panel::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(circle at 16% 18%, rgba(229, 184, 245, 0.42), transparent 18%),
+            radial-gradient(circle at 80% 34%, rgba(255, 224, 178, 0.24), transparent 16%),
+            radial-gradient(circle at 72% 72%, rgba(195, 228, 177, 0.22), transparent 16%),
+            radial-gradient(circle at 28% 80%, rgba(255, 203, 219, 0.22), transparent 18%);
+          pointer-events: none;
+          opacity: 0.9;
+        }
+        .cat-chatbot__panel::after {
+          content: '';
+          position: absolute;
+          inset: 6px;
+          border-radius: 24px;
+          border: 1px solid rgba(210, 160, 237, 0.4);
+          pointer-events: none;
+          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
         }
         .cat-chatbot.is-open .cat-chatbot__panel {
           display: flex;
@@ -114,70 +141,112 @@ class CatChatbotBtn extends HTMLElement {
         }
         .cat-chatbot__header {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           gap: 16px;
-          padding: 18px 18px 14px;
+          padding: 18px 18px 16px;
           background:
-            radial-gradient(circle at top left, rgba(255, 210, 150, 0.24), transparent 34%),
-            linear-gradient(135deg, var(--cat-chatbot-plum), var(--cat-chatbot-plum-deep));
-          color: #ffffff;
+            linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.2));
+          color: var(--cat-chatbot-ink);
           position: relative;
+          z-index: 1;
         }
         .cat-chatbot__header::after {
           content: '';
           position: absolute;
           inset: auto 0 0;
           height: 1px;
-          background: rgba(255, 255, 255, 0.16);
+          background: rgba(125, 83, 144, 0.12);
         }
-        .cat-chatbot__eyebrow {
+        .cat-chatbot__header-main {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          min-width: 0;
+        }
+        .cat-chatbot__avatar {
+          width: 42px;
+          height: 42px;
+          flex-shrink: 0;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          margin: 0 0 10px;
-          padding: 5px 9px;
-          border-radius: 999px;
-          background: rgba(255, 255, 255, 0.14);
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+          justify-content: center;
+          border-radius: 50%;
+          background:
+            radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.98), rgba(249, 232, 244, 0.96) 56%, rgba(232, 206, 246, 0.98));
+          border: 1px solid rgba(222, 189, 238, 0.72);
+          box-shadow: 0 8px 20px rgba(170, 118, 191, 0.16);
+          overflow: hidden;
+        }
+        .cat-chatbot__avatar img,
+        .cat-chatbot__message-avatar img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .cat-chatbot__header-copy {
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .cat-chatbot__eyebrow {
+          display: none;
         }
         .cat-chatbot__title {
-          font-size: 1.08rem;
+          font-size: 1rem;
           font-weight: 700;
           margin: 0;
         }
         .cat-chatbot__subtitle {
-          margin: 6px 0 0;
-          max-width: 260px;
-          font-size: 0.8rem;
-          line-height: 1.5;
-          color: rgba(255, 243, 249, 0.9);
+          display: none;
+        }
+        .cat-chatbot__presence {
+          display: inline-flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 7px;
+          margin-top: 2px;
+          font-size: 0.78rem;
+          color: rgba(56, 26, 63, 0.7);
+        }
+        .cat-chatbot__presence-meta {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .cat-chatbot__status-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--cat-chatbot-success);
+          box-shadow: 0 0 0 4px rgba(106, 191, 140, 0.14);
         }
         .cat-chatbot__close {
-          background: rgba(255, 255, 255, 0.12);
-          color: #ffffff;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          width: 38px;
-          height: 38px;
-          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.36);
+          color: var(--cat-chatbot-ink);
+          border: 1px solid rgba(141, 43, 97, 0.08);
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
           cursor: pointer;
           font-size: 1rem;
           flex-shrink: 0;
         }
         .cat-chatbot__messages {
           flex: 1;
+          min-height: 0;
           overflow-y: auto;
-          padding: 18px 18px 14px;
+          padding: 16px 18px 16px;
           background:
-            radial-gradient(circle at top, rgba(255, 215, 228, 0.22), transparent 24%),
-            linear-gradient(180deg, #fffafc, #fff6ef 54%, #fffdfb 100%);
+            linear-gradient(180deg, rgba(255, 248, 255, 0.16), rgba(255, 255, 255, 0.06));
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 12px;
           position: relative;
+          z-index: 1;
         }
         .cat-chatbot__messages::before {
           content: '';
@@ -190,132 +259,265 @@ class CatChatbotBtn extends HTMLElement {
           z-index: 1;
           pointer-events: none;
         }
+        .cat-chatbot__message {
+          display: flex;
+          align-items: flex-end;
+          gap: 10px;
+        }
+        .cat-chatbot__message--user {
+          justify-content: flex-end;
+        }
+        .cat-chatbot__message--status {
+          justify-content: center;
+        }
+        .cat-chatbot__message--emergency {
+          justify-content: center;
+        }
+        .cat-chatbot__message-avatar {
+          width: 32px;
+          height: 32px;
+          flex-shrink: 0;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.96), rgba(247, 230, 242, 0.92) 58%, rgba(230, 202, 244, 0.95));
+          border: 1px solid rgba(222, 189, 238, 0.72);
+          color: #d98cab;
+          box-shadow: 0 6px 16px rgba(170, 118, 191, 0.14);
+          overflow: hidden;
+        }
         .cat-chatbot__bubble {
-          max-width: 88%;
+          max-width: calc(100% - 42px);
           padding: 12px 14px;
           border-radius: 20px;
-          font-size: 0.92rem;
-          line-height: 1.6;
+          font-size: 0.88rem;
+          line-height: 1.55;
           white-space: pre-wrap;
-          box-shadow: 0 10px 26px rgba(68, 24, 43, 0.08);
+          word-break: break-word;
+          overflow-wrap: anywhere;
+          box-shadow: 0 8px 22px rgba(124, 85, 145, 0.1);
           position: relative;
         }
         .cat-chatbot__bubble--assistant {
-          align-self: flex-start;
-          background: linear-gradient(180deg, #ffffff, #fdeff5);
-          color: #4c1734;
-          border: 1px solid rgba(157, 45, 106, 0.08);
-          border-bottom-left-radius: 8px;
+          background: linear-gradient(180deg, rgba(245, 239, 252, 0.96), rgba(239, 232, 249, 0.95));
+          color: var(--cat-chatbot-ink);
+          border: 1px solid rgba(186, 157, 210, 0.38);
+          border-bottom-left-radius: 12px;
         }
         .cat-chatbot__bubble--user {
-          align-self: flex-end;
-          background: linear-gradient(135deg, #d97a17, #bf5915);
+          background: linear-gradient(135deg, rgba(171, 119, 214, 0.96), rgba(132, 79, 176, 0.98));
           color: #ffffff;
-          border: 1px solid rgba(147, 69, 16, 0.16);
-          border-bottom-right-radius: 8px;
+          border: 1px solid rgba(107, 59, 146, 0.18);
+          border-bottom-right-radius: 12px;
         }
         .cat-chatbot__bubble--status {
-          align-self: center;
-          background: rgba(141, 43, 97, 0.09);
+          background: rgba(245, 239, 252, 0.72);
           color: #6b1a47;
           font-size: 0.8rem;
-          border: 1px solid rgba(141, 43, 97, 0.08);
+          border: 1px solid rgba(186, 157, 210, 0.25);
           box-shadow: none;
         }
+        .cat-chatbot__bubble--emergency {
+          max-width: 100%;
+          background: linear-gradient(180deg, rgba(255, 228, 196, 0.98), rgba(255, 221, 181, 0.98));
+          color: #3f2610;
+          border: 1px solid rgba(230, 126, 34, 0.34);
+          padding: 14px 16px 14px 42px;
+          font-weight: 800;
+          letter-spacing: 0.01em;
+          box-shadow: 0 8px 24px rgba(230, 126, 34, 0.22);
+        }
+        .cat-chatbot__bubble--emergency::before {
+          content: '⚠';
+          position: absolute;
+          top: 14px;
+          left: 14px;
+          width: 20px;
+          height: 20px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: transparent;
+          color: #c86910;
+          font-size: 0.92rem;
+          font-weight: 900;
+        }
         .cat-chatbot__composer {
-          padding: 16px;
-          border-top: 1px solid rgba(157, 45, 106, 0.12);
+          padding: 8px 18px 16px;
+          border-top: none;
           background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 241, 0.98));
+            linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.22));
+          position: relative;
+          z-index: 1;
+          flex-shrink: 0;
         }
         .cat-chatbot__safety {
           display: flex;
           align-items: center;
-          gap: 8px;
-          margin: 0 0 12px;
-          padding: 10px 12px;
-          border-radius: 16px;
-          background: linear-gradient(135deg, #fff4df, #ffecd0);
+          gap: 0;
+          margin: 0 0 10px;
+          padding: 0;
+          border-radius: 0;
+          background: transparent;
           color: var(--cat-chatbot-gold-deep);
-          font-size: 0.76rem;
+          font-size: 0.77rem;
           font-weight: 700;
           line-height: 1.45;
-          border: 1px solid rgba(200, 108, 22, 0.14);
-        }
-        .cat-chatbot__notice {
-          margin: 0 0 10px;
-          padding: 10px 12px;
-          border-radius: 16px;
-          background: #fffaf2;
-          color: #7a3d00;
-          font-size: 0.76rem;
-          line-height: 1.45;
-          border: 1px solid rgba(200, 108, 22, 0.12);
+          border: none;
         }
         .cat-chatbot__attempts {
-          margin: 0 0 10px;
-          font-size: 0.75rem;
+          margin: 0;
+          font-size: 0.72rem;
           font-weight: 700;
-          color: var(--cat-chatbot-plum);
+          color: rgba(97, 44, 106, 0.76);
+          white-space: nowrap;
         }
         .cat-chatbot__attempt-actions {
-          display: flex;
-          justify-content: flex-end;
-          margin: -4px 0 10px;
-        }
-        .cat-chatbot__reset {
-          border: none;
-          background: transparent;
-          color: var(--cat-chatbot-plum);
-          font: inherit;
-          font-size: 0.74rem;
-          font-weight: 700;
-          cursor: pointer;
-          padding: 0;
+          display: none;
         }
         .cat-chatbot__hint {
-          font-size: 0.75rem;
-          color: #7b6b75;
+          display: none;
+        }
+        .cat-chatbot__quick-replies {
+          display: flex;
+          gap: 8px;
+          overflow-x: auto;
+          padding-bottom: 6px;
           margin: 0 0 10px;
+          scrollbar-width: none;
+        }
+        .cat-chatbot__quick-replies::-webkit-scrollbar {
+          display: none;
+        }
+        .cat-chatbot__quick-reply {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          border: 1px solid rgba(210, 193, 222, 0.9);
+          background: rgba(255, 255, 255, 0.9);
+          color: #4e3b56;
+          border-radius: 999px;
+          padding: 10px 14px;
+          font: inherit;
+          font-size: 0.72rem;
+          font-weight: 700;
+          white-space: nowrap;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(133, 93, 152, 0.1);
+          transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+        }
+        .cat-chatbot__quick-reply:hover {
+          transform: translateY(-1px);
+          background: rgba(255, 255, 255, 0.98);
+          border-color: rgba(200, 172, 220, 0.96);
+        }
+        .cat-chatbot__quick-icon {
+          width: 16px;
+          height: 16px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          border-radius: 50%;
+          font-size: 0.7rem;
+          line-height: 1;
+          background: rgba(230, 126, 34, 0.12);
+        }
+        .cat-chatbot__quick-reply:disabled {
+          opacity: 0.55;
+          cursor: not-allowed;
+          transform: none;
         }
         .cat-chatbot__form {
-          display: grid;
-          grid-template-columns: 1fr auto;
+          display: block;
+        }
+        .cat-chatbot__input-shell {
+          display: flex;
+          align-items: center;
           gap: 10px;
-          align-items: end;
+          padding: 8px 8px 8px 18px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(220, 205, 232, 0.92);
+          backdrop-filter: blur(12px);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            0 8px 24px rgba(141, 110, 160, 0.08);
         }
         .cat-chatbot__input {
           resize: none;
-          min-height: 52px;
+          min-height: 48px;
           max-height: 132px;
-          border: 1px solid rgba(157, 45, 106, 0.18);
-          border-radius: 18px;
-          padding: 14px 15px;
+          border: none;
+          border-radius: 0;
+          padding: 13px 0 11px;
           font: inherit;
-          color: #333333;
+          font-size: 0.95rem;
+          color: var(--cat-chatbot-ink);
           outline: none;
-          background: rgba(255, 255, 255, 0.92);
+          background: transparent;
+          flex: 1;
+          line-height: 1.4;
+          box-sizing: border-box;
+          display: block;
+          margin: 0;
+          overflow-y: auto;
         }
         .cat-chatbot__input:focus {
-          border-color: var(--cat-chatbot-plum);
-          box-shadow: 0 0 0 4px rgba(157, 45, 106, 0.12);
+          box-shadow: none;
         }
         .cat-chatbot__send {
           border: none;
-          border-radius: 18px;
-          background: linear-gradient(135deg, var(--cat-chatbot-plum), #741f4d);
+          border-radius: 50%;
+          background: linear-gradient(135deg, #f0953b, #d86f18);
           color: #ffffff;
           font: inherit;
           font-weight: 700;
-          padding: 12px 18px;
+          width: 46px;
+          height: 46px;
           cursor: pointer;
-          min-height: 52px;
-          box-shadow: 0 12px 24px rgba(141, 43, 97, 0.18);
+          min-height: 46px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 12px 24px rgba(230, 126, 34, 0.24);
         }
         .cat-chatbot__send:disabled {
           opacity: 0.6;
           cursor: wait;
           box-shadow: none;
+        }
+        .cat-chatbot__typing {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          min-width: 44px;
+          min-height: 12px;
+        }
+        .cat-chatbot__typing-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(107, 59, 146, 0.5);
+          animation: catChatbotTyping 1s infinite ease-in-out;
+        }
+        .cat-chatbot__typing-dot:nth-child(2) {
+          animation-delay: 0.18s;
+        }
+        .cat-chatbot__typing-dot:nth-child(3) {
+          animation-delay: 0.36s;
+        }
+        @keyframes catChatbotTyping {
+          0%, 80%, 100% {
+            transform: translateY(0);
+            opacity: 0.45;
+          }
+          40% {
+            transform: translateY(-3px);
+            opacity: 1;
+          }
         }
         @media (max-width: 640px) {
           .cat-chatbot,
@@ -333,41 +535,69 @@ class CatChatbotBtn extends HTMLElement {
             height: min(74vh, 560px);
             border-radius: 24px;
           }
-          .cat-chatbot__form {
-            grid-template-columns: 1fr;
+          .cat-chatbot__header {
+            padding: 16px;
           }
-          .cat-chatbot__send {
-            width: 100%;
+          .cat-chatbot__presence {
+            gap: 6px;
+          }
+          .cat-chatbot__subtitle {
+            max-width: none;
+          }
+          .cat-chatbot__input-shell {
+            padding-left: 14px;
+          }
+          .cat-chatbot__bubble {
+            max-width: calc(100% - 38px);
           }
         }
       </style>
       <div class="cat-chatbot" id="catChatbotRoot">
         <div class="cat-chatbot__panel" id="catChatbotPanel" aria-live="polite">
           <div class="cat-chatbot__header">
-            <div>
-              <p class="cat-chatbot__eyebrow">Apoyo inmediato</p>
-              <p class="cat-chatbot__title">Asistente Cattleya</p>
-              <p class="cat-chatbot__subtitle">Orientacion sobre VBG, rutas de ayuda y evaluacion inicial de riesgo.</p>
+            <div class="cat-chatbot__header-main">
+              <div class="cat-chatbot__avatar" aria-hidden="true">
+                <img src="assets/logo-claro.png" alt="" />
+              </div>
+              <div class="cat-chatbot__header-copy">
+                <p class="cat-chatbot__eyebrow">Apoyo inmediato</p>
+                <p class="cat-chatbot__title">Asistente Cattleya</p>
+                <p class="cat-chatbot__subtitle">Orientacion sobre VBG, rutas de ayuda y evaluacion inicial de riesgo.</p>
+                <div class="cat-chatbot__presence">
+                  <span class="cat-chatbot__status-dot" aria-hidden="true"></span>
+                  <span>En linea</span>
+                  <span class="cat-chatbot__presence-meta">
+                    <span>•</span>
+                    <span class="cat-chatbot__attempts" id="catChatbotAttempts"></span>
+                  </span>
+                </div>
+              </div>
             </div>
-            <button class="cat-chatbot__close" type="button" aria-label="Cerrar chat">x</button>
+            <button class="cat-chatbot__close" type="button" aria-label="Cerrar chat">&times;</button>
           </div>
           <div class="cat-chatbot__messages" id="catChatbotMessages"></div>
           <div class="cat-chatbot__composer">
             <p class="cat-chatbot__safety">Si estas en peligro inmediato, llama a la Linea 155 o al 123.</p>
-            <p class="cat-chatbot__notice">Se clara y concreta. Describe tu situacion o pregunta en un solo mensaje breve.</p>
-            <p class="cat-chatbot__attempts" id="catChatbotAttempts"></p>
-            <div class="cat-chatbot__attempt-actions">
-              <button class="cat-chatbot__reset" id="catChatbotReset" type="button">Reiniciar intentos</button>
-            </div>
             <p class="cat-chatbot__hint">Si hay riesgo inmediato, llama a la Linea 155 o al 123.</p>
+            <div class="cat-chatbot__quick-replies" aria-label="Sugerencias rapidas">
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Cuales son las rutas de ayuda disponibles en Colombia?"><span class="cat-chatbot__quick-icon">🚨</span><span>Rutas de Ayuda</span></button>
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Cuales son las principales senales de riesgo en un caso de violencia?"><span class="cat-chatbot__quick-icon">🛑</span><span>Senales de Riesgo</span></button>
+              <button class="cat-chatbot__quick-reply" type="button" data-prompt="Necesito hablar con una persona o recibir orientacion humana. Que opciones tengo?"><span class="cat-chatbot__quick-icon">📞</span><span>Hablar con Humano</span></button>
+            </div>
             <form class="cat-chatbot__form" id="catChatbotForm">
-              <textarea
-                class="cat-chatbot__input"
-                id="catChatbotInput"
-                rows="1"
-                placeholder="Escribe una pregunta clara y breve..."
-              ></textarea>
-              <button class="cat-chatbot__send" id="catChatbotSend" type="submit">Enviar</button>
+              <div class="cat-chatbot__input-shell">
+                <textarea
+                  class="cat-chatbot__input"
+                  id="catChatbotInput"
+                  rows="1"
+                  placeholder="Escribe una pregunta clara y breve..."
+                ></textarea>
+                <button class="cat-chatbot__send" id="catChatbotSend" type="submit" aria-label="Enviar mensaje">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 12L20 4L13 20L11 13L4 12Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
             </form>
           </div>
         </div>
@@ -393,11 +623,12 @@ class CatChatbotBtn extends HTMLElement {
     this._input = this.querySelector('#catChatbotInput');
     this._send = this.querySelector('#catChatbotSend');
     this._attemptsLabel = this.querySelector('#catChatbotAttempts');
-    this._resetAttemptsBtn = this.querySelector('#catChatbotReset');
+    this._quickReplyButtons = this.querySelectorAll('.cat-chatbot__quick-reply');
 
     this._setPlacement();
     this._updateAttemptUI();
     this._renderMessages();
+    this._resizeInput();
     this._bindEvents();
   }
 
@@ -409,8 +640,16 @@ class CatChatbotBtn extends HTMLElement {
   _bindEvents() {
     this._toggle.addEventListener('click', () => this._openPanel());
     this._close.addEventListener('click', () => this._closePanel());
-    this._resetAttemptsBtn.addEventListener('click', () => this._resetAttempts());
     this._form.addEventListener('submit', (event) => this._handleSubmit(event));
+    this._quickReplyButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (this._isSending || this._getRemainingAttempts() <= 0) return;
+        this._input.value = button.dataset.prompt || '';
+        this._resizeInput();
+        this._form.requestSubmit();
+      });
+    });
+    this._input.addEventListener('input', () => this._resizeInput());
     this._input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
@@ -435,11 +674,34 @@ class CatChatbotBtn extends HTMLElement {
 
   _renderMessages() {
     this._messages.innerHTML = this._conversation.map((message) => {
-      const roleClass = message.role === 'user'
-        ? 'cat-chatbot__bubble--user'
-        : 'cat-chatbot__bubble--assistant';
+      const isUser = message.role === 'user';
+      const isEmergency = !isUser && this._isEmergencyMessage(message.content);
+      const wrapperClasses = ['cat-chatbot__message'];
+      const bubbleClasses = ['cat-chatbot__bubble'];
 
-      return `<div class="cat-chatbot__bubble ${roleClass}">${this._escapeHtml(message.content)}</div>`;
+      if (isUser) {
+        wrapperClasses.push('cat-chatbot__message--user');
+        bubbleClasses.push('cat-chatbot__bubble--user');
+      } else if (isEmergency) {
+        wrapperClasses.push('cat-chatbot__message--emergency');
+        bubbleClasses.push('cat-chatbot__bubble--assistant', 'cat-chatbot__bubble--emergency');
+      } else {
+        bubbleClasses.push('cat-chatbot__bubble--assistant');
+      }
+
+      const avatar = !isUser && !isEmergency
+        ? `
+          <span class="cat-chatbot__message-avatar" aria-hidden="true">
+            <img src="assets/logo-claro.png" alt="" />
+          </span>
+        `
+        : '';
+
+      if (isUser) {
+        return `<div class="${wrapperClasses.join(' ')}"><div class="${bubbleClasses.join(' ')}">${this._escapeHtml(message.content)}</div></div>`;
+      }
+
+      return `<div class="${wrapperClasses.join(' ')}">${avatar}<div class="${bubbleClasses.join(' ')}">${this._escapeHtml(message.content)}</div></div>`;
     }).join('');
 
     this._messages.scrollTop = this._messages.scrollHeight;
@@ -467,21 +729,10 @@ class CatChatbotBtn extends HTMLElement {
     return Math.max(0, this._maxAttempts - this._attemptsUsed);
   }
 
-  _resetAttempts() {
-    this._attemptsUsed = 0;
-    this._writeAttemptsUsed();
-    this._updateAttemptUI();
-    this._conversation.push({
-      role: 'assistant',
-      content: 'Reinicie el contador de intentos de esta sesion para seguir probando.'
-    });
-    this._renderMessages();
-  }
-
   _updateAttemptUI() {
     const remaining = this._getRemainingAttempts();
     if (this._attemptsLabel) {
-      this._attemptsLabel.textContent = `Intentos disponibles en esta sesion: ${remaining} de ${this._maxAttempts}.`;
+      this._attemptsLabel.textContent = `${remaining}/${this._maxAttempts} intentos`;
     }
 
     const isLocked = remaining <= 0;
@@ -491,6 +742,9 @@ class CatChatbotBtn extends HTMLElement {
     if (this._send) {
       this._send.disabled = isLocked || this._isSending;
     }
+    this._quickReplyButtons.forEach((button) => {
+      button.disabled = isLocked || this._isSending;
+    });
 
     if (this._input) {
       this._input.placeholder = isLocked
@@ -501,11 +755,27 @@ class CatChatbotBtn extends HTMLElement {
 
   _appendStatus(text) {
     const status = document.createElement('div');
-    status.className = 'cat-chatbot__bubble cat-chatbot__bubble--status';
-    status.textContent = text;
+    status.className = 'cat-chatbot__message cat-chatbot__message--status';
+    status.setAttribute('aria-label', text);
+    status.innerHTML = `
+      <div class="cat-chatbot__bubble cat-chatbot__bubble--status">
+        <span class="cat-chatbot__typing" aria-hidden="true">
+          <span class="cat-chatbot__typing-dot"></span>
+          <span class="cat-chatbot__typing-dot"></span>
+          <span class="cat-chatbot__typing-dot"></span>
+        </span>
+      </div>
+    `;
     this._messages.appendChild(status);
     this._messages.scrollTop = this._messages.scrollHeight;
     return status;
+  }
+
+  _resizeInput() {
+    if (!this._input) return;
+    this._input.style.height = 'auto';
+    const nextHeight = Math.min(this._input.scrollHeight, 132);
+    this._input.style.height = `${Math.max(48, nextHeight)}px`;
   }
 
   async _handleSubmit(event) {
@@ -527,6 +797,7 @@ class CatChatbotBtn extends HTMLElement {
     this._conversation.push({ role: 'user', content: text });
     this._renderMessages();
     this._input.value = '';
+    this._resizeInput();
 
     this._isSending = true;
     this._updateAttemptUI();
@@ -615,14 +886,23 @@ class CatChatbotBtn extends HTMLElement {
 
   _resolveChatEndpoint() {
     const runtimeConfig = window.CATTLEYA_CONFIG || {};
-    const configuredBase = String(runtimeConfig.CHATBOT_API_BASE_URL || '').trim().replace(/\/+$/, '');
-    if (configuredBase) {
-      return `${configuredBase}/api/chat`;
+    const configuredChatBase = String(runtimeConfig.CHATBOT_API_BASE_URL || '').trim().replace(/\/+$/, '');
+    if (configuredChatBase) {
+      return `${configuredChatBase}/api/chat`;
+    }
+
+    const configuredApiBase = String(runtimeConfig.API_BASE_URL || '').trim().replace(/\/+$/, '');
+    if (configuredApiBase) {
+      return `${configuredApiBase}/api/chat`;
     }
 
     const hostname = window.location.hostname;
     if (hostname === '127.0.0.1' || hostname === 'localhost') {
-      return 'http://127.0.0.1:5000/api/chat';
+      return 'http://127.0.0.1:8000/api/chat';
+    }
+
+    if (window.location.protocol === 'file:') {
+      return 'http://127.0.0.1:8000/api/chat';
     }
 
     return '/api/chat';
@@ -636,6 +916,15 @@ class CatChatbotBtn extends HTMLElement {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
   }
+
+  _isEmergencyMessage(text) {
+    const normalized = String(text || '').toLowerCase();
+    return normalized.includes('155')
+      || normalized.includes('123')
+      || normalized.includes('peligro inmediato')
+      || normalized.includes('linea 155');
+  }
 }
 
 customElements.define('cat-chatbot-btn', CatChatbotBtn);
+}
