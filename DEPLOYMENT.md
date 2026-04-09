@@ -36,8 +36,6 @@ Ademas de las que ya define `render.yaml`, configura o verifica:
 - `POSTGRES_SSLMODE=require`
 - `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD` si quieres que Render cree el admin automaticamente durante el deploy.
 
-Tambien tienes una plantilla de referencia en [backend/.env.render.example](/c:/Users/Esteban/desktop/cattleya/backend/.env.render.example).
-
 ### Flujo sugerido en Render
 
 1. Conecta el repositorio.
@@ -45,7 +43,7 @@ Tambien tienes una plantilla de referencia en [backend/.env.render.example](/c:/
 3. Espera a que cree:
    - un servicio web `cattleya-backend`
    - una base de datos `cattleya-db`
-4. En el servicio web, agrega solo las variables que quieras personalizar, tomando como base [backend/.env.render.example](/c:/Users/Esteban/desktop/cattleya/backend/.env.render.example).
+4. En el servicio web, agrega las variables directamente desde el panel de Render usando la lista del apartado "Variables necesarias del backend".
 5. Si quieres acceso inmediato al admin, agrega `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL` y `DJANGO_SUPERUSER_PASSWORD`.
 6. Corrige `DJANGO_CORS_ALLOWED_ORIGINS` con el dominio real del frontend cuando ya exista.
 6. Despliega.

@@ -53,8 +53,9 @@ else {
 }
 
 if (-not (Test-Path ".\.env")) {
-    Copy-Item ".\.env.example" ".\.env"
-    Write-Host "Se creo .env a partir de .env.example"
+    Write-Host "No existe .env en backend/."
+    Write-Host "Crea backend/.env manualmente con las variables locales antes de continuar."
+    exit 1
 }
 
 & $venvPython manage.py migrate

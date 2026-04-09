@@ -9,7 +9,7 @@ if (-not (Test-Path ".\venv\Scripts\python.exe")) {
 }
 
 if (-not (Test-Path ".\.env")) {
-    Write-Host "No existe .env. Crea el archivo desde .env.example y completa las credenciales."
+    Write-Host "No existe .env. Crea backend/.env y completa las credenciales."
     exit 1
 }
 
