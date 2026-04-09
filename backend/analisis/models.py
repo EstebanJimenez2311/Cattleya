@@ -1,5 +1,17 @@
+import math
+
 from django.core.exceptions import ValidationError
 from django.db import models
+
+
+def _sanitize_json_numbers(value):
+    if isinstance(value, dict):
+        return {key: _sanitize_json_numbers(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_sanitize_json_numbers(item) for item in value]
+    if isinstance(value, float) and (math.isnan(value) or math.isinf(value)):
+        return None
+    return value
 
 
 def _require_keys(value, required_keys, path):
@@ -34,6 +46,43 @@ class ResultadoAnalisis(models.Model):
 
     @staticmethod
     def validate_datos_structure(datos):
+        if isinstance(datos, dict) and {"metadata", "dashboard"}.issubset(datos.keys()):
+            ResultadoAnalisis._validate_notebook_export(datos)
+            return
+
+        if isinstance(datos, dict) and {
+            "contexto",
+            "dashboard_principal",
+            "analisis_segmentado",
+            "foco_regional",
+        }.issubset(datos.keys()):
+            ResultadoAnalisis._validate_legacy_structure(datos)
+            return
+
+        raise ValidationError(
+            {
+                "datos": (
+                    "La estructura del JSON no es compatible. "
+                    "Se esperaba un export con claves metadata/dashboard "
+                    "o la estructura legacy contexto/dashboard_principal/analisis_segmentado/foco_regional."
+                )
+            }
+        )
+
+    @staticmethod
+    def _validate_notebook_export(datos):
+        _require_keys(datos, ["metadata", "dashboard"], "datos")
+        _require_keys(datos["metadata"], ["nombre", "fecha", "fuente"], "datos.metadata")
+
+        if not isinstance(datos["dashboard"], dict):
+            raise ValidationError({"datos.dashboard": "Debe ser un objeto JSON."})
+
+        insights = datos.get("insights", [])
+        if insights and not isinstance(insights, list):
+            raise ValidationError({"datos.insights": "Debe ser una lista."})
+
+    @staticmethod
+    def _validate_legacy_structure(datos):
         root_keys = [
             "contexto",
             "dashboard_principal",
@@ -165,9 +214,11 @@ class ResultadoAnalisis(models.Model):
 
     def clean(self):
         super().clean()
+        self.datos = _sanitize_json_numbers(self.datos)
         self.validate_datos_structure(self.datos)
 
     def save(self, *args, **kwargs):
+        self.datos = _sanitize_json_numbers(self.datos)
         self.full_clean()
         return super().save(*args, **kwargs)
 

@@ -1,0 +1,38 @@
+.cattleya-drop-input {
+  position: relative;
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  border: 2px dashed #9d2d6a;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff8f5 0%, #fff 100%);
+  color: #5f2945;
+  cursor: pointer;
+}
+
+.cattleya-drop-input::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #9d2d6a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cattleya-drop-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cattleya-drop-hint {
+  margin-top: 8px;
+  color: #6f5a67;
+  font-size: 12px;
+}
+
+.cattleya-drop-wrapper.is-dragover .cattleya-drop-input {
+  border-color: #f28c28;
+  background: #fff0e2;
+  box-shadow: 0 0 0 4px rgba(242, 140, 40, 0.15);
+}

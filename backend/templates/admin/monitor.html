@@ -20,9 +20,26 @@
       <div><strong>Última actualización</strong></div>
       <div>{% if ultima_actualizacion %}{{ ultima_actualizacion }}{% else %}N/A{% endif %}</div>
     </div>
-    <div class="submit-row" style="margin-top: 1rem;">
-      <a class="default" href="/api/analisis/resultados/" target="_blank">Ver endpoint /api/analisis/resultados/</a>
+    <div class="submit-row" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <a class="default" href="/api/analisis/resultados/" target="_blank">Ver /api/analisis/resultados/</a>
+      <a class="default" href="/api/analisis/dashboard/" target="_blank">Ver /api/analisis/dashboard/</a>
     </div>
+    {% if analisis_recientes %}
+    <table class="listing" style="width: 100%; margin-top: 1rem;">
+      <thead>
+        <tr><th>Nombre</th><th>Fuente</th><th>Actualizado</th></tr>
+      </thead>
+      <tbody>
+        {% for analisis in analisis_recientes %}
+        <tr>
+          <td>{{ analisis.nombre }}</td>
+          <td>{{ analisis.fuente }}</td>
+          <td>{{ analisis.actualizado }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
   </section>
 
   <section class="module aligned">
@@ -65,10 +82,35 @@
 
   <section class="module aligned">
     <h2>Operaciones</h2>
-    <p>Ejecuta la carga de análisis desde el admin.</p>
+    <p>Carga un archivo JSON exportado desde el notebook para alimentar el dashboard del frontend.</p>
+    <form method="post" enctype="multipart/form-data" style="margin-top: 1rem;">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="upload_analysis">
+      <div class="form-row">
+        <div><strong>Archivo JSON</strong></div>
+        <div><input type="file" name="archivo" accept=".json,application/json" required></div>
+      </div>
+      <div class="form-row">
+        <div><strong>Nombre opcional</strong></div>
+        <div><input type="text" name="nombre" placeholder="analisis_vbg_colombia"></div>
+      </div>
+      <div class="form-row">
+        <div><strong>Descripción opcional</strong></div>
+        <div><input type="text" name="descripcion" placeholder="Carga desde dashboard"></div>
+      </div>
+      <div class="submit-row" style="margin-top: 1rem;">
+        <button type="submit" class="default">Subir y procesar JSON</button>
+      </div>
+    </form>
+
+    <hr style="margin: 1.5rem 0;">
+
+    <p>También puedes ejecutar la command line `cargar_analisis` si ya conoces la ruta local del archivo.</p>
     <form method="post" style="margin-top: 1rem;">
       {% csrf_token %}
-      <button type="submit" class="default">Ejecutar cargar_analisis</button>
+      <div class="submit-row">
+        <button type="submit" class="default">Ejecutar cargar_analisis</button>
+      </div>
     </form>
   </section>
 </div>

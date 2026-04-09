@@ -46,6 +46,7 @@ Ademas de las que ya define `render.yaml`, configura o verifica:
 4. En el servicio web, agrega las variables directamente desde el panel de Render usando la lista del apartado "Variables necesarias del backend".
 5. Si quieres acceso inmediato al admin, agrega `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL` y `DJANGO_SUPERUSER_PASSWORD`.
 6. Corrige `DJANGO_CORS_ALLOWED_ORIGINS` con el dominio real del frontend cuando ya exista.
+   El backend ya contempla desarrollo local con `http://127.0.0.1:5500` y `http://localhost:5500`, asi que esta variable debe enfocarse en los dominios reales de produccion.
 6. Despliega.
 
 ### Verificacion del backend
@@ -86,7 +87,7 @@ El archivo [netlify.toml](/c:/Users/Esteban/desktop/cattleya/netlify.toml) ya pu
    - Publish directory: `cattleya-sitio`
 3. Despliega.
 4. Toma la URL final de Netlify.
-5. Regresa a Render y actualiza `DJANGO_CORS_ALLOWED_ORIGINS` y `DJANGO_CSRF_TRUSTED_ORIGINS` si hace falta.
+5. Regresa a Render y actualiza `DJANGO_CORS_ALLOWED_ORIGINS` y `DJANGO_CSRF_TRUSTED_ORIGINS` con el dominio real del frontend si hace falta.
 6. Vuelve a desplegar el backend.
 
 ## 4. Orden recomendado para dejar la demo lista
@@ -105,7 +106,7 @@ El archivo [netlify.toml](/c:/Users/Esteban/desktop/cattleya/netlify.toml) ya pu
 - Admin abre correctamente
 - Frontend carga
 - Pagina `testimonios.html` muestra noticias reales
-- CORS habilitado solo para el dominio del frontend
+- CORS habilitado para produccion y para desarrollo local
 - `DJANGO_SECRET_KEY` rotada para produccion
 
 ## 6. Riesgos a tener presentes

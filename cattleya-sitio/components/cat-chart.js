@@ -1,63 +1,80 @@
 /**
- * <cat-chart chart-id="miGrafico" title="Título" description="Descripción" height="320">
+ * <cat-chart chart-id="mi-grafico" title="Titulo" description="Descripcion" height="320">
  *
- * Este componente crea el contenedor visual de un gráfico.
- * Los datos y la inicialización de Chart.js se manejan desde data/charts.js
- *
- * Atributos:
- *   chart-id    — ID único del canvas (debe coincidir con el registro en charts.js)
- *   title       — título del gráfico
- *   description — descripción/pregunta que responde el gráfico
- *   height      — altura del canvas en px (default: 320)
- *
- * Uso:
- *   <cat-chart
- *     chart-id="chart-evolucion"
- *     title="Evolución anual de casos"
- *     description="¿Aumentaron o disminuyeron los casos?">
- *   </cat-chart>
- *
- * Luego en data/charts.js registrar:
- *   CHARTS['chart-evolucion'] = { type: 'line', data: {...}, options: {...} }
+ * Contenedor visual para un grafico de Chart.js.
+ * La configuracion se toma desde window.CHARTS[chart-id].
  */
 class CatChart extends HTMLElement {
-  connectedCallback() { this._render(); }
+  connectedCallback() {
+    this._render();
+  }
+
+  disconnectedCallback() {
+    this._destroyChart();
+  }
+
+  _destroyChart() {
+    if (this._chart) {
+      this._chart.destroy();
+      this._chart = null;
+    }
+  }
 
   _render() {
-    const chartId   = this.getAttribute('chart-id')    || `chart-${Math.random().toString(36).slice(2,7)}`;
-    const title     = this.getAttribute('title')       || '';
-    const desc      = this.getAttribute('description') || '';
-    const height    = this.getAttribute('height')      || '320';
+    const chartId = this.getAttribute('chart-id') || `chart-${Math.random().toString(36).slice(2, 7)}`;
+    const title = this.getAttribute('title') || '';
+    const description = this.getAttribute('description') || '';
+    const height = this.getAttribute('height') || '320';
+
+    this._destroyChart();
 
     this.innerHTML = `
       <div class="chart-container">
         ${title ? `<h3>${title}</h3>` : ''}
-        ${desc  ? `<p style="font-size:0.82rem;color:#666;margin-bottom:16px;">${desc}</p>` : ''}
+        ${description ? `<p style="font-size:0.84rem;color:#6b5561;margin-bottom:16px;line-height:1.6;">${description}</p>` : ''}
         <div class="chart-canvas-wrap" style="height:${height}px;">
-          <canvas id="${chartId}"></canvas>
+          <canvas id="${chartId}" aria-label="${title || chartId}" role="img"></canvas>
         </div>
       </div>
     `;
 
-    // Esperar a que Chart.js y charts.js estén cargados
     this._initChart(chartId);
   }
 
+  _cloneConfig(config) {
+    if (typeof structuredClone === 'function') {
+      return structuredClone(config);
+    }
+    return JSON.parse(JSON.stringify(config));
+  }
+
   _initChart(chartId) {
+    const maxAttempts = 120;
+    let attempts = 0;
+
     const tryInit = () => {
+      if (!this.isConnected) return;
+
       if (typeof Chart === 'undefined' || typeof window.CHARTS === 'undefined') {
-        setTimeout(tryInit, 50);
+        attempts += 1;
+        if (attempts < maxAttempts) setTimeout(tryInit, 50);
         return;
       }
+
       const config = window.CHARTS[chartId];
       if (!config) {
-        console.warn(`[cat-chart] No se encontró configuración para: ${chartId}`);
+        attempts += 1;
+        if (attempts < maxAttempts) setTimeout(tryInit, 100);
         return;
       }
+
       const canvas = this.querySelector(`#${chartId}`);
       if (!canvas) return;
-      new Chart(canvas.getContext('2d'), config);
+
+      this._destroyChart();
+      this._chart = new Chart(canvas.getContext('2d'), this._cloneConfig(config));
     };
+
     tryInit();
   }
 }

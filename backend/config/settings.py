@@ -11,22 +11,27 @@ def env_bool(name: str, default: bool) -> bool:
     return os.getenv(name, str(default)).strip().lower() in {"1", "true", "yes", "on"}
 
 
+def env_list(name: str, default: str = "") -> list[str]:
+    return [item.strip() for item in os.getenv(name, default).split(",") if item.strip()]
+
+
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-dev-only-change-me")
 DEBUG = env_bool("DJANGO_DEBUG", True)
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,testserver").split(",")
-    if host.strip()
-]
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,testserver")
 render_external_hostname = os.getenv("RENDER_EXTERNAL_HOSTNAME", "").strip()
 if render_external_hostname and render_external_hostname not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(render_external_hostname)
 
-CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
-    if origin.strip()
+LOCAL_DEV_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
 ]
+
+CSRF_TRUSTED_ORIGINS = list(
+    dict.fromkeys(
+        env_list("DJANGO_CSRF_TRUSTED_ORIGINS") + LOCAL_DEV_ORIGINS
+    )
+)
 render_external_url = os.getenv("RENDER_EXTERNAL_URL", "").strip()
 if render_external_url and render_external_url not in CSRF_TRUSTED_ORIGINS:
     CSRF_TRUSTED_ORIGINS.append(render_external_url)
@@ -138,10 +143,15 @@ ADMIN_REMEMBER_ME_AGE = int(os.getenv("DJANGO_ADMIN_REMEMBER_ME_AGE", str(60 * 6
 
 CORS_ALLOW_ALL_ORIGINS = env_bool("DJANGO_CORS_ALLOW_ALL_ORIGINS", DEBUG)
 
-CORS_ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv("DJANGO_CORS_ALLOWED_ORIGINS", "http://127.0.0.1:5500,http://localhost:5500").split(",")
-    if origin.strip()
+CORS_ALLOWED_ORIGINS = list(
+    dict.fromkeys(
+        env_list("DJANGO_CORS_ALLOWED_ORIGINS") + LOCAL_DEV_ORIGINS
+    )
+)
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^http://localhost:\d+$",
+    r"^http://127\.0\.0\.1:\d+$",
 ]
 
 REST_FRAMEWORK = {
