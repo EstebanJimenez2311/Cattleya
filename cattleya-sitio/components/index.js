@@ -22,7 +22,8 @@ const components = [
   'cat-chart',
   'cat-cta-banner',
   'cat-section-header',
-  'cat-help-btn'
+  'cat-help-btn',
+  'cat-chatbot-btn'
 ];
 
 components.forEach(name => {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leamos las Raíces — CATTLEYA</title>
+  <title>Leamos las Raíces - CATTLEYA</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="data/charts.js"></script>
@@ -54,7 +54,7 @@
         <cat-stat-card variant="dark" number="XX,XXX" label="Total de registros analizados"></cat-stat-card>
         <cat-stat-card variant="dark" number="XX" label="Variables en el dataset"></cat-stat-card>
         <cat-stat-card variant="dark" number="X.X%" label="Valores nulos / faltantes"></cat-stat-card>
-        <cat-stat-card variant="dark" number="20XX–20XX" label="Rango temporal del dataset"></cat-stat-card>
+        <cat-stat-card variant="dark" number="20XX-20XX" label="Rango temporal del dataset"></cat-stat-card>
       </div>
       </cat-surface>
     </div>
@@ -113,7 +113,7 @@
     <div style="margin-top:24px;">
       <cat-chart
         chart-id="chart-meses"
-        title="Estacionalidad — casos por mes (promedio histórico)"
+        title="Estacionalidad - casos por mes (promedio histórico)"
         description="¿Hay meses con mayor incidencia?"
         height="260">
       </cat-chart>
@@ -129,18 +129,18 @@
       <cat-surface padding="24px" radius="24px">
       <div class="cards-grid" style="margin-top:0;">
         <cat-card
-          icon="📌"
-          title="Hallazgo 1 — [Raíz identificada]"
+          icon="[1]"
+          title="Hallazgo 1 - [Raíz identificada]"
           text="Describe aquí el patrón más revelador de la lectura descriptiva. Reemplaza este texto con el resultado real del notebook.">
         </cat-card>
         <cat-card
-          icon="📌"
-          title="Hallazgo 2 — [Territorio o patrón]"
-          text="Segundo hallazgo importante. Por ejemplo: concentración geográfica, grupo etario más afectado, o tipo de violencia predominante.">
+          icon="[2]"
+          title="Hallazgo 2 - [Territorio o patrón]"
+          text="Segundo hallazgo importante. Por ejemplo: concentración geográfica, grupo etario más afectado o tipo de violencia predominante.">
         </cat-card>
         <cat-card
-          icon="📌"
-          title="Hallazgo 3 — [Señal clave]"
+          icon="[3]"
+          title="Hallazgo 3 - [Señal clave]"
           text="Tercer hallazgo. Considera tendencias temporales, variaciones regionales o correlaciones iniciales que ayuden a entender la raíz del problema.">
         </cat-card>
       </div>
@@ -162,7 +162,9 @@
     <a href="tendencias.html" class="btn-primary">Tendencias &rarr;</a>
   </div>
 
+  <cat-chatbot-btn></cat-chatbot-btn>
   <cat-footer></cat-footer>
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 
 </body>
