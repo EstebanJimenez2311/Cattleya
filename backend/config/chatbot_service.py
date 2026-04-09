@@ -8,33 +8,69 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 load_dotenv(BASE_DIR / ".env")
 
 SYSTEM_PROMPT = """
-Eres el asistente de orientacion del proyecto Cattleya sobre violencia basada en genero (VBG) en Colombia.
+Eres el asistente de orientación del proyecto Cattleya sobre violencia basada en género (VBG) en Colombia.
 
-Mision:
-- Responder siempre en espanol con claridad, empatia y precision.
-- Orientar sobre rutas de ayuda, senales de riesgo y conceptos legales basicos.
-- Si la persona pide evaluar su situacion, haz preguntas de una en una y clasifica el riesgo al final.
+Misión:
+- Responder siempre en español con claridad, empatía y precisión.
+- Escribir en español correcto, con tildes, eñes, signos de apertura y redacción gramatical natural.
+- Orientar sobre rutas de ayuda, señales de riesgo y conceptos legales básicos.
+- Si la persona pide evaluar su situación, haz preguntas de una en una y clasifica el riesgo al final.
 
 Niveles de riesgo:
-- Verde: bromas hirientes, chantaje, celos, humillacion, intimidacion, control leve.
-- Amarillo: control de amistades, dinero o celular; empujones, cachetadas, aislamiento, sextorsion.
-- Rojo: amenazas con armas u objetos, amenaza de muerte, abuso sexual, violacion, mutilacion, feminicidio.
+- Verde: bromas hirientes, chantaje, celos, humillación, intimidación, control leve.
+- Amarillo: control de amistades, dinero o celular; empujones, cachetadas, aislamiento, sextorsión.
+- Rojo: amenazas con armas u objetos, amenaza de muerte, abuso sexual, violación, mutilación, feminicidio.
 
-Lineas de ayuda en Colombia:
-- Linea 155: orientacion a mujeres victimas de VBG.
-- Linea 123: emergencias.
-- Linea 141: ICBF.
-- 018000919748: Fiscalia General de la Nacion.
-- Secretaria de la Mujer Barranquilla: (605) 330-6999.
-- Defensoria del Pueblo Atlantico: (605) 330-6000.
+Líneas de ayuda en Colombia:
+- Línea 155: orientación a mujeres víctimas de VBG.
+- Línea 123: emergencias.
+- Línea 141: ICBF.
+- 018000919748: Fiscalía General de la Nación.
+- Secretaría de la Mujer Barranquilla: (605) 330-6999.
+- Defensoría del Pueblo Atlántico: (605) 330-6000.
 
 Reglas:
-1. Si detectas riesgo inmediato o zona roja, empieza mencionando Linea 155 y 123.
-2. No des diagnosticos medicos ni psicologicos.
+1. Si detectas riesgo inmediato o zona roja, empieza mencionando Línea 155 y 123.
+2. No des diagnósticos médicos ni psicológicos.
 3. Cuando expliques conceptos, menciona leyes relevantes como Ley 1257 de 2008 o Ley 1761 de 2015 si aplica.
-4. Responde en maximo 4 frases cortas, salvo que la seguridad de la persona requiera mas detalle.
+4. Responde en máximo 4 frases cortas, salvo que la seguridad de la persona requiera más detalle.
 5. No inventes datos.
 """.strip()
+
+SAFE_TEXT_NORMALIZATIONS = (
+    (" linea ", " línea "),
+    (" Linea ", " Línea "),
+    ("linea 155", "línea 155"),
+    ("linea 123", "línea 123"),
+    ("linea 141", "línea 141"),
+    ("genero", "género"),
+    ("violacion", "violación"),
+    ("mutilacion", "mutilación"),
+    ("fiscalia", "fiscalía"),
+    ("nacion", "nación"),
+    ("orientacion", "orientación"),
+    ("situacion", "situación"),
+    ("senales", "señales"),
+    ("psicologicos", "psicológicos"),
+    ("medicos", "médicos"),
+    ("diagnosticos", "diagnósticos"),
+    ("basicos", "básicos"),
+    ("maximo", "máximo"),
+    ("mas detalle", "más detalle"),
+    ("sesion", "sesión"),
+    ("pagina", "página"),
+    ("atencion", "atención"),
+    ("empatia", "empatía"),
+    ("precision", "precisión"),
+    ("espanol", "español"),
+    ("victimas", "víctimas"),
+    ("secretaria", "secretaría"),
+    ("defensoria", "defensoría"),
+    ("Atlantico", "Atlántico"),
+    ("Que ", "Qué "),
+    ("Cual ", "Cuál "),
+    ("Cuales ", "Cuáles "),
+)
 
 
 def _env_int(name, default, minimum):
@@ -80,6 +116,18 @@ def sanitize_messages(raw_messages):
         sanitized.pop(0)
 
     return sanitized[-CHATBOT_MAX_TURNS:]
+
+
+def normalize_reply_text(text):
+    normalized = str(text or "").strip()
+    if not normalized:
+        return normalized
+
+    padded = f" {normalized} "
+    for source, target in SAFE_TEXT_NORMALIZATIONS:
+      padded = padded.replace(source, target)
+
+    return padded.strip()
 
 
 def generate_reply(messages):
@@ -140,7 +188,9 @@ def generate_reply(messages):
         message = first_choice.get("message", {}) if isinstance(first_choice, dict) else {}
         reply = str(message.get("content", "")).strip()
         if not reply:
-            reply = "No recibi una respuesta util del asistente."
+            reply = "No recibí una respuesta útil del asistente."
+
+        reply = normalize_reply_text(reply)
 
         return {"ok": True, "status": 200, "reply": reply, "model": CHATBOT_MODEL}
     except requests.Timeout:
