@@ -59,12 +59,26 @@ class ResultadoAnalisis(models.Model):
             ResultadoAnalisis._validate_legacy_structure(datos)
             return
 
+        if isinstance(datos, dict) and {
+            "informacion_general_notebook",
+            "carga_de_datos",
+            "analisis_exploratorio_datos",
+            "preprocesamiento_ml",
+            "resultados_modelado",
+            "evaluacion_profunda",
+            "interpretabilidad",
+            "predicciones_prophet",
+        }.issubset(datos.keys()):
+            ResultadoAnalisis._validate_predictive_structure(datos)
+            return
+
         raise ValidationError(
             {
                 "datos": (
                     "La estructura del JSON no es compatible. "
-                    "Se esperaba un export con claves metadata/dashboard "
-                    "o la estructura legacy contexto/dashboard_principal/analisis_segmentado/foco_regional."
+                    "Se esperaba un export con claves metadata/dashboard, "
+                    "la estructura legacy contexto/dashboard_principal/analisis_segmentado/foco_regional "
+                    "o un export predictivo con módulos de ML y predicciones."
                 )
             }
         )
@@ -80,6 +94,124 @@ class ResultadoAnalisis(models.Model):
         insights = datos.get("insights", [])
         if insights and not isinstance(insights, list):
             raise ValidationError({"datos.insights": "Debe ser una lista."})
+
+    @staticmethod
+    def _validate_predictive_structure(datos):
+        _require_keys(
+            datos,
+            [
+                "informacion_general_notebook",
+                "carga_de_datos",
+                "analisis_exploratorio_datos",
+                "preprocesamiento_ml",
+                "resultados_modelado",
+                "evaluacion_profunda",
+                "interpretabilidad",
+                "predicciones_prophet",
+            ],
+            "datos",
+        )
+
+        info = datos["informacion_general_notebook"]
+        _require_keys(
+            info,
+            ["titulo", "descripcion_general", "estructura_modular", "librerias_cargadas"],
+            "datos.informacion_general_notebook",
+        )
+        if not isinstance(info["estructura_modular"], list):
+            raise ValidationError(
+                {"datos.informacion_general_notebook.estructura_modular": "Debe ser una lista."}
+            )
+        if not isinstance(info["librerias_cargadas"], list):
+            raise ValidationError(
+                {"datos.informacion_general_notebook.librerias_cargadas": "Debe ser una lista."}
+            )
+
+        carga = datos["carga_de_datos"]
+        _require_keys(
+            carga,
+            ["ruta_datos", "shape_raw", "columnas_raw", "head_raw"],
+            "datos.carga_de_datos",
+        )
+        if not isinstance(carga["shape_raw"], list) or len(carga["shape_raw"]) != 2:
+            raise ValidationError({"datos.carga_de_datos.shape_raw": "Debe ser una lista de dos elementos."})
+        if not isinstance(carga["columnas_raw"], list):
+            raise ValidationError({"datos.carga_de_datos.columnas_raw": "Debe ser una lista."})
+        if not isinstance(carga["head_raw"], list):
+            raise ValidationError({"datos.carga_de_datos.head_raw": "Debe ser una lista."})
+
+        eda = datos["analisis_exploratorio_datos"]
+        _require_keys(
+            eda,
+            [
+                "tipos_de_datos",
+                "nulos_por_columna",
+                "estadisticas_descriptivas",
+                "distribucion_variable_objetivo",
+                "ratio_desbalance_vcm",
+                "casos_vcm_por_patron",
+            ],
+            "datos.analisis_exploratorio_datos",
+        )
+
+        pre = datos["preprocesamiento_ml"]
+        _require_keys(
+            pre,
+            [
+                "columnas_eliminadas",
+                "X_shape_inicial",
+                "y_distribucion_inicial",
+                "variables_numericas",
+                "variables_categoricas",
+                "estrategia_imputacion",
+                "encoding_categorias",
+                "X_shape_final_ml_preprocesado",
+                "train_test_split",
+            ],
+            "datos.preprocesamiento_ml",
+        )
+
+        resultados = datos["resultados_modelado"]
+        _require_keys(
+            resultados,
+            ["comparacion_modelos", "random_forest", "xgboost", "logistic_regression"],
+            "datos.resultados_modelado",
+        )
+
+        evaluacion = datos["evaluacion_profunda"]
+        _require_keys(
+            evaluacion,
+            ["umbral_decision_optimo_rf", "cross_validation_random_forest"],
+            "datos.evaluacion_profunda",
+        )
+
+        interpretabilidad = datos["interpretabilidad"]
+        _require_keys(
+            interpretabilidad,
+            ["top_20_feature_importance_rf", "shap_global_description"],
+            "datos.interpretabilidad",
+        )
+
+        predicciones = datos["predicciones_prophet"]
+        _require_keys(
+            predicciones,
+            [
+                "circunstancias_modeladas",
+                "prediccion_nacional_vcm_anual",
+                "predicciones_por_circunstancia_anual",
+            ],
+            "datos.predicciones_prophet",
+        )
+        _require_list_of_dicts(
+            predicciones["prediccion_nacional_vcm_anual"],
+            ["anio", "prediccion", "minimo", "maximo"],
+            "datos.predicciones_prophet.prediccion_nacional_vcm_anual",
+        )
+        _require_list_of_dicts(
+            predicciones["predicciones_por_circunstancia_anual"],
+            ["Circunstancia", "Año", "Predicción", "Mínimo (IC95%)", "Máximo (IC95%)", "Var% vs 2025"],
+            "datos.predicciones_prophet.predicciones_por_circunstancia_anual",
+        )
 
     @staticmethod
     def _validate_legacy_structure(datos):

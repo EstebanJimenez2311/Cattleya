@@ -62,14 +62,41 @@ def is_notebook_analysis_payload(datos):
     return isinstance(datos, dict) and {"metadata", "dashboard"}.issubset(datos.keys())
 
 
+def is_predictive_analysis_payload(datos):
+    return isinstance(datos, dict) and {
+        "informacion_general_notebook",
+        "carga_de_datos",
+        "analisis_exploratorio_datos",
+        "preprocesamiento_ml",
+        "resultados_modelado",
+        "evaluacion_profunda",
+        "interpretabilidad",
+        "predicciones_prophet",
+    }.issubset(datos.keys())
+
+
 def get_analysis_name(payload):
     metadata = payload.get("metadata") or {}
-    return metadata.get("nombre") or "dashboard"
+    if metadata.get("nombre"):
+        return metadata["nombre"]
+
+    info = payload.get("informacion_general_notebook") or {}
+    if info.get("titulo"):
+        return str(info["titulo"])[:100]
+
+    return "dashboard"
 
 
 def get_analysis_source(payload, fallback="json"):
     metadata = payload.get("metadata") or {}
-    return metadata.get("fuente") or fallback
+    if metadata.get("fuente"):
+        return metadata["fuente"]
+
+    carga = payload.get("carga_de_datos") or {}
+    if carga.get("ruta_datos"):
+        return carga["ruta_datos"]
+
+    return fallback
 
 
 def get_analysis_description(payload, fallback=""):
@@ -78,6 +105,11 @@ def get_analysis_description(payload, fallback=""):
     nombre = metadata.get("nombre") or "Análisis cargado"
     if fecha:
         return f"{nombre} cargado desde exportación JSON del {fecha}."
+
+    info = payload.get("informacion_general_notebook") or {}
+    if info.get("descripcion_general"):
+        return info["descripcion_general"]
+
     return fallback or f"{nombre} cargado desde exportación JSON."
 
 
@@ -279,8 +311,269 @@ def build_frontend_payload(resultado):
         return _build_frontend_from_legacy(resultado, datos)
     if is_notebook_analysis_payload(datos):
         return _build_frontend_from_notebook(resultado, datos)
+    if is_predictive_analysis_payload(datos):
+        return _build_frontend_from_predictive(resultado, datos)
 
     raise ValidationError("La estructura almacenada no es compatible con el frontend.")
+
+
+def _build_frontend_from_predictive(resultado, datos):
+    info = datos.get("informacion_general_notebook") or {}
+    carga = datos.get("carga_de_datos") or {}
+    eda = datos.get("analisis_exploratorio_datos") or {}
+    pre = datos.get("preprocesamiento_ml") or {}
+    modelado = datos.get("resultados_modelado") or {}
+    evaluacion = datos.get("evaluacion_profunda") or {}
+    interpretabilidad = datos.get("interpretabilidad") or {}
+    predicciones = datos.get("predicciones_prophet") or {}
+
+    shape_raw = carga.get("shape_raw") or [0, 0]
+    filas = shape_raw[0] if len(shape_raw) > 0 else 0
+    columnas = shape_raw[1] if len(shape_raw) > 1 else 0
+    distribucion = (eda.get("distribucion_variable_objetivo") or {}).get("conteo") or {}
+    total_vcm = distribucion.get("1", 0) or distribucion.get(1, 0) or 0
+    total_no_vcm = distribucion.get("0", 0) or distribucion.get(0, 0) or 0
+
+    comparacion = modelado.get("comparacion_modelos") or {}
+    accuracy = comparacion.get("accuracy") or {}
+    f1_vcm = comparacion.get("f1_vcm") or {}
+    roc_auc = comparacion.get("roc_auc") or {}
+
+    modelos = []
+    for nombre_modelo in sorted(set(list(accuracy.keys()) + list(f1_vcm.keys()) + list(roc_auc.keys()))):
+        modelos.append(
+            {
+                "modelo": nombre_modelo,
+                "accuracy": accuracy.get(nombre_modelo, 0),
+                "f1_vcm": f1_vcm.get(nombre_modelo, 0),
+                "roc_auc": roc_auc.get(nombre_modelo, 0),
+            }
+        )
+
+    importancia = interpretabilidad.get("top_20_feature_importance_rf") or {}
+    importancia_items = [
+        {"feature": key, "valor": value}
+        for key, value in importancia.items()
+    ]
+    importancia_items.sort(key=lambda item: item.get("valor", 0), reverse=True)
+
+    pred_nacional = predicciones.get("prediccion_nacional_vcm_anual") or []
+    pred_circunstancia = predicciones.get("predicciones_por_circunstancia_anual") or []
+
+    labels_modelos = [item["modelo"] for item in modelos]
+    labels_pred_nacional = [str(item.get("anio", "")) for item in pred_nacional]
+    labels_importancia = [item.get("feature", "") for item in importancia_items[:10]]
+    circunstancias = sorted({item.get("Circunstancia", "N/D") for item in pred_circunstancia})
+
+    circunstancias_series = []
+    for circunstancia in circunstancias[:5]:
+        rows = [item for item in pred_circunstancia if item.get("Circunstancia") == circunstancia]
+        rows.sort(key=lambda item: item.get("Año", 0))
+        circunstancias_series.append(
+            {
+                "label": circunstancia,
+                "data": [item.get("Predicción", 0) for item in rows],
+            }
+        )
+
+    cv = evaluacion.get("cross_validation_random_forest") or {}
+    cv_folds = cv.get("f1_scores_folds") or []
+    cv_labels = [f"Fold {index + 1}" for index in range(len(cv_folds))]
+
+    best_model = max(modelos, key=lambda item: item.get("f1_vcm", 0), default=None)
+    top_feature = importancia_items[0] if importancia_items else None
+    umbral = ((evaluacion.get("umbral_decision_optimo_rf") or {}).get("umbral"))
+    accuracy_best = _percent((best_model or {}).get("accuracy", 0) * 100) if best_model else "N/D"
+    f1_best = _percent((best_model or {}).get("f1_vcm", 0) * 100) if best_model else "N/D"
+    roc_auc_best = _percent((best_model or {}).get("roc_auc", 0) * 100) if best_model else "N/D"
+
+    charts = {
+        "chart-modelos-accuracy": _build_chart_config(
+            "bar",
+            labels_modelos,
+            "Accuracy",
+            [round(item.get("accuracy", 0) * 100, 2) for item in modelos],
+        ),
+        "chart-modelos-f1": _build_chart_config(
+            "bar",
+            labels_modelos,
+            "F1 VCM",
+            [round(item.get("f1_vcm", 0) * 100, 2) for item in modelos],
+        ),
+        "chart-modelos-rocauc": _build_chart_config(
+            "bar",
+            labels_modelos,
+            "ROC AUC",
+            [round(item.get("roc_auc", 0) * 100, 2) for item in modelos],
+        ),
+        "chart-clases-vcm": _build_chart_config(
+            "doughnut",
+            ["VCM", "No VCM"],
+            "Distribución",
+            [total_vcm, total_no_vcm],
+            doughnut=True,
+        ),
+        "chart-feature-importance": _build_chart_config(
+            "bar",
+            labels_importancia,
+            "Importancia RF",
+            [round(item.get("valor", 0), 4) for item in importancia_items[:10]],
+            horizontal=True,
+        ),
+        "chart-prediccion-nacional": _build_multi_dataset_chart(
+            "line",
+            labels_pred_nacional,
+            [
+                {
+                    "label": "Predicción",
+                    "data": [item.get("prediccion", 0) for item in pred_nacional],
+                    "color": CHART_COLORS["magenta"],
+                },
+                {
+                    "label": "Mínimo",
+                    "data": [item.get("minimo", 0) for item in pred_nacional],
+                    "color": CHART_COLORS["orange"],
+                },
+                {
+                    "label": "Máximo",
+                    "data": [item.get("maximo", 0) for item in pred_nacional],
+                    "color": CHART_COLORS["magenta_dark"],
+                },
+            ],
+        ),
+        "chart-prediccion-circunstancias": _build_multi_dataset_chart(
+            "line",
+            sorted({str(item.get("Año", "")) for item in pred_circunstancia}),
+            circunstancias_series,
+        ),
+        "chart-cv-rf": _build_chart_config(
+            "bar",
+            cv_labels,
+            "F1 por fold",
+            [round(value * 100, 2) for value in cv_folds],
+        ),
+    }
+
+    charts["chart-modelos-accuracy"]["meta"] = {
+        "title": "Accuracy por modelo",
+        "description": "Comparación del porcentaje de acierto global entre Random Forest, XGBoost y Regresión Logística.",
+    }
+    charts["chart-modelos-f1"]["meta"] = {
+        "title": "F1 para violencia contra la mujer",
+        "description": "Métrica principal para evaluar precisión y recall del caso positivo.",
+    }
+    charts["chart-modelos-rocauc"]["meta"] = {
+        "title": "ROC AUC por modelo",
+        "description": "Capacidad discriminativa de cada modelo para separar VCM de otros casos.",
+    }
+    charts["chart-clases-vcm"]["meta"] = {
+        "title": "Distribución de la variable objetivo",
+        "description": "Balance entre casos clasificados como violencia contra la mujer y no VCM.",
+    }
+    charts["chart-feature-importance"]["meta"] = {
+        "title": "Variables más influyentes en Random Forest",
+        "description": "Top 10 variables con mayor importancia en el modelo predictivo.",
+    }
+    charts["chart-prediccion-nacional"]["meta"] = {
+        "title": "Predicción nacional anual de VCM",
+        "description": "Pronóstico anual con bandas mínima y máxima reportadas por Prophet.",
+    }
+    charts["chart-prediccion-circunstancias"]["meta"] = {
+        "title": "Predicción por circunstancia del hecho",
+        "description": "Comparación anual de las principales circunstancias modeladas.",
+    }
+    charts["chart-cv-rf"]["meta"] = {
+        "title": "Validación cruzada del Random Forest",
+        "description": "Resultado F1 obtenido por fold en la validación cruzada.",
+    }
+
+    highlights = [
+        {
+            "titulo": "Modelo con mejor rendimiento",
+            "descripcion": (
+                f"{best_model.get('modelo')} lidera el análisis con F1 {f1_best}, "
+                f"accuracy {accuracy_best} y ROC AUC {roc_auc_best}."
+                if best_model
+                else "No se encontró un modelo líder en el JSON cargado."
+            ),
+        },
+        {
+            "titulo": "Variable más influyente",
+            "descripcion": (
+                f"{top_feature.get('feature')} aporta una importancia de {_percent(top_feature.get('valor', 0) * 100)} en Random Forest."
+                if top_feature
+                else "No hay variables de importancia disponibles."
+            ),
+        },
+        {
+            "titulo": "Pronóstico nacional disponible",
+            "descripcion": (
+                f"El JSON incluye proyecciones nacionales para {', '.join(labels_pred_nacional)} "
+                f"y {len(circunstancias)} circunstancias modeladas."
+                if labels_pred_nacional
+                else "No se encontraron predicciones nacionales en el archivo."
+            ),
+        },
+    ]
+
+    return {
+        "nombre": resultado.nombre,
+        "fuente": resultado.fuente,
+        "actualizado": resultado.actualizado,
+        "metadata": {
+            "titulo": info.get("titulo", resultado.nombre),
+            "descripcion_general": info.get("descripcion_general", resultado.descripcion),
+            "ruta_datos": carga.get("ruta_datos", resultado.fuente),
+        },
+        "stats": [
+            {"number": _compact_number(filas), "label": "Registros analizados"},
+            {"number": _compact_number(columnas), "label": "Columnas de origen"},
+            {"number": _compact_number(len(modelos)), "label": "Modelos comparados"},
+            {"number": _compact_number(len(pred_nacional)), "label": "Años pronosticados"},
+        ],
+        "highlights": highlights,
+        "charts": charts,
+        "sections": {
+            "hero_subtitle": info.get(
+                "descripcion_general",
+                "Este tablero muestra el análisis predictivo cargado en la base de datos."
+            ),
+            "stats_subtitle": (
+                "Las métricas, rankings y pronósticos se generan directamente desde el JSON predictivo "
+                "almacenado en ResultadoAnalisis."
+            ),
+            "intro_subtitle": (
+                "La lectura empieza por comparar desempeño de modelos, entender variables influyentes "
+                "y luego revisar pronósticos nacionales y por circunstancia."
+            ),
+            "source_summary": (
+                f"Fuente base: {carga.get('ruta_datos', resultado.fuente)} | "
+                f"Umbral óptimo RF: {umbral if umbral is not None else 'N/D'} | "
+                f"Ratio de desbalance: {eda.get('ratio_desbalance_vcm', 'N/D')}."
+            ),
+            "method_note": (
+                "Este tablero visualiza resultados exportados del pipeline de ML. "
+                "Las predicciones representan salidas del modelo y no equivalen a incidencia real observada."
+            ),
+        },
+        "metadata_cards": [
+            {"label": "Título del notebook", "value": info.get("titulo", resultado.nombre)},
+            {"label": "Ruta de datos", "value": carga.get("ruta_datos", resultado.fuente)},
+            {"label": "Librerías cargadas", "value": _compact_number(len(info.get("librerias_cargadas", [])))},
+            {"label": "Circunstancias modeladas", "value": _compact_number(len(predicciones.get("circunstancias_modeladas", [])))},
+        ],
+        "raw": datos,
+        "source_schema": "predictive_ml_export",
+        "available_sections": list(datos.keys()),
+        "chart_notes": {
+            "chart-clases-vcm": f"Distribución objetivo reportada en el EDA: {eda.get('ratio_desbalance_vcm', 'N/D')}.",
+            "chart-feature-importance": interpretabilidad.get(
+                "shap_global_description",
+                "No hay descripción SHAP disponible en el export."
+            ),
+            "chart-prediccion-circunstancias": "Cada línea corresponde a una circunstancia modelada en Prophet.",
+        },
+    }
 
 
 def _build_frontend_from_notebook(resultado, datos):
