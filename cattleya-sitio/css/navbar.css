@@ -125,7 +125,19 @@
   transition: color 0.2s, background 0.2s;
 }
 
+.cat-drop-item-disabled {
+  display: block;
+  color: rgba(255,255,255,0.42);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 11px 18px;
+  cursor: not-allowed;
+  user-select: none;
+}
+
 .cat-drop-menu a + a,
+.cat-drop-menu a + .cat-drop-item-disabled,
+.cat-drop-item-disabled + a,
 .cat-drop-hr + a { border-top: 1px solid rgba(255,255,255,0.07); }
 
 .cat-drop-menu a:hover {
@@ -233,6 +245,16 @@
   padding: 12px 20px 12px 32px;
   border-top: 1px solid rgba(255,255,255,0.05);
   transition: color 0.2s;
+}
+
+.cat-mob-sub-disabled {
+  display: block;
+  color: rgba(255,255,255,0.38);
+  font-size: 13.5px;
+  padding: 12px 20px 12px 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  cursor: not-allowed;
+  user-select: none;
 }
 
 .cat-mob-sub a:hover { color: var(--naranja); }
