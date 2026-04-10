@@ -22,6 +22,10 @@ render_external_hostname = os.getenv("RENDER_EXTERNAL_HOSTNAME", "").strip()
 if render_external_hostname and render_external_hostname not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(render_external_hostname)
 
+render_external_url = os.getenv("RENDER_EXTERNAL_URL", "").strip()
+if not render_external_url and render_external_hostname:
+    render_external_url = f"https://{render_external_hostname}"
+
 LOCAL_DEV_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
@@ -32,7 +36,6 @@ CSRF_TRUSTED_ORIGINS = list(
         env_list("DJANGO_CSRF_TRUSTED_ORIGINS") + LOCAL_DEV_ORIGINS
     )
 )
-render_external_url = os.getenv("RENDER_EXTERNAL_URL", "").strip()
 if render_external_url and render_external_url not in CSRF_TRUSTED_ORIGINS:
     CSRF_TRUSTED_ORIGINS.append(render_external_url)
 
