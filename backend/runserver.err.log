@@ -1,0 +1,5 @@
+Watching for file changes with StatReloader
+[09/Apr/2026 22:54:54] "GET /health/ HTTP/1.1" 200 47
+[09/Apr/2026 22:54:54] "GET /admin/ HTTP/1.1" 302 0
+[09/Apr/2026 22:54:55] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4943
+[09/Apr/2026 22:54:55,146] - Broken pipe from ('127.0.0.1', 61850)
