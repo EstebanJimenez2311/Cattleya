@@ -6,15 +6,25 @@ $ErrorActionPreference = "Stop"
 
 function Get-UsablePython {
     $candidates = @(
-        "python",
         "$env:LocalAppData\Programs\Python\Python312\python.exe",
-        "$env:ProgramFiles\Python312\python.exe"
+        "$env:ProgramFiles\Python312\python.exe",
+        "$env:LocalAppData\Programs\Python\Python313\python.exe",
+        "$env:ProgramFiles\Python313\python.exe",
+        "python"
     )
 
     foreach ($candidate in $candidates) {
         try {
-            & $candidate --version | Out-Null
-            return $candidate
+            $resolvedPath = (Get-Command $candidate -ErrorAction Stop).Source
+
+            if ($resolvedPath -like "*\WindowsApps\python.exe") {
+                continue
+            }
+
+            $pythonExecutable = (& $resolvedPath -c "import sys; print(sys.executable)" 2>$null).Trim()
+            if ($LASTEXITCODE -eq 0 -and $pythonExecutable) {
+                return $resolvedPath
+            }
         }
         catch {
         }

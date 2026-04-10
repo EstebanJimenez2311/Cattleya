@@ -31,6 +31,72 @@
   height: 100%;
 }
 
+.carrusel-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.carrusel-topbar__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--magenta);
+}
+
+.carrusel-topbar__eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--naranja);
+  box-shadow: 0 0 0 0 rgba(242,140,40,0.38);
+  animation: noticiasPulse 1.8s ease-in-out infinite;
+}
+
+.carrusel-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: rgba(34, 25, 29, 0.68);
+}
+
+.carrusel-status strong {
+  color: var(--purpura);
+}
+
+.carrusel-progress {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(157,45,106,0.12);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.carrusel-progress__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--magenta), var(--naranja));
+  transform: scaleX(0.1667);
+  transform-origin: left center;
+  transition: transform 0.4s ease;
+}
+
+.carrusel-wrapper.is-paused .carrusel-progress__fill {
+  filter: saturate(0.82);
+}
+
 .carrusel-slide {
   min-width: 100%;
   padding: 0 2px;
@@ -257,6 +323,12 @@
   border: 1px solid rgba(246,135,29,0.18);
 }
 
+@keyframes noticiasPulse {
+  0%,
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242,140,40,0.38); }
+  50% { transform: scale(1.18); box-shadow: 0 0 0 10px rgba(242,140,40,0); }
+}
+
 .timeline {
   position: relative;
   margin-top: 48px;
@@ -338,5 +410,21 @@
 
   .noticia-item__descripcion {
     font-size: 0.95rem;
+  }
+
+  .carrusel-topbar {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrusel-track,
+  .carrusel-progress__fill,
+  .timeline-item,
+  .carrusel-btn,
+  .carrusel-dot,
+  .carrusel-topbar__eyebrow::before {
+    transition: none !important;
+    animation: none !important;
   }
 }

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CATTLEYA - Datos que no callan</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo-magenta.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/logo-magenta.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="data/charts.js"></script>
   <script src="components/index.js"></script>
@@ -74,58 +76,96 @@
           </a>
         </div>
       </div>
-
-      <div class="hero-right-space"></div>
     </div>
   </section>
 
   <section class="stats">
     <cat-surface variant="cream">
-    <div class="stats-inner">
-      <div class="stat-card fade-up" style="--fd:0s">
-        <div class="stat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
-            <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0 0 21 18.382V7.618a1 1 0 0 0-.553-.894L15 4m0 13V4m0 0L9 7"/>
-          </svg>
+      <div class="support-grid">
+        <div class="support-route fade-up" style="--fd:0s;">
+          <span class="support-route__eyebrow">Ruta de apoyo</span>
+          <h2>Ver, entender y actuar antes de que el silencio pese más.</h2>
+          <p>
+            Cattleya organiza cifras, contexto y casos recientes para que estudiantes, familias y comunidades
+            identifiquen señales de alerta y sepan dónde buscar ayuda.
+          </p>
+          <div class="support-route__chips">
+            <span>Datos legibles</span>
+            <span>Orientación clara</span>
+            <span>Recursos útiles</span>
+          </div>
         </div>
-        <span class="stat-number">6 Regiones</span>
-        <span class="stat-label">Cobertura Nacional</span>
-        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
-      </div>
 
-      <div class="stat-card fade-up" style="--fd:0.15s">
-        <div class="stat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
-            <rect x="3" y="4" width="18" height="18" rx="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-        </div>
-        <span class="stat-number">2018-2025</span>
-        <span class="stat-label">Período de Análisis</span>
-        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
+        <aside class="support-quote fade-up" style="--fd:0.12s;" data-support-quote-card>
+          <span class="support-quote__kicker">Voces para no normalizar</span>
+          <div class="support-quote__mark">"</div>
+          <blockquote class="support-quote__text" data-support-quote-text>
+            La violencia no empieza cuando deja marcas visibles; empieza cuando alguien siente que ya no puede decidir en paz.
+          </blockquote>
+          <p class="support-quote__author" data-support-quote-author>Mensaje de prevención y cuidado</p>
+          <div class="support-quote__dots" data-support-quote-dots></div>
+        </aside>
       </div>
-
-      <div class="stat-card fade-up" style="--fd:0.3s">
-        <div class="stat-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8B2467" stroke-width="1.8" width="32" height="32">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-            <polyline points="17 6 23 6 23 12"/>
-          </svg>
-        </div>
-        <span class="stat-number">+12%</span>
-        <span class="stat-label">Incremento Reportado</span>
-        <div class="stat-bar"><div class="stat-bar-fill"></div></div>
-      </div>
-    </div>
     </cat-surface>
   </section>
 
-  <section class="quote-section">
-    <!-- <div class="quote-orchid-left" aria-hidden="true"></div>
-    <div class="quote-orchid-right" aria-hidden="true"></div> -->
+  <section class="section facts-section">
+    <div class="facts-shell">
+      <div class="facts-copy fade-up">
+        <span class="section-label">Sabías que</span>
+        <h2 class="section-title">Pequeñas pistas,<br><em>grandes conversaciones</em></h2>
+        <p class="section-subtitle">
+          Este carrusel reúne datos breves y fáciles de recordar para dialogar con estudiantes, familias y redes de apoyo
+          sin entrar de inmediato a una lectura técnica del tablero.
+        </p>
+        <a href="contexto.html" class="btn-primary">
+          Entender las señales
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
 
+      <div class="facts-carousel fade-up" style="--fd:0.12s;" data-facts-carousel>
+        <div class="facts-carousel__viewport">
+          <article class="facts-card active" data-fact-slide>
+            <span class="facts-card__kicker">Entorno cercano</span>
+            <h3>La primera conversación útil suele empezar con una duda, no con una denuncia.</h3>
+            <p>Reconocer cambios de ánimo, aislamiento o control excesivo puede abrir una ruta de apoyo mucho antes de una crisis mayor.</p>
+          </article>
+          <article class="facts-card" data-fact-slide>
+            <span class="facts-card__kicker">Señales de alerta</span>
+            <h3>El control del dinero, del teléfono o de las amistades también es violencia.</h3>
+            <p>No todo comienza con agresión física. Muchas situaciones escalan desde vigilancia, chantaje emocional o dependencia forzada.</p>
+          </article>
+          <article class="facts-card" data-fact-slide>
+            <span class="facts-card__kicker">Acompañamiento</span>
+            <h3>Pedir ayuda no exige tener “pruebas perfectas” para ser válido.</h3>
+            <p>Buscar orientación temprana con una línea de ayuda, una docente o una institución puede ser el paso que cambie el rumbo.</p>
+          </article>
+          <article class="facts-card" data-fact-slide>
+            <span class="facts-card__kicker">Prevención</span>
+            <h3>Hablar de consentimiento y límites claros reduce zonas grises peligrosas.</h3>
+            <p>Cuando el lenguaje para nombrar lo que incomoda existe, también crece la capacidad de detectar abuso y pedir apoyo.</p>
+          </article>
+        </div>
+
+        <div class="facts-carousel__footer">
+          <div class="facts-carousel__progress" aria-hidden="true">
+            <span class="facts-carousel__progress-fill" data-facts-progress></span>
+          </div>
+          <div class="facts-carousel__controls">
+            <button type="button" class="facts-carousel__btn" data-facts-prev aria-label="Dato anterior">&larr;</button>
+            <div class="facts-carousel__dots" data-facts-dots></div>
+            <button type="button" class="facts-carousel__btn" data-facts-next aria-label="Siguiente dato">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
     <div class="quote-inner fade-up">
       <span class="quote-number">❝</span>
       <blockquote class="quote-text">
@@ -145,34 +185,6 @@
       </svg>
     </div>
   </section>
-
-  <!-- <section class="section">
-    <div class="preview-grid">
-      <div>
-        <cat-section-header
-          label="Análisis exploratorio"
-          title="Los datos hablan,&lt;br&gt;&lt;em&gt;nosotros escuchamos&lt;/em&gt;"
-          subtitle="Aplicamos EDA, estadística descriptiva e inferencial, y machine learning sobre bases de datos gubernamentales de Colombia para encontrar patrones y tendencias en los reportes de violencia contra la mujer.">
-        </cat-section-header>
-        <a href="analisis.html" class="btn-primary" style="margin-top:32px;display:inline-flex;">Ver el análisis completo &rarr;</a>
-      </div>
-      <cat-chart
-        chart-id="chart-home"
-        title="Distribución por tipo de violencia">
-      </cat-chart>
-    </div>
-  </section> -->
-
-  <!--
-  <div class="section" style="padding-top:0;">
-    <cat-cta-banner
-      title="¿Necesitas ayuda ahora?"
-      text="Si tú o alguien que conoces está en riesgo, no estás sola. Hay personas dispuestas a escucharte y a ayudarte."
-      btn-text="Ver líneas de ayuda &rarr;"
-      btn-href="lucha.html">
-    </cat-cta-banner>
-  </div>
-  -->
 
   <cat-chatbot-btn></cat-chatbot-btn>
   <cat-footer></cat-footer>

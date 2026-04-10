@@ -7,7 +7,7 @@
   // ============================================
 
   const MAX_RENDER = 6;
-  const DEBUG = true;
+  const DEBUG = false;
   const API_BASE_URL = resolveApiBaseUrl();
 
   function resolveApiBaseUrl() {
@@ -205,6 +205,9 @@
     const prevBtn = container.querySelector('[data-carrusel-prev]');
     const nextBtn = container.querySelector('[data-carrusel-next]');
     const wrapper = container.querySelector('.carrusel-wrapper');
+    const progress = container.querySelector('[data-carrusel-progress]');
+    const status = container.querySelector('[data-carrusel-status]');
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!track || slides.length <= 1) {
       if (prevBtn) prevBtn.disabled = true;
@@ -215,47 +218,17 @@
     let current = 0;
     let autoPlay = null;
 
-    if (DEBUG) {
-      console.log('[CattleyaNoticias] initSlider', {
-        slides: slides.length,
-        dots: dots.length,
-        hasTrack: Boolean(track),
-        hasPrevBtn: Boolean(prevBtn),
-        hasNextBtn: Boolean(nextBtn)
-      });
-    }
-
     function measureSlides() {
-      if (!slides.length) {
-        console.warn('[CattleyaNoticias] measureSlides: NO HAY SLIDES');
-        return;
-      }
-
-      console.log('[CattleyaNoticias] measureSlides: configurando', slides.length, 'slides');
       track.style.width = `${slides.length * 100}%`;
       track.style.display = 'flex';
 
-      slides.forEach((slide, index) => {
+      slides.forEach((slide) => {
         const slideWidth = `${100 / slides.length}%`;
         slide.style.width = slideWidth;
         slide.style.minWidth = slideWidth;
         slide.style.flex = `0 0 ${slideWidth}`;
         slide.style.boxSizing = 'border-box';
       });
-
-      if (DEBUG) {
-        const trackRect = track.getBoundingClientRect();
-        const wrapperRect = wrapper ? wrapper.getBoundingClientRect() : null;
-        const firstSlideRect = slides[0].getBoundingClientRect();
-        
-        console.log('[CattleyaNoticias] measureSlides - MEDICIONES:', {
-          trackWidth: trackRect.width,
-          wrapperWidth: wrapperRect ? wrapperRect.width : 'no wrapper',
-          firstSlideWidth: firstSlideRect.width,
-          trackDisplay: track.style.display,
-          trackFlexBasis: track.style.flex
-        });
-      }
     }
 
     function goTo(index) {
@@ -263,17 +236,17 @@
       const offsetPercent = -(current * (100 / slides.length));
       track.style.transform = `translateX(${offsetPercent}%)`;
 
-      if (DEBUG) {
-        console.log('[CattleyaNoticias] goTo', {
-          requestedIndex: index,
-          current: current,
-          offsetPercent: offsetPercent
-        });
-      }
-
       dots.forEach((dot, dotIndex) => {
         dot.classList.toggle('active', dotIndex === current);
       });
+
+      if (progress) {
+        progress.style.transform = `scaleX(${(current + 1) / slides.length})`;
+      }
+
+      if (status) {
+        status.innerHTML = `<strong>${current + 1}</strong> de ${slides.length} casos recientes`;
+      }
     }
 
     function stopAutoPlay() {
@@ -281,26 +254,23 @@
         window.clearInterval(autoPlay);
         autoPlay = null;
       }
+      if (wrapper) wrapper.classList.add('is-paused');
     }
 
     function startAutoPlay() {
+      if (reducedMotion) return;
       stopAutoPlay();
       autoPlay = window.setInterval(() => goTo(current + 1), 7000);
+      if (wrapper) wrapper.classList.remove('is-paused');
     }
 
     prevBtn.addEventListener('click', () => {
-      if (DEBUG) {
-        console.log('[CattleyaNoticias] click prev', { current: current });
-      }
       stopAutoPlay();
       goTo(current - 1);
       startAutoPlay();
     });
 
     nextBtn.addEventListener('click', () => {
-      if (DEBUG) {
-        console.log('[CattleyaNoticias] click next', { current: current });
-      }
       stopAutoPlay();
       goTo(current + 1);
       startAutoPlay();
@@ -308,9 +278,6 @@
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
-        if (DEBUG) {
-          console.log('[CattleyaNoticias] click dot', { index: index, current: current });
-        }
         goTo(index);
         startAutoPlay();
       });
@@ -319,16 +286,17 @@
     if (wrapper) {
       wrapper.addEventListener('mouseenter', stopAutoPlay);
       wrapper.addEventListener('mouseleave', startAutoPlay);
+      wrapper.addEventListener('focusin', stopAutoPlay);
+      wrapper.addEventListener('focusout', (event) => {
+        if (!wrapper.contains(event.relatedTarget)) {
+          startAutoPlay();
+        }
+      });
     }
 
-    // Esperar a que los slides estén completamente renderizados en el DOM
-    // Usar un pequeño delay para permitir que el navegador complete el layout
     setTimeout(() => {
-      console.log('[CattleyaNoticias] Ejecutando measureSlides con delay...');
       measureSlides();
-      console.log('[CattleyaNoticias] Mostrando primer slide con goTo(0)...');
       goTo(0);
-      console.log('[CattleyaNoticias] Iniciando autoplay...');
       startAutoPlay();
     }, 100);
   }
@@ -346,6 +314,13 @@
       .join('');
 
     container.innerHTML = `
+      <div class="carrusel-topbar">
+        <div class="carrusel-topbar__eyebrow">Casos recientes desde medios verificados</div>
+        <div class="carrusel-status" data-carrusel-status><strong>1</strong> de ${Math.min(noticias.length, MAX_RENDER)} casos recientes</div>
+      </div>
+      <div class="carrusel-progress" aria-hidden="true">
+        <span class="carrusel-progress__fill" data-carrusel-progress></span>
+      </div>
       <div class="carrusel-wrapper">
         <div class="carrusel-track" data-carrusel-track>
           ${slides}
@@ -364,30 +339,22 @@
   async function init() {
     let container = await waitForNoticiasContainer();
     if (!container) {
-      console.error('[CattleyaNoticias] contenedor NO ENCONTRADO');
       return;
     }
 
-    console.log('[CattleyaNoticias] init() iniciando, contenedor encontrado:', container.id);
     renderState(container, 'loading', 'Cargando casos recientes de Colombia...');
 
     try {
-      console.log('[CattleyaNoticias] Llamando obtenerNoticias...');
       const noticias = await obtenerNoticias();
-      console.log('[CattleyaNoticias] obtenerNoticias retornó:', noticias.length, 'noticias');
 
       if (!noticias || !noticias.length) {
-        console.error('[CattleyaNoticias] No hay noticias o array vacío');
         renderState(container, 'empty', 'No hay casos recientes disponibles.');
         return;
       }
 
       container = getNoticiasContainer(container);
-      console.log('[CattleyaNoticias] Llamando renderNoticias con', noticias.length, 'noticias');
       renderNoticias(container, noticias);
-      console.log('[CattleyaNoticias] renderNoticias completado');
     } catch (error) {
-      console.error('[CattleyaNoticias] Error en init:', error);
       renderState(container, 'error', 'Error al cargar las noticias. Verifica que el servidor backend esté ejecutándose.');
     }
   }
