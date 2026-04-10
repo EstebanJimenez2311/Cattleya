@@ -9,31 +9,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/logo-magenta.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-    .tabs-nav {
-      display: flex;
-      gap: 8px;
-      border-bottom: 2px solid var(--crema);
-      margin-bottom: 40px;
-    }
-    .tab-btn {
-      padding: 12px 24px;
-      border: none;
-      background: none;
-      font-family: "DM Sans", sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--carbon);
-      opacity: 0.5;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .tab-btn:hover { opacity: 0.8; }
-    .tab-btn.active { color: var(--magenta); opacity: 1; border-bottom-color: var(--magenta); }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: tabFade 0.4s ease; }
-    @keyframes tabFade { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     .concepto-card {
       background: linear-gradient(135deg, var(--crema), #f5e0d8);
       border-radius: 20px;
@@ -69,71 +44,6 @@
       color: var(--carbon);
       line-height: 1.7;
       opacity: 0.8;
-    }
-    .prueba-wrapper {
-      background: var(--blanco);
-      border: 2px solid var(--crema);
-      border-radius: 20px;
-      padding: 32px;
-      margin-bottom: 24px;
-      transition: border-color 0.3s;
-    }
-    .prueba-wrapper:hover { border-color: rgba(157,45,106,0.3); }
-    .prueba-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .prueba-nombre {
-      font-family: "Playfair Display", serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--purpura);
-    }
-    .prueba-badge {
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-    }
-    .prueba-badge--pendiente { background: #fff3cd; color: #856404; }
-    .prueba-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .prueba-dato {
-      background: var(--crema);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-    }
-    .prueba-dato__label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--magenta);
-      margin-bottom: 6px;
-    }
-    .prueba-dato__valor {
-      font-family: "Playfair Display", serif;
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--purpura);
-    }
-    .prueba-conclusion {
-      font-size: 0.88rem;
-      color: var(--carbon);
-      line-height: 1.7;
-      opacity: 0.75;
-      border-top: 1px solid var(--crema);
-      padding-top: 16px;
     }
     .metricas-grid {
       display: grid;
@@ -171,31 +81,6 @@
       color: var(--carbon);
       opacity: 0.6;
     }
-    .matriz-grid {
-      display: grid;
-      grid-template-columns: auto 1fr 1fr;
-      gap: 4px;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-    .matriz-cell {
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    .matriz-label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--carbon);
-      opacity: 0.6;
-    }
-    .matriz-tp, .matriz-tn { background: #d1e7dd; color: #0f5132; }
-    .matriz-fp, .matriz-fn { background: #f8d7da; color: #842029; }
     .var-importance { margin-top: 24px; }
     .var-row {
       display: flex;
@@ -207,10 +92,61 @@
     .var-bar-wrap { flex: 1; background: var(--crema); border-radius: 100px; height: 10px; overflow: hidden; }
     .var-bar-fill { height: 100%; background: var(--magenta); border-radius: 100px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
     .var-pct { font-size: 0.82rem; font-weight: 600; color: var(--magenta); min-width: 40px; text-align: right; }
+    .ml-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .ml-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .ml-summary-card {
+      background: linear-gradient(180deg, #fff, #fdf0eb);
+      border: 1px solid rgba(157,45,106,0.14);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .ml-summary-card__label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      margin-bottom: 8px;
+    }
+    .ml-summary-card__value {
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--purpura);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .ml-summary-card__text {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--carbon);
+      opacity: 0.72;
+    }
+    .ml-note-box {
+      background: #fff3cd;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      border-left: 4px solid #856404;
+      font-size: 0.85rem;
+      color: #856404;
+      line-height: 1.7;
+    }
     @media (max-width: 768px) {
-      .prueba-grid { grid-template-columns: 1fr 1fr; }
       .metricas-grid { grid-template-columns: 1fr 1fr; }
       .concepto-card { grid-template-columns: 1fr; }
+      .ml-grid,
+      .ml-mini-grid { grid-template-columns: 1fr; }
     }
   </style>
   <script src="components/index.js"></script>
@@ -227,176 +163,124 @@
   </cat-page-hero>
 
   <div class="section">
-    <div class="tabs-nav">
-      <button class="tab-btn active" data-tab="inferencial">Estadística inferencial</button>
-      <button class="tab-btn" data-tab="ml">Machine Learning</button>
-    </div>
-
-    <div class="tab-panel active" id="tab-inferencial">
-      <div class="concepto-card">
-        <div class="concepto-icon">I</div>
-        <div>
-          <div class="concepto-titulo">¿Qué es la estadística inferencial?</div>
-          <div class="concepto-texto">
-            A diferencia de la estadística descriptiva, la estadística inferencial nos permite sacar conclusiones sobre una población completa a partir de una muestra y cuantificar qué tan confiables son esas conclusiones.
-          </div>
-        </div>
-      </div>
-
-      <div class="prueba-wrapper">
-        <div class="prueba-header">
-          <div class="prueba-nombre">Prueba 1 - [Nombre de la prueba]</div>
-          <span class="prueba-badge prueba-badge--pendiente">Pendiente de datos reales</span>
-        </div>
-        <p style="font-size:0.88rem;color:var(--carbon);opacity:0.7;margin-bottom:20px;line-height:1.7;">
-          <strong>Hipótesis nula (H0):</strong> [Escribir aquí la hipótesis nula del equipo] <br>
-          <strong>Hipótesis alternativa (H1):</strong> [Escribir aquí la hipótesis alternativa]
-        </p>
-        <div class="prueba-grid">
-          <div class="prueba-dato"><div class="prueba-dato__label">Estadístico</div><div class="prueba-dato__valor">-</div></div>
-          <div class="prueba-dato"><div class="prueba-dato__label">P-valor</div><div class="prueba-dato__valor">-</div></div>
-          <div class="prueba-dato"><div class="prueba-dato__label">Nivel α</div><div class="prueba-dato__valor">0.05</div></div>
-        </div>
-        <div class="prueba-conclusion">
-          <strong>Conclusión:</strong> Reemplaza este texto con la interpretación real de la prueba.
-        </div>
-        <div class="chart-container" style="margin-top:24px; margin-bottom:0;">
-          <h3>Visualización de la prueba</h3>
-          <div class="chart-canvas-wrap" style="height:260px;"><canvas id="chart-prueba1"></canvas></div>
-        </div>
-      </div>
-
-      <div class="prueba-wrapper">
-        <div class="prueba-header">
-          <div class="prueba-nombre">Prueba 2 - [Nombre de la prueba]</div>
-          <span class="prueba-badge prueba-badge--pendiente">Pendiente de datos reales</span>
-        </div>
-        <p style="font-size:0.88rem;color:var(--carbon);opacity:0.7;margin-bottom:20px;line-height:1.7;">
-          <strong>Hipótesis nula (H0):</strong> [Escribir aquí] <br>
-          <strong>Hipótesis alternativa (H1):</strong> [Escribir aquí]
-        </p>
-        <div class="prueba-grid">
-          <div class="prueba-dato"><div class="prueba-dato__label">Estadístico</div><div class="prueba-dato__valor">-</div></div>
-          <div class="prueba-dato"><div class="prueba-dato__label">P-valor</div><div class="prueba-dato__valor">-</div></div>
-          <div class="prueba-dato"><div class="prueba-dato__label">Nivel α</div><div class="prueba-dato__valor">0.05</div></div>
-        </div>
-        <div class="prueba-conclusion">
-          <strong>Conclusión:</strong> Reemplaza con la interpretación del equipo una vez corran las pruebas en Python.
-        </div>
-        <div class="chart-container" style="margin-top:24px; margin-bottom:0;">
-          <h3>Matriz de correlación (placeholder)</h3>
-          <div class="chart-canvas-wrap" style="height:260px;"><canvas id="chart-correlacion"></canvas></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-panel" id="tab-ml">
+    <div id="tab-ml">
       <div class="concepto-card">
         <div class="concepto-icon">ML</div>
         <div>
-          <div class="concepto-titulo">¿Qué es el machine learning y por qué lo aplicamos aquí?</div>
+          <div class="concepto-titulo">Patrones de crecimiento y clasificacion asistida por modelos</div>
           <div class="concepto-texto">
-            El machine learning permite que los computadores aprendan patrones a partir de datos históricos para hacer predicciones o clasificaciones sobre casos nuevos.
+            Este apartado resume dos salidas del notebook de Medicina Legal: un modelo de clasificacion que distingue casos asociados a violencia contra la mujer y un modelo temporal que proyecta la evolucion mensual de los registros para 2026 y 2027.
           </div>
         </div>
       </div>
 
       <div style="background:var(--crema);border-radius:16px;padding:24px 28px;margin-bottom:32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-        <span style="font-size:0.82rem;font-weight:600;color:var(--magenta);letter-spacing:0.08em;text-transform:uppercase;">Modelo utilizado:</span>
-        <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--purpura);" id="modelo-nombre">[Completar con el modelo elegido]</span>
-        <span style="font-size:0.82rem;color:var(--carbon);opacity:0.6;">Reemplaza el texto entre corchetes con el nombre real del modelo.</span>
+        <span style="font-size:0.82rem;font-weight:600;color:var(--magenta);letter-spacing:0.08em;text-transform:uppercase;">Modelos utilizados:</span>
+        <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--purpura);" id="modelo-nombre">Random Forest para clasificacion y Prophet para crecimiento temporal</span>
+        <span style="font-size:0.82rem;color:var(--carbon);opacity:0.6;">Version estatica alimentada desde el notebook `ML_MEDICINA_LEGAL.ipynb`, sin conexion al backend por ahora.</span>
       </div>
 
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--purpura);margin-bottom:20px;">Métricas de evaluación</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--purpura);margin-bottom:20px;">Resumen del notebook</h3>
       <cat-surface padding="24px" radius="24px">
         <div class="metricas-grid" style="margin-bottom:0;">
           <div class="metrica-card">
-            <div class="metrica-card__label">Accuracy</div>
-            <div class="metrica-card__valor" id="met-accuracy">-%</div>
-            <div class="metrica-card__desc">Porcentaje de predicciones correctas</div>
+            <div class="metrica-card__label">Registros</div>
+            <div class="metrica-card__valor" id="met-accuracy">2,085</div>
+            <div class="metrica-card__desc">Casos utilizados en el pipeline de entrenamiento</div>
           </div>
           <div class="metrica-card">
-            <div class="metrica-card__label">Precisión</div>
-            <div class="metrica-card__valor" id="met-precision">-%</div>
-            <div class="metrica-card__desc">De los positivos predichos, cuántos son reales</div>
+            <div class="metrica-card__label">Casos VCM</div>
+            <div class="metrica-card__valor" id="met-precision">1,474</div>
+            <div class="metrica-card__desc">Registros identificados como violencia contra la mujer</div>
           </div>
           <div class="metrica-card">
-            <div class="metrica-card__label">Recall</div>
-            <div class="metrica-card__valor" id="met-recall">-%</div>
-            <div class="metrica-card__desc">De los positivos reales, cuántos encontró</div>
+            <div class="metrica-card__label">F1 CV</div>
+            <div class="metrica-card__valor" id="met-recall">0.918</div>
+            <div class="metrica-card__desc">Promedio en validacion cruzada 5-fold para Random Forest</div>
           </div>
           <div class="metrica-card">
-            <div class="metrica-card__label">F1-Score</div>
-            <div class="metrica-card__valor" id="met-f1">-%</div>
-            <div class="metrica-card__desc">Balance entre precisión y recall</div>
+            <div class="metrica-card__label">ROC-AUC</div>
+            <div class="metrica-card__valor" id="met-f1">0.963</div>
+            <div class="metrica-card__desc">Desempeño medio del modelo sobre los folds evaluados</div>
           </div>
         </div>
       </cat-surface>
 
-      <div style="background:#fff3cd;border-radius:12px;padding:16px 20px;margin-bottom:32px;border-left:4px solid #856404;font-size:0.85rem;color:#856404;">
-        <strong>Para el equipo:</strong> Cuando tengan las métricas del modelo, reemplacen los valores placeholder en el bloque JS al final de esta página.
+      <div class="ml-note-box">
+        <strong>Nota de implementacion:</strong> Esta version deja visible el resultado del analisis sin depender de endpoints. Cuando haya tiempo, podemos refactorizarla para leer estos mismos datos desde un JSON o desde el backend sin tocar el diseño.
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+      <div class="ml-grid">
         <div class="chart-container" style="margin-bottom:0;">
-          <h3>Matriz de confusión</h3>
-          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">Reemplaza los valores con los resultados reales del modelo.</p>
-          <div class="matriz-grid">
-            <div class="matriz-label"></div>
-            <div class="matriz-label">Pred. positivo</div>
-            <div class="matriz-label">Pred. negativo</div>
-            <div class="matriz-label">Real +</div>
-            <div class="matriz-cell matriz-tp" id="mat-tp">VP<br><small>-</small></div>
-            <div class="matriz-cell matriz-fn" id="mat-fn">FN<br><small>-</small></div>
-            <div class="matriz-label">Real -</div>
-            <div class="matriz-cell matriz-fp" id="mat-fp">FP<br><small>-</small></div>
-            <div class="matriz-cell matriz-tn" id="mat-tn">VN<br><small>-</small></div>
+          <h3>Proyeccion nacional 2026-2027</h3>
+          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">El modulo Prophet del notebook estima un comportamiento estable a nivel nacional, con una variacion minima entre 2026 y 2027 y un rango amplio de incertidumbre.</p>
+          <div class="ml-mini-grid">
+            <div class="ml-summary-card">
+              <div class="ml-summary-card__label">2026</div>
+              <div class="ml-summary-card__value">190</div>
+              <div class="ml-summary-card__text">Intervalo estimado: entre 98 y 280 casos.</div>
+            </div>
+            <div class="ml-summary-card">
+              <div class="ml-summary-card__label">2027</div>
+              <div class="ml-summary-card__value">191</div>
+              <div class="ml-summary-card__text">Intervalo estimado: entre 102 y 279 casos.</div>
+            </div>
+            <div class="ml-summary-card">
+              <div class="ml-summary-card__label">Cobertura historica</div>
+              <div class="ml-summary-card__value">2018-2025</div>
+              <div class="ml-summary-card__text">Serie mensual reconstruida desde los registros de Medicina Legal.</div>
+            </div>
+            <div class="ml-summary-card">
+              <div class="ml-summary-card__label">Lectura</div>
+              <div class="ml-summary-card__value">+1 caso</div>
+              <div class="ml-summary-card__text">La proyeccion no sugiere una ruptura brusca, sino persistencia del problema.</div>
+            </div>
           </div>
         </div>
 
         <div class="chart-container" style="margin-bottom:0;">
-          <h3>Importancia de variables</h3>
-          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">¿Qué factores tienen más peso en el modelo? Reemplaza con los datos reales.</p>
+          <h3>Patrones de crecimiento por circunstancia</h3>
+          <p style="font-size:0.82rem;color:#666;margin-bottom:20px;">El notebook compara la variacion esperada frente a 2025. Las barras muestran la magnitud relativa del cambio y el porcentaje conserva el valor reportado en el resumen exportable.</p>
           <div class="var-importance">
             <div class="var-row">
-              <span class="var-name">Variable 1 - [nombre]</span>
-              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="85%"></div></div>
-              <span class="var-pct">85%</span>
+              <span class="var-name">Violencia a niños, niñas y adolescentes</span>
+              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="100%"></div></div>
+              <span class="var-pct">+185.7%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 2 - [nombre]</span>
-              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="72%"></div></div>
-              <span class="var-pct">72%</span>
+              <span class="var-name">Violencia entre otros familiares</span>
+              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="54%"></div></div>
+              <span class="var-pct">+100.0%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 3 - [nombre]</span>
-              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="58%"></div></div>
-              <span class="var-pct">58%</span>
+              <span class="var-name">Feminicidio</span>
+              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="7%"></div></div>
+              <span class="var-pct">+12.5%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 4 - [nombre]</span>
-              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="41%"></div></div>
-              <span class="var-pct">41%</span>
+              <span class="var-name">Violencia de pareja</span>
+              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="9%"></div></div>
+              <span class="var-pct">-15.8%</span>
             </div>
             <div class="var-row">
-              <span class="var-name">Variable 5 - [nombre]</span>
-              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="27%"></div></div>
-              <span class="var-pct">27%</span>
+              <span class="var-name">Sicariato</span>
+              <div class="var-bar-wrap"><div class="var-bar-fill" style="width:0%" data-width="50%"></div></div>
+              <span class="var-pct">-92.8%</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="chart-container">
-        <h3>Distribución de predicciones del modelo</h3>
-        <p style="font-size:0.82rem;color:#666;margin-bottom:16px;">Reemplaza con la curva ROC o distribución real del modelo elegido.</p>
+        <h3>Comparativo proyectado por circunstancia</h3>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:16px;">Visualizacion estatica tomada del resumen del notebook para contrastar 2026 y 2027 en las cinco circunstancias con modelo Prophet entrenado.</p>
         <div class="chart-canvas-wrap" style="height:280px;"><canvas id="chart-ml"></canvas></div>
       </div>
 
       <div style="background:linear-gradient(135deg,var(--magenta),var(--purpura));border-radius:20px;padding:40px;color:var(--blanco);margin-top:32px;">
-        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--crema);margin-bottom:16px;">¿Qué nos dice el modelo?</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--crema);margin-bottom:16px;">Que nos dice el modelo</div>
         <p style="font-size:0.95rem;line-height:1.8;color:rgba(253,238,233,0.85);" id="ml-conclusion">
-          Reemplaza este párrafo con la conclusión real del modelo una vez el equipo lo haya entrenado y evaluado.
+          El notebook sugiere dos cosas al mismo tiempo: primero, que el patron general de violencia contra la mujer se mantiene alto y estable en el corto plazo, con 190 casos proyectados para 2026 y 191 para 2027; segundo, que el crecimiento no se distribuye de manera uniforme. Mientras feminicidio sigue concentrando el mayor volumen, el mayor salto relativo aparece en violencia a niños, niñas y adolescentes y en violencia entre otros familiares, lo que ayuda a orientar vigilancia, priorizacion territorial y lectura preventiva aun antes de conectar esta vista a servicios en vivo.
         </p>
       </div>
     </div>
@@ -413,16 +297,6 @@
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
   <script>
-    document.querySelectorAll('.tab-btn').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.tab-btn').forEach((item) => item.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.remove('active'));
-        this.classList.add('active');
-        document.getElementById(`tab-${this.dataset.tab}`).classList.add('active');
-        if (this.dataset.tab === 'ml') animateBars();
-      });
-    });
-
     function animateBars() {
       document.querySelectorAll('.var-bar-fill').forEach((bar) => {
         setTimeout(() => {
@@ -430,71 +304,55 @@
         }, 100);
       });
     }
-
-    new Chart(document.getElementById('chart-prueba1').getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['Física', 'Psicológica', 'Sexual', 'Económica', 'Negligencia'],
-        datasets: [
-          { label: 'Observado', data: [38, 29, 18, 11, 4], backgroundColor: '#9D2D6A', borderRadius: 6 },
-          { label: 'Esperado', data: [32, 32, 16, 14, 6], backgroundColor: 'rgba(157,45,106,0.25)', borderRadius: 6 }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } },
-        scales: {
-          y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans' } } },
-          x: { grid: { display: false }, ticks: { font: { family: 'DM Sans' } } }
-        }
-      }
-    });
-
-    new Chart(document.getElementById('chart-correlacion').getContext('2d'), {
-      type: 'radar',
-      data: {
-        labels: ['Edad de la víctima', 'Región', 'Tipo de relación', 'Hora del día', 'Reincidencia', 'Denuncia previa'],
-        datasets: [{
-          label: 'Correlación con tipo de violencia',
-          data: [0.72, 0.58, 0.81, 0.34, 0.69, 0.77],
-          borderColor: '#9D2D6A',
-          backgroundColor: 'rgba(157,45,106,0.12)',
-          pointBackgroundColor: '#9D2D6A',
-          borderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          r: {
-            min: 0,
-            max: 1,
-            ticks: { stepSize: 0.25, font: { family: 'DM Sans', size: 11 } },
-            pointLabels: { font: { family: 'DM Sans', size: 11 } }
-          }
-        },
-        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } }
-      }
-    });
+    animateBars();
 
     new Chart(document.getElementById('chart-ml').getContext('2d'), {
-      type: 'line',
+      type: 'bar',
       data: {
-        labels: ['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0'],
+        labels: [
+          'Feminicidio',
+          'Sicariato',
+          'Violencia de pareja',
+          'Entre otros familiares',
+          'Niños, niñas y adolescentes'
+        ],
         datasets: [
-          { label: 'Clase positiva', data: [2, 5, 8, 12, 18, 22, 28, 35, 28, 18, 8], borderColor: '#9D2D6A', backgroundColor: 'rgba(157,45,106,0.15)', fill: true, tension: 0.4 },
-          { label: 'Clase negativa', data: [10, 22, 30, 24, 18, 12, 8, 5, 3, 2, 1], borderColor: '#F28C28', backgroundColor: 'rgba(242,140,40,0.1)', fill: true, tension: 0.4 }
+          {
+            label: 'Proyección 2026',
+            data: [140, 29, 37, 20, 19],
+            backgroundColor: 'rgba(157,45,106,0.82)',
+            borderRadius: 8
+          },
+          {
+            label: 'Proyección 2027',
+            data: [152, 4, 31, 21, 19],
+            backgroundColor: 'rgba(242,140,40,0.78)',
+            borderRadius: 8
+          }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { labels: { font: { family: 'DM Sans' } } } },
+        plugins: {
+          legend: { labels: { font: { family: 'DM Sans' } } },
+          tooltip: {
+            callbacks: {
+              label: (context) => `${context.dataset.label}: ${context.parsed.y} casos`
+            }
+          }
+        },
         scales: {
-          x: { title: { display: true, text: 'Score de predicción', font: { family: 'DM Sans' } }, grid: { display: false } },
-          y: { title: { display: true, text: 'Frecuencia', font: { family: 'DM Sans' } }, grid: { color: 'rgba(0,0,0,0.05)' } }
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'DM Sans', size: 11 } }
+          },
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Casos proyectados', font: { family: 'DM Sans' } },
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: { font: { family: 'DM Sans' } }
+          }
         }
       }
     });
