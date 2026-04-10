@@ -16,9 +16,16 @@
   }
 
   const apiBaseUrl = resolveApiBaseUrl();
+  const body = document.body;
 
   function buildUrl(path) {
     return `${apiBaseUrl.replace(/\/$/, '')}${path}`;
+  }
+
+  function setDashboardState(state) {
+    if (!body) return;
+    body.classList.remove('analisis-loading', 'analisis-ready', 'analisis-error');
+    body.classList.add(`analisis-${state}`);
   }
 
   function rerender(el) {
@@ -258,16 +265,23 @@
     updateTextSections(payload);
     updateCharts(payload.charts || {});
     injectChartNotes(payload.chart_notes || payload.chartNotes || {});
+    setDashboardState('ready');
   }
 
   async function loadAnalysisDashboard() {
-    if (!apiBaseUrl) return;
+    if (!apiBaseUrl) {
+      setDashboardState('error');
+      return;
+    }
+
+    setDashboardState('loading');
 
     try {
       const payload = await fetchJson('/api/analisis/dashboard/');
       applyPayload(payload || {});
     } catch (error) {
       console.warn('[analisis-api] No se pudo cargar el análisis desde la base de datos.', error);
+      setDashboardState('error');
 
       const source = document.querySelector('[data-analisis-source]');
       if (source) {

@@ -90,6 +90,91 @@
       line-height: 1.6;
     }
 
+    .analisis-loading-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(157, 45, 106, 0.08);
+      color: var(--magenta);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .analisis-loading-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--naranja);
+      box-shadow: 0 0 0 0 rgba(242, 140, 40, 0.45);
+      animation: analisisPing 1.8s ease-in-out infinite;
+    }
+
+    @keyframes analisisPing {
+      0%,
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242, 140, 40, 0.45); }
+      50% { transform: scale(1.18); box-shadow: 0 0 0 10px rgba(242, 140, 40, 0); }
+    }
+
+    body.analisis-loading [data-analisis-source] {
+      opacity: 0.72;
+    }
+
+    body.analisis-loading .analisis-meta__item,
+    body.analisis-loading cat-stat-card .stat-card,
+    body.analisis-loading .chart-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.analisis-loading .analisis-meta__item::after,
+    body.analisis-loading cat-stat-card .stat-card::after,
+    body.analisis-loading .chart-container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, transparent 15%, rgba(255,255,255,0.66) 45%, transparent 75%);
+      transform: translateX(-100%);
+      animation: analisisShimmer 1.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    body.analisis-loading cat-stat-card .stat-card__number,
+    body.analisis-loading cat-stat-card .stat-card__label,
+    body.analisis-loading .analisis-meta__label,
+    body.analisis-loading .analisis-meta__value,
+    body.analisis-loading .chart-container h3,
+    body.analisis-loading .chart-container p,
+    body.analisis-loading .chart-canvas-wrap canvas {
+      opacity: 0.24;
+    }
+
+    body.analisis-loading .chart-canvas-wrap {
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(157,45,106,0.06), rgba(246,135,29,0.08)),
+        repeating-linear-gradient(
+          to top,
+          rgba(157,45,106,0.08) 0,
+          rgba(157,45,106,0.08) 1px,
+          transparent 1px,
+          transparent 52px
+        );
+    }
+
+    body.analisis-ready .analisis-loading-pill,
+    body.analisis-error .analisis-loading-pill {
+      display: none;
+    }
+
+    @keyframes analisisShimmer {
+      to { transform: translateX(100%); }
+    }
+
     @media (max-width: 1100px) {
       .analisis-stats,
       .analisis-meta {
@@ -112,7 +197,7 @@
     }
   </style>
 </head>
-<body>
+<body class="analisis-loading">
 
   <cat-navbar active="analisis"></cat-navbar>
 
@@ -150,6 +235,7 @@
       <p class="analisis-source-note" data-analisis-source>
         Esta vista leera el backend en vivo y convertira sus respuestas en graficos comparables, claros y consistentes con el branding de Cattleya.
       </p>
+      <div class="analisis-loading-pill" data-analisis-loading-pill>Conectando el tablero con el backend en vivo...</div>
     </div>
   </div>
 
